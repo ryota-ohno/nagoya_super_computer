@@ -1,3 +1,4 @@
+# coding: UTF-8
 ##(A1,A2)に対して(a,b,theta)の最適化→次は(a,b)に対して(A1,A2)の最適化をやるかも  for BTBT
 import os
 import pandas as pd
