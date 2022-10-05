@@ -168,7 +168,8 @@ def get_params_dict(auto_dir, num_init, fixed_param_keys, opt_param_keys):###dic
             df_init_params.to_csv(init_params_csv,index=False)
             params_dict = df_init_params.loc[index,fixed_param_keys+opt_param_keys].to_dict()
             return [params_dict]
-    for index in df_init_params.index:##こちら側はinit_params内のある業に関する探索が終わった際の新しい行での探索を開始するもの
+    dict_matrix=[]
+    for index in df_init_params.index:##こちら側はinit_params内のある業に関する探索が終わった際の新しい行での探索を開始するもの ###ここを改良すればよさそう
         df_init_params = pd.read_csv(init_params_csv)
         init_params_dict = df_init_params.loc[index,fixed_param_keys+opt_param_keys].to_dict()
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
@@ -187,12 +188,11 @@ def get_params_dict(auto_dir, num_init, fixed_param_keys, opt_param_keys):###dic
                 opt_params_dict = get_values_from_df(df_init_params,index+1,opt_param_keys)
                 df_init_params = update_value_in_df(df_init_params,index+1,'status','InProgress')
                 df_init_params.to_csv(init_params_csv,index=False)
-                return [{**fixed_params_dict,**opt_params_dict}]
+                dict_matrix.append({**fixed_params_dict,**opt_params_dict})
             else:
                 continue
 
         else:
-            dict_matrix=[]
             for i in range(len(opt_params_matrix)):
                 opt_params_dict={'a':opt_params_matrix[i][0],'b':opt_params_matrix[i][1]}
                 df_inprogress = filter_df(df_cur, {**fixed_params_dict,**opt_params_dict,'status':'InProgress'})
@@ -201,8 +201,8 @@ def get_params_dict(auto_dir, num_init, fixed_param_keys, opt_param_keys):###dic
                 else:
                     d={**fixed_params_dict,**opt_params_dict}
                     dict_matrix.append(d)
-            return dict_matrix
-    return {}
+    return dict_matrix
+    
         
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):##探索範囲の更新等を行う
     df_val = filter_df(df_cur, fixed_params_dict)
