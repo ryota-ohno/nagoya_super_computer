@@ -122,7 +122,7 @@ def listen(args):
     isAvailable = len_queue < num_nodes 
     if isAvailable:
         dict_matrix = get_params_dict(auto_dir,num_init, fixed_param_keys, opt_param_keys)
-        if len(params_dict)!=0:#終わりがまだ見えないなら
+        if len(dict_matrix)!=0:#終わりがまだ見えないなら
             for i in range(dict_matrix):
                 params_dict=dict_matrix[i]
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
