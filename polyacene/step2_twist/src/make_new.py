@@ -229,12 +229,12 @@ def get_file_name_from_dict(monomer_name,paras_dict):
         file_name += '_{}={}'.format(key,val)
     return file_name + '.inp'
     
-def exec_gjf(auto_dir, monomer_name, params_dict, machine_type,isInterlayer,isTest=True):
+def exec_gjf(auto_dir, monomer_name, params_dict,isInterlayer,isTest=True):
     inp_dir = os.path.join(auto_dir,'gaussian')
     print(params_dict)
     
-    file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict,machine_type,isInterlayer)
-    cc_list = get_one_exe(file_name,machine_type)
+    file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict,isInterlayer)
+    cc_list = get_one_exe(file_name)
     sh_filename = os.path.splitext(file_name)[0]+'.r1'
     sh_path = os.path.join(inp_dir,sh_filename)
     with open(sh_path,'w') as f:
