@@ -64,7 +64,7 @@ def init_process(args):
     
     auto_csv_path = os.path.join(auto_dir,'step2_twist.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','E','E_p1','E_p2','E_t','status','file_name'])
+        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','E','E_p1','E_p2','E_t','machine_type','status','file_name'])
     else:
         df_E = pd.read_csv(auto_csv_path)
         df_E = df_E[df_E['status']!='InProgress']
@@ -128,7 +128,7 @@ def listen(args):
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
                 if not(alreadyCalculated):
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict,'cx':0,'cy':0,'cz':0},isInterlayer=False,isTest=isTest)
-                    df_newline = pd.Series({**params_dict,'E':0.,'E_p1':0.,'E_p2':0.,'E_t':0.,'status':'InProgress','file_name':file_name})
+                    df_newline = pd.Series({**params_dict,'E':0.,'E_p1':0.,'E_p2':0.,'E_t':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)
     
