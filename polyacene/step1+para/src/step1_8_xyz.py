@@ -246,6 +246,7 @@ if __name__ == '__main__':
     parser.add_argument('--auto-dir',type=str,help='path to dir which includes gaussian, gaussview and csv')
     parser.add_argument('--monomer-name',type=str,help='monomer name')
     parser.add_argument('--num-nodes',type=int,help='num nodes')
+    parser.add_argument('--num-init',type=int,help='number of parameters in progress at init_params.csv')
     ##maxnum-machine2 がない
     args = parser.parse_args()
 
