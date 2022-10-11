@@ -1,6 +1,6 @@
 ##tetracene層内計算
 import os
-os.environ['HOME'] ='/home/ohno'
+os.environ['HOME'] ='/data/group1/z40145w'
 import pandas as pd
 import time
 import sys
