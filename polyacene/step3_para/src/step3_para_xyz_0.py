@@ -204,7 +204,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     df_val = filter_df(df_cur, fixed_params_dict)
     cx_init_prev = init_params_dict['cx']; cy_init_prev = init_params_dict['cy']; cz_init_prev = init_params_dict['cz']
-    a = init_params_dict['a'],b = init_params_dict['b'],Rt = init_params_dict['Rt'],Rp = init_params_dict['Rp']
+    a = init_params_dict['a'];b = init_params_dict['b'];Rt = init_params_dict['Rt'];Rp = init_params_dict['Rp']
     
     while True:
         E_list=[];heri_list=[]
