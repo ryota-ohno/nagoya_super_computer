@@ -125,7 +125,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 params_dict=dict_matrix[i]
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
                 if not(alreadyCalculated):
-                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isInterlayer=False,isTest=isTest)
+                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isTest=isTest)
                     df_newline = pd.Series({**params_dict,'E':0.,'E_i01':0.,'E_ip1':0.,'E_ip2':0.,'E_it1':0.,'E_it2':0.,'E_it3':0.,'E_it4':0.,'E_i02':0.,'E_ip3':0.,'E_ip4':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)

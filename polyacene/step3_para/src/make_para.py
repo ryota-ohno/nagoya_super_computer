@@ -82,7 +82,7 @@ def get_one_exe(file_name):
 ######################################## 特化関数 ########################################
 
 ##################gaussview##################
-def make_xyzfile(monomer_name,params_dict,isInterlayer):
+def make_xyzfile(monomer_name,params_dict):
     a_ = params_dict['a']; b_ = params_dict['b']; c = np.array([params_dict.get('cx',0.0),params_dict.get('cy',0.0),params_dict.get('cz',0.0)])
     A1 = params_dict.get('A1',0.0); A2 = params_dict.get('A2',0.0); A3 = params_dict['theta']
     phi1 = params_dict.get('phi1',0.0); phi2 = params_dict.get('phi2',0.0)
@@ -119,7 +119,7 @@ def make_xyz(monomer_name,params_dict):
         xyzfile_name += '_{}={}'.format(key,val)
     return xyzfile_name + '.xyz'
 
-def make_gjf_xyz(auto_dir,monomer_name,params_dict,machine_type,isInterlayer):##R3:t-shaped R4:slipped-parallel
+def make_gjf_xyz(auto_dir,monomer_name,params_dict,machine_type):##R3:t-shaped R4:slipped-parallel
     a_ = params_dict['a']; b_ = params_dict['b']; c = np.array([params_dict['cx'],params_dict['cy'],params_dict['cz']])
     R3 = params_dict['Rt']; R4 =params_dict['Rp']
     A1 = 0; A2 = 0; A3 = params_dict['theta']
@@ -220,7 +220,7 @@ def get_file_name_from_dict(monomer_name,paras_dict):
         file_name += '_{}={}'.format(key,val)
     return file_name + '.inp'
     
-def exec_gjf(auto_dir, monomer_name, params_dict,isInterlayer,isTest=True):
+def exec_gjf(auto_dir, monomer_name, params_dict,isTest=True):
     inp_dir = os.path.join(auto_dir,'gaussian')
     xyz_dir = os.path.join(auto_dir,'gaussview')
     print(params_dict)
@@ -231,7 +231,7 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isInterlayer,isTest=True):
     with open(xyz_path,'w') as f:
         f.writelines(xyz_list)
     
-    file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict, isInterlayer)
+    file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict)
     cc_list = get_one_exe(file_name)
     sh_filename = os.path.splitext(file_name)[0]+'.r1'
     sh_path = os.path.join(inp_dir,sh_filename)
