@@ -227,7 +227,7 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isTest=True):
     
     xyzfile_name = make_xyz(monomer_name, params_dict)
     xyz_path = os.path.join(xyz_dir,xyzfile_name)
-    xyz_list = make_xyzfile(monomer_name,params_dict,isInterlayer=False)
+    xyz_list = make_xyzfile(monomer_name,params_dict)
     with open(xyz_path,'w') as f:
         f.writelines(xyz_list)
     
