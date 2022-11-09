@@ -7,8 +7,8 @@ import sys
 from tqdm import tqdm
 sys.path.append(os.path.join(os.environ['HOME'],'Working/interaction/'))
 from make_para import exec_gjf##計算した点のxyzfileを出す
-from step3_para_xyz_0 import get_c_vec_vdw##同様
-from step3_para_xyz_0 import detect_peaks##同様
+from step3_para_vdw import get_c_vec_vdw##同様
+from step3_para_vdw import detect_peaks##同様
 from utils import get_E
 import argparse
 import numpy as np
