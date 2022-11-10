@@ -223,7 +223,7 @@ def get_file_name_from_dict(monomer_name,params_dict):
         if key in ['a','b','Rt','Rp','cx','cy','cz','theta']:
             val = np.round(val,2)
         elif key in ['A1','A2']:#,'theta']:
-            val = int(val)
+            val = np.round(val,2)
         file_name += '_{}={}'.format(key,val)
     return file_name + '.inp'
     
