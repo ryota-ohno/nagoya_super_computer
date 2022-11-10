@@ -135,7 +135,7 @@ def make_xyz(monomer_name,params_dict):
         if key in ['a','b','cx','cy','cz','theta']:
             val = np.round(val,2)
         elif key in ['A1','A2']:#,'theta']:
-            val = int(val)
+            val = np.round(val,2)
         xyzfile_name += '_{}={}'.format(key,val)
     return xyzfile_name + '.xyz'
 
