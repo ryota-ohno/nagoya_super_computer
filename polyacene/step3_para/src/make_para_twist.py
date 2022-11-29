@@ -30,7 +30,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi,isFF=False):
 def get_xyzR_lines(xyzR_array,file_description):
     lines = [     
         '%mem=24GB\n',
-        '%nproc=42\n',
+        '%nproc=48\n',
         '#P TEST b3lyp/6-311G** EmpiricalDispersion=GD3 counterpoise=2\n',
         '\n',
         file_description+'\n',
