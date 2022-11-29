@@ -203,7 +203,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
         E_list=[];heri_list=[]
         para_list=[]
         for Rt in [Rt_init_prev-0.1,Rt_init_prev,Rt_init_prev+0.1]:
-            for b in [Rp_init_prev-0.1,Rp_init_prev,Rp_init_prev+0.1]:
+            for Rp in [Rp_init_prev-0.1,Rp_init_prev,Rp_init_prev+0.1]:
                 Rt = np.round(Rt,1);Rp = np.round(Rp,1)
                 df_val_ab = df_val[
                     (df_val['a']==a)&(df_val['b']==b)&(df_val['theta']==theta)&
