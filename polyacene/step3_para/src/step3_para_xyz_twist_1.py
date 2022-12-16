@@ -212,7 +212,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
         for cx in [cx_init_prev]:
             for cy in [cy_init_prev]:
                 for cz in [cz_init_prev-0.05,cz_init_prev,cz_init_prev+0.05]:
-                    cx = np.round(cx,1);cy = np.round(cy,1);cz = np.round(cz,1)
+                    cx = np.round(cx,2);cy = np.round(cy,2);cz = np.round(cz,2)
                     df_val_ab = df_val[
                         (df_val['cx']==cx)&(df_val['cy']==cy)&(df_val['cz']==cz)&(df_val['Rt']==Rt)&(df_val['Rp']==Rp)&(df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['a']==a)&(df_val['b']==b)&
                         (df_val['status']=='Done')
