@@ -73,7 +73,7 @@ def main_process(args):
     os.makedirs(auto_dir, exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'gaussian'), exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
-    auto_csv_path = os.path.join(auto_dir,'step1.csv')
+    auto_csv_path = os.path.join(auto_dir,'step2_twist.csv')
     if not os.path.exists(auto_csv_path):        
         df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','E','E_p1','E_p2','E_t','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
