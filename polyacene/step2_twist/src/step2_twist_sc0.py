@@ -130,7 +130,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     return isOver
 
 def check_calc_status(auto_dir,params_dict):
-    df_E= pd.read_csv(os.path.join(auto_dir,'step1.csv'))
+    df_E= pd.read_csv(os.path.join(auto_dir,'step2_twist.csv'))
     if len(df_E)==0:
         return False
     df_E_filtered = filter_df(df_E, params_dict)
