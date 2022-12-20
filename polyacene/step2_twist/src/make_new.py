@@ -51,7 +51,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
 def get_xyzR_lines(xyzR_array,file_description):
     lines = [     
         '%mem=24GB\n',
-        '%nproc=42\n',
+        '%nproc=48\n',
         '#P TEST b3lyp/6-311G** EmpiricalDispersion=GD3 counterpoise=2\n',
         '\n',
         file_description+'\n',
@@ -225,7 +225,7 @@ def get_file_name_from_dict(monomer_name,paras_dict):
         if key in ['a','b','cx','cy','cz','theta']:
             val = np.round(val,2)
         elif key in ['A1','A2']:#,'theta']:
-            val = int(val)
+            val = np.round(val,2)
         file_name += '_{}={}'.format(key,val)
     return file_name + '.inp'
     
