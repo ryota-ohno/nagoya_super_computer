@@ -6,7 +6,7 @@ import time
 import sys
 from tqdm import tqdm
 sys.path.append(os.path.join(os.environ['HOME'],'Working/interaction/'))
-from make_twist import exec_gjf##計算した点のxyzfileを出す
+from make_twist_1 import exec_gjf##計算した点のxyzfileを出す
 from step3_twist_vdw import get_c_vec_vdw##同様
 from step3_twist_vdw import detect_peaks##同様
 from utils import get_E
@@ -81,7 +81,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step3_twist.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['cx','cy','cz','a','b','theta','A1','A2','E','E_i01','E_ip1','E_ip2','E_it1','E_it2','E_it3','E_it4','machine_type','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['cx','cy','cz','a','b','theta','A1','A2','E','E_p','E_t','E_i01','E_ip1','E_ip2','E_it1','E_it2','E_it3','E_it4','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -107,14 +107,14 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
             continue
         E_list=get_E(log_filepath)
-        if len(E_list)!=5:
+        if len(E_list)!=7:
             continue
         else:
             len_queue-=1
-            Ei01=float(E_list[0]);Eip1=float(E_list[1]);Eip2=float(E_list[2]);Eit1=float(E_list[3]);Eit2=float(E_list[4]);Eit3=float(E_list[4]);Eit4=float(E_list[3])##ここも計算する分子数に合わせて調整
-            E = Ei01+Eip1+Eip2+Eit1+Eit2+Eit3+Eit4##隣接20分子　2パターン
+            Ep=float(E_list[0]);Et=float(E_list[1]);Ei01=float(E_list[2]);Eip1=float(E_list[3]);Eip2=float(E_list[4]);Eit1=float(E_list[5]);Eit2=float(E_list[6]);Eit3=float(E_list[6]);Eit4=float(E_list[5])##ここも計算する分子数に合わせて調整
+            E = Ep*2+Et*4+(Ei01+Eip1+Eip2+Eit1+Eit2+Eit3+Eit4)*2##隣接20分子　2パターン
             #### TODO
-            df_E.loc[idx, ['E_i01','E_ip1','E_ip2','E_it1','E_it2','E_it3','E_it4','E','status']] = [Ei01,Eip1,Eip2,Eit1,Eit2,Eit3,Eit4,E,'Done']
+            df_E.loc[idx, ['E_p','E_t','E_i01','E_ip1','E_ip2','E_it1','E_it2','E_it3','E_it4','E','status']] = [Ep,Et,Ei01,Eip1,Eip2,Eit1,Eit2,Eit3,Eit4,E,'Done']
             df_E.to_csv(auto_csv,index=False)
             break#2つ同時に計算終わったりしたらまずいので一個で切る
     isAvailable = len_queue < num_nodes 
@@ -126,7 +126,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
                 if not(alreadyCalculated):
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isTest=isTest)
-                    df_newline = pd.Series({**params_dict,'E':0.,'E_i01':0.,'E_ip1':0.,'E_ip2':0.,'E_it1':0.,'E_it2':0.,'E_it3':0.,'E_it4':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
+                    df_newline = pd.Series({**params_dict,'E':0.,'E_p':0.,'E_t':0.,'E_i01':0.,'E_ip1':0.,'E_ip2':0.,'E_it1':0.,'E_it2':0.,'E_it3':0.,'E_it4':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)
     
@@ -173,7 +173,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
         isDone, opt_params_matrix = get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict)
         if isDone:
-            opt_params_dict={'cx':opt_params_matrix[0][0],'cy':opt_params_matrix[0][1],'cz':opt_params_matrix[0][2]}
+            opt_params_dict={'a':opt_params_matrix[0][0],'b':opt_params_matrix[0][1],'A1':opt_params_matrix[0][2],'theta':opt_params_matrix[0][3]}
             # df_init_paramsのstatusをupdate
             df_init_params = update_value_in_df(df_init_params,index,'status','Done')
             if np.max(df_init_params.index) < index+1:##もうこれ以上は新しい計算は進まない
@@ -192,7 +192,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
 
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict={'cx':opt_params_matrix[i][0],'cy':opt_params_matrix[i][1],'cz':opt_params_matrix[i][2]}
+                opt_params_dict={'a':opt_params_matrix[i][0],'b':opt_params_matrix[i][1],'A1':opt_params_matrix[i][2],'theta':opt_params_matrix[i][3]}
                 df_inprogress = filter_df(df_cur, {**fixed_params_dict,**opt_params_dict,'status':'InProgress'})
                 if len(df_inprogress)>=1:
                     continue
@@ -203,31 +203,34 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
         
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     df_val = filter_df(df_cur, fixed_params_dict)
-    cx_init_prev = init_params_dict['cx']; cy_init_prev = init_params_dict['cy']; cz_init_prev = init_params_dict['cz']
-    a = init_params_dict['a'];b = init_params_dict['b'];A1 = init_params_dict['A1'];A2 = init_params_dict['A2']
+    cx = init_params_dict['cx']; cy = init_params_dict['cy']; cz = init_params_dict['cz']
+    a_init_prev = init_params_dict['a']; b_init_prev = init_params_dict['b']
+    A1_init_prev = init_params_dict['A1']; A2 = init_params_dict['A2']; theta_init_prev = init_params_dict['theta']
     
     while True:
         E_list=[];heri_list=[]
         para_list=[]
-        for cx in [cx_init_prev]:
-            for cy in [cy_init_prev-0.1,cy_init_prev,cy_init_prev+0.1]:
-                for cz in [cz_init_prev-0.1,cz_init_prev,cz_init_prev+0.1]:
-                    cx = np.round(cx,1);cy = np.round(cy,1);cz = np.round(cz,1)
-                    df_val_ab = df_val[
-                        (df_val['cx']==cx)&(df_val['cy']==cy)&(df_val['cz']==cz)&(df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['a']==a)&(df_val['b']==b)&
+        for theta in [theta_init_prev-1,theta_init_prev,theta_init_prev+1]:
+            for A1 in [A1_init_prev-1,A1_init_prev,A1_init_prev+1]:
+                for a in [a_init_prev-0.1,a_init_prev,a_init_prev+0.1]:
+                    for b in [b_init_prev-0.1,b_init_prev,b_init_prev+0.1]:
+                        theta=np.round(theta,1);A1 = np.round(A1,1)
+                        a = np.round(a,1);b = np.round(b,1)
+                        df_val_ab = df_val[
+                        (df_val['cx']==cx)&(df_val['cy']==cy)&(df_val['cz']==cz)&(df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['theta']==theta)&(df_val['a']==a)&(df_val['b']==b)&
                         (df_val['status']=='Done')
                                      ]
                     if len(df_val_ab)==0:
-                        para_list.append([cx,cy,cz])
+                        para_list.append([a,b,A1,theta])
                         continue
-                    heri_list.append([cx,cy,cz]);E_list.append(df_val_ab['E'].values[0])
+                    heri_list.append([a,b,A1,theta]);E_list.append(df_val_ab['E'].values[0])
         if len(para_list) != 0:
             return False,para_list
-        cx_init,cy_init,cz_init = heri_list[np.argmin(np.array(E_list))]
-        if cx_init==cx_init_prev and cy_init==cy_init_prev and cz_init==cz_init_prev:
-            return True,[[cx_init,cy_init,cz_init]]
+        a_init,b_init,A1_init,theta_init = heri_list[np.argmin(np.array(E_list))]
+        if a_init==a_init_prev and b_init==b_init_prev and A1_init==A1_init_prev and theta_init==theta_init_prev:
+            return True,[[a_init,b_init,A1_init,theta_init]]
         else:
-            cx_init_prev=cx_init;cy_init_prev=cy_init;cz_init_prev=cz_init
+            a_init_prev=a_init;b_init_prev=b_init;A1_init_prev=A1_init;theta_init_prev=theta_init
 
 def get_values_from_df(df,index,key):
     return df.loc[index,key]
