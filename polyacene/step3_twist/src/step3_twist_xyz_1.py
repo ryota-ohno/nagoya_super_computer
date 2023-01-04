@@ -93,8 +93,8 @@ def main_process(args):
 
 def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
     num_init = args.num_init
-    fixed_param_keys = ['a','b','theta','A1','A2']
-    opt_param_keys = ['cx','cy','cz']
+    fixed_param_keys = ['cx','cy','cz','A2']
+    opt_param_keys = ['a','b','theta','A1']
     
     auto_csv = os.path.join(auto_dir,'step3_twist.csv')
     df_E = pd.read_csv(auto_csv)
