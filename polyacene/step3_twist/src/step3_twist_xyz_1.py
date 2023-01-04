@@ -220,10 +220,10 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
                         (df_val['cx']==cx)&(df_val['cy']==cy)&(df_val['cz']==cz)&(df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['theta']==theta)&(df_val['a']==a)&(df_val['b']==b)&
                         (df_val['status']=='Done')
                                      ]
-                    if len(df_val_ab)==0:
-                        para_list.append([a,b,A1,theta])
-                        continue
-                    heri_list.append([a,b,A1,theta]);E_list.append(df_val_ab['E'].values[0])
+                        if len(df_val_ab)==0:
+                            para_list.append([a,b,A1,theta])
+                            continue
+                        heri_list.append([a,b,A1,theta]);E_list.append(df_val_ab['E'].values[0])
         if len(para_list) != 0:
             return False,para_list
         a_init,b_init,A1_init,theta_init = heri_list[np.argmin(np.array(E_list))]
