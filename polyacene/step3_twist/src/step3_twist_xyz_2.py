@@ -6,7 +6,7 @@ import time
 import sys
 from tqdm import tqdm
 sys.path.append(os.path.join(os.environ['HOME'],'Working/interaction/'))
-from make_twist_1 import exec_gjf##計算した点のxyzfileを出す
+from make_twist_2 import exec_gjf##計算した点のxyzfileを出す
 from step3_twist_vdw import get_c_vec_vdw##同様
 from step3_twist_vdw import detect_peaks##同様
 from utils import get_E
