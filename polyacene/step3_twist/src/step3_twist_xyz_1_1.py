@@ -223,7 +223,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
                         if len(df_val_ab)==0:
                             para_list.append([a,b,A1,theta])
                             continue
-                        heri_list.append([a,b,A1,theta]);E_list.append(df_val_ab['E'].values[0])
+                        heri_list.append([a,b,A1,theta]);E_list.append(df_val_ab['E_p2'].values[0])
         if len(para_list) != 0:
             return False,para_list
         a_init,b_init,A1_init,theta_init = heri_list[np.argmin(np.array(E_list))]
