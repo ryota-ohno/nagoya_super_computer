@@ -107,7 +107,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
             continue
         E_list=get_E(log_filepath)
-        if len(E_list)!=5:
+        if len(E_list)!=1:
             continue
         else:
             len_queue-=1
