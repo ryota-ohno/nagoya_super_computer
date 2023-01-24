@@ -134,7 +134,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##R3:t-shaped R4:slipped-par
         monomer_array_ip1 = get_monomer_xyzR(monomer_name,c[0],c[1]+b_,c[2]+R4,A1,A2,A3, phi1)
         monomer_array_ip2 = get_monomer_xyzR(monomer_name,c[0],c[1]-b_,c[2]-R4,A1,A2,A3, phi1)
     else:##a_<b_
-        monomer_array_p1 = get_monomer_xyzR(monomer_name,a_,0,2*R3-R4,0,0,A3, phi1)##p2がa方向
+        monomer_array_p1 = get_monomer_xyzR(monomer_name,a_,0,2*R3-R4,A1,A2,A3, phi1)##p2がa方向
         monomer_array_p2 = get_monomer_xyzR(monomer_name,0,b_,R4,A1,A2,A3, phi1)##p1がb方向
         monomer_array_ip1 = get_monomer_xyzR(monomer_name,c[0]+a_,c[1],c[2]+2*R3-R4,A1,A2,A3, phi1)
         monomer_array_ip2 = get_monomer_xyzR(monomer_name,c[0]-a_,c[1],c[2]-(2*R3-R4),A1,A2,A3, phi1)
