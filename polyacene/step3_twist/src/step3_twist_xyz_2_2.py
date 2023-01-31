@@ -210,7 +210,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     while True:
         E_list=[];heri_list=[]
         para_list=[]
-        for cy in [cy_init_prev-1,cy_init_prev,cy_init_prev+1]:
+        for cy in [cy_init_prev-0.1,cy_init_prev,cy_init_prev+0.1]:
             for a in [a_init_prev-0.1,a_init_prev,a_init_prev+0.1]:
                 for b in [b_init_prev-0.1,b_init_prev,b_init_prev+0.1]:
                     a = np.round(a,1);b = np.round(b,1);cy = np.round(cy,1)
