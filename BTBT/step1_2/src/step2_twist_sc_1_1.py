@@ -76,7 +76,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step2_twist.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','phi_r','E','E_p1','E_p2','E_t1','E_t3','E_m','machine_type','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','phi_r','phi_b','E','E_p1','E_p2','E_t1','E_t3','E_m','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -212,7 +212,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
                         a = np.round(a,1);b = np.round(b,1);phi_r = np.round(phi_r,1)
                         df_val_ab = df_val[
                             (df_val['a']==a)&(df_val['b']==b)&(df_val['theta']==theta)&
-                            (df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['phi_r']==phi_r)&
+                            (df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['phi_r']==phi_r)&(df_val['phi_b']==phi_b)&
                             (df_val['status']=='Done')
                                     ]
                         if len(df_val_ab)==0:
