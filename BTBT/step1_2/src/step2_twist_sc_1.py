@@ -10,6 +10,7 @@ from make_new_1 import exec_gjf##計算した点のxyzfileを出す
 from vdw import vdw_R##同様
 from utils import get_E
 from utils import get_E_mono_1
+from utils import get_E_mono_2
 import argparse
 import numpy as np
 from scipy import signal
@@ -108,7 +109,12 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         else:
             len_queue-=1
             Ep1=float(E_list[0]);Ep2=float(E_list[1]);Et1=float(E_list[2]);Et3=float(E_list[3])
-            Em=get_E_mono_1(log_filepath)
+            if monomer_name == 'mono-C4-BTBT':
+                Em=get_E_mono_1(log_filepath)
+            elif monomer_name == 'mono-C9-BTBT':
+                Em=get_E_mono_2(log_filepath)
+            else:
+                Em=0
             E = (Ep1+Ep2+Et1+Et3)+Em
             df_E.loc[idx, ['E_t1','E_t3','E_p1','E_p2','E_m','E','status']] = [Et1,Et3,Ep1,Ep2,Em,E,'Done']
             df_E.to_csv(auto_csv,index=False)
@@ -212,7 +218,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
                         a = np.round(a,1);b = np.round(b,1);phi_r = np.round(phi_r,1)
                         df_val_ab = df_val[
                             (df_val['a']==a)&(df_val['b']==b)&(df_val['theta']==theta)&
-                            (df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['phi_r']==phi_r)&
+                            (df_val['A1']==A1)&(df_val['A2']==A2)&(df_val['phi_r']==phi_r)&(df_val['phi_b']==phi_b)&
                             (df_val['status']=='Done')
                                     ]
                         if len(df_val_ab)==0:

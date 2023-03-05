@@ -77,7 +77,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step2_twist.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','phi_r','phi_b','E','E_p1','E_p2','E_t1','E_t3','E_m','machine_type','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['a','b','theta','A1','A2','phi_r','E','E_p1','E_p2','E_t1','E_t3','E_m','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -213,7 +213,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
         para_list=[]
         for a in [a_init_prev-0.1,a_init_prev,a_init_prev+0.1]:
             for b in [b_init_prev-0.1,b_init_prev,b_init_prev+0.1]:
-                for phi_r in [phi_r_init_prev]:
+                for phi_r in [phi_r_init_prev-1,phi_r_init_prev,phi_r_init_prev+1]:
                     for phi_b in [phi_b_init_prev]:
                         a = np.round(a,1);b = np.round(b,1);phi_r = np.round(phi_r,1)
                         df_val_ab = df_val[

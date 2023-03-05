@@ -47,6 +47,29 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi,phi_b,isFF=False):
         else:
             return np.concatenate([xyz_array,R_array],axis=1)
     
+    elif monomer_name=='mono-C9-BTBT':
+        #alkylの基準
+        C0_index = 5 #BTBT骨格の端
+        C1_index = 23 #アルキルの根本
+        
+        C0=xyz_array[C0_index]
+        C1=xyz_array[C1_index]
+        
+        #phi1に関するalkylの軸
+        n1=C1-C0
+        n1/=np.linalg.norm(n1)
+        n0=[1,0,0]
+        n2=np.cross(n0,n1)
+        #alkyl回転・分子1作成
+        xyz_array[C1_index:] = np.matmul((xyz_array[C1_index:]-C0),Rod(n1,phi).T) + C0
+        xyz_array[C1_index:] = np.matmul((xyz_array[C1_index:]-C0),Rod(n2,phi_b).T) + C0
+        
+        if isFF:
+            FFconfig_array=df_mono[['q','sig','eps']].values
+            return np.concatenate([xyz_array,R_array,FFconfig_array],axis=1)
+        else:
+            return np.concatenate([xyz_array,R_array],axis=1)
+    
     else:
         raise RuntimeError('invalid monomer_name={}'.format(monomer_name))
         
