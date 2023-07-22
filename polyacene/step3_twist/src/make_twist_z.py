@@ -157,7 +157,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##R3:t-shaped R4:slipped-par
     dimer_array_i01 = np.concatenate([monomer_array_c1,monomer_array_i01])
     dimer_array_ip1 = np.concatenate([monomer_array_c1,monomer_array_ip1])
     dimer_array_ip2 = np.concatenate([monomer_array_c1,monomer_array_ip2])
-    dimer_array_i02 = np.concatenate([monomer_array_c1,monomer_array_i01])
+    dimer_array_i02 = np.concatenate([monomer_array_c1,monomer_array_i02])
     dimer_array_ip3 = np.concatenate([monomer_array_c1,monomer_array_ip3])
     dimer_array_ip4 = np.concatenate([monomer_array_c1,monomer_array_ip4])
     dimer_array_it1 = np.concatenate([monomer_array_c1,monomer_array_it1])
