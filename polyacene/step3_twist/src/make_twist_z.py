@@ -127,6 +127,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##R3:t-shaped R4:slipped-par
     #print(phi1, phi2)
     ##平行配置をA2傾けてT字を-A2傾ける　この時A2は負の値をとる
     monomer_array_c1 = get_monomer_xyzR(monomer_name,0,0,0,A1,A2,A3, phi1)##centerのc
+    monomer_array_c2 = get_monomer_xyzR(monomer_name,0,0,0,-A1,A2,-A3, phi1)##centerのc
     monomer_array_i01 = get_monomer_xyzR(monomer_name,c[0],c[1],c[2],A1,A2,A3, phi1)
     monomer_array_i02 = get_monomer_xyzR(monomer_name,c[0],c[1],c[2],-A1,A2,-A3, phi1)
     
@@ -157,9 +158,9 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##R3:t-shaped R4:slipped-par
     dimer_array_i01 = np.concatenate([monomer_array_c1,monomer_array_i01])
     dimer_array_ip1 = np.concatenate([monomer_array_c1,monomer_array_ip1])
     dimer_array_ip2 = np.concatenate([monomer_array_c1,monomer_array_ip2])
-    dimer_array_i02 = np.concatenate([monomer_array_c1,monomer_array_i02])
-    dimer_array_ip3 = np.concatenate([monomer_array_c1,monomer_array_ip3])
-    dimer_array_ip4 = np.concatenate([monomer_array_c1,monomer_array_ip4])
+    dimer_array_i02 = np.concatenate([monomer_array_c2,monomer_array_i02])
+    dimer_array_ip3 = np.concatenate([monomer_array_c2,monomer_array_ip3])
+    dimer_array_ip4 = np.concatenate([monomer_array_c2,monomer_array_ip4])
     dimer_array_it1 = np.concatenate([monomer_array_c1,monomer_array_it1])
     dimer_array_it2 = np.concatenate([monomer_array_c1,monomer_array_it2])
     dimer_array_it3 = np.concatenate([monomer_array_c1,monomer_array_it3])
