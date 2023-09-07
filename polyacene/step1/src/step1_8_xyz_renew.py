@@ -157,16 +157,19 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
     #最初の立ち上がり時
     if len(df_init_params_inprogress) < num_init:
         df_init_params_notyet = df_init_params[df_init_params['status']=='NotYet']
-        index_list_notyet=df_init_params_notyet.index.to_list()##notyetのindexをreset前に取得　init_paramsに合わせる
-        df_init_params_notyet = df_init_params_notyet.reset_index(inplace=True)##indexをreset
-        can_init=int(num_init-len(df_init_params_inprogress))
-        df_init_params_start = df_init_params_notyet.loc[:can_init-1]
-        params_dict=df_init_params_start.loc[:,fixed_param_keys+opt_param_keys].to_dict('record')
-        for i in range(can_init):
-            index=index_list_notyet[i]
-            df_init_params = update_value_in_df(df_init_params,index,'status','InProgress')
-            df_init_params.to_csv(init_params_csv,index=False)
-        return(params_dict)
+        if len(df_init_params_notyet) == 0:
+            pass
+        else:
+            index_list_notyet=df_init_params_notyet.index.to_list()##notyetのindexをreset前に取得　init_paramsに合わせる
+            df_init_params_notyet = df_init_params_notyet.reset_index(inplace=True)##indexをreset
+            can_init=int(num_init-len(df_init_params_inprogress))
+            df_init_params_start = df_init_params_notyet.loc[:can_init-1]
+            params_dict=df_init_params_start.loc[:,fixed_param_keys+opt_param_keys].to_dict('record')
+            for i in range(can_init):
+                index=index_list_notyet[i]
+                df_init_params = update_value_in_df(df_init_params,index,'status','InProgress')
+                df_init_params.to_csv(init_params_csv,index=False)
+            return(params_dict)
     dict_matrix=[]
     init_params_dict_list=df_init_params.loc[0:,fixed_param_keys+opt_param_keys].to_dict('record')
     fixed_params_dict_list=df_init_params.loc[0:,fixed_param_keys].to_dict('record')
