@@ -166,7 +166,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
             can_init=int(num_init-len(df_init_params_inprogress))
             print(df_init_params_notyet)
             params_dict=df_init_params_notyet.loc[:can_init-1,fixed_param_keys+opt_param_keys].to_dict('record')
-            for i in range(can_init):
+            for i in range(min(can_init,len(index_list_notyet))):
                 index=index_list_notyet[i]
                 df_init_params = update_value_in_df(df_init_params,index,'status','InProgress')
                 df_init_params.to_csv(init_params_csv,index=False)
