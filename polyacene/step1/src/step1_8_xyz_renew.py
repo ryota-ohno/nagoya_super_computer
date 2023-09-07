@@ -97,7 +97,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     df_queue = df_E.loc[df_E['status']=='InProgress',['file_name']]
     len_queue = len(df_queue)
     for i in range(len_queue):
-        idx=df_queue.index.to_list[i]
+        idx=df_queue.index.to_list()[i]
         file_name=df_queue.values[i]
         log_filepath = os.path.join(*[auto_dir,'gaussian',file_name])
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
