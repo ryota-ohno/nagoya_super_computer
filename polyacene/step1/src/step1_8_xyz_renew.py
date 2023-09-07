@@ -162,7 +162,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
             pass
         else:
             index_list_notyet=df_init_params_notyet.index.to_list()##notyetのindexをreset前に取得　init_paramsに合わせる
-            df_init_params_notyet = df_init_params_notyet.reset_index(inplace=True)##indexをreset
+            df_init_params_notyet.reset_index(inplace=True)##indexをreset
             can_init=int(num_init-len(df_init_params_inprogress))
             print(df_init_params_notyet)
             params_dict=df_init_params_notyet.loc[:can_init-1,fixed_param_keys+opt_param_keys].to_dict('record')
