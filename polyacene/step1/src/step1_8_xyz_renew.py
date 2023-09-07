@@ -152,8 +152,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
     df_init_params = pd.read_csv(init_params_csv)
     df_cur = pd.read_csv(os.path.join(auto_dir, 'step1.csv'))
     df_init_params_inprogress = df_init_params[df_init_params['status']=='InProgress']
-    index_list=df_init_params.index.to_list()##先にindexを取得
-    
+    index_list=df_init_params_inprogress.index.to_list()##先にindexを取得
     #最初の立ち上がり時
     if len(df_init_params_inprogress) < num_init:
         df_init_params_notyet = df_init_params[df_init_params['status']=='NotYet']
@@ -172,8 +171,8 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
                 df_init_params.to_csv(init_params_csv,index=False)
             return(params_dict)
     dict_matrix=[]
-    init_params_dict_list=df_init_params.loc[0:,fixed_param_keys+opt_param_keys].to_dict('record')
-    fixed_params_dict_list=df_init_params.loc[0:,fixed_param_keys].to_dict('record')
+    init_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys+opt_param_keys].to_dict('record')
+    fixed_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys].to_dict('record')
     for i in range(len(init_params_dict_list)):
         init_params_dict=init_params_dict_list[i]
         fixed_params_dict=fixed_params_dict_list[i]
