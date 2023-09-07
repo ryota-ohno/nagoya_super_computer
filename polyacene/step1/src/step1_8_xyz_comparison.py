@@ -249,11 +249,17 @@ if __name__ == '__main__':
     ##maxnum-machine2 がない
     args = parser.parse_args()
 
+    start = time.perf_counter()
     if args.init:
         print("----initial process----")
         init_process(args)
-    
+    end1 = time.perf_counter()
+    print(end1-start)
     print("----main process----")
     main_process(args)
+
+    end2 = time.perf_counter()
+    print(end2-end1)
+
     print("----finish process----")
     
