@@ -94,7 +94,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     
     auto_csv = os.path.join(auto_dir,'step1.csv')
     df_E = pd.read_csv(auto_csv)
-    df_queue = df_E.loc[df_E['status']=='InProgress',['file_name']]
+    df_q = df_E[df_E['status']=='InProgress']
+    df_queue = df_q.loc[:,'file_name']
     len_queue = len(df_queue)
     for i in range(len_queue):
         idx=df_queue.index.to_list()[i]
