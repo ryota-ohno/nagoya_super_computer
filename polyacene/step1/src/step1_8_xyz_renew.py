@@ -165,15 +165,15 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
             df_init_params_notyet.reset_index(inplace=True)##indexをreset
             can_init=int(num_init-len(df_init_params_inprogress))
             #print(df_init_params_notyet)
-            params_dict=df_init_params_notyet.loc[:can_init-1,fixed_param_keys+opt_param_keys].to_dict('record')
+            params_dict=df_init_params_notyet.loc[:can_init-1,fixed_param_keys+opt_param_keys].to_dict('records')
             for i in range(min(can_init,len(index_list_notyet))):
                 index=index_list_notyet[i]
                 df_init_params = update_value_in_df(df_init_params,index,'status','InProgress')
                 df_init_params.to_csv(init_params_csv,index=False)
             return(params_dict)
     dict_matrix=[]
-    init_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys+opt_param_keys].to_dict('record')
-    fixed_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys].to_dict('record')
+    init_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys+opt_param_keys].to_dict('records')
+    fixed_params_dict_list=df_init_params_inprogress.loc[:,fixed_param_keys].to_dict('records')
     for i in range(len(init_params_dict_list)):
         init_params_dict=init_params_dict_list[i]
         fixed_params_dict=fixed_params_dict_list[i]
