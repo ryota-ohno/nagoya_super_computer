@@ -157,14 +157,14 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
     #最初の立ち上がり時
     if len(df_init_params_inprogress) < num_init:
         df_init_params_notyet = df_init_params[df_init_params['status']=='NotYet']
-        print(df_init_params_notyet)
+        #print(df_init_params_notyet)
         if len(df_init_params_notyet) == 0:
             pass
         else:
             index_list_notyet=df_init_params_notyet.index.to_list()##notyetのindexをreset前に取得　init_paramsに合わせる
             df_init_params_notyet.reset_index(inplace=True)##indexをreset
             can_init=int(num_init-len(df_init_params_inprogress))
-            print(df_init_params_notyet)
+            #print(df_init_params_notyet)
             params_dict=df_init_params_notyet.loc[:can_init-1,fixed_param_keys+opt_param_keys].to_dict('record')
             for i in range(min(can_init,len(index_list_notyet))):
                 index=index_list_notyet[i]
