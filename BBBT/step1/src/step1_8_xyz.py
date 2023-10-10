@@ -111,7 +111,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         else:
             len_queue-=1
             Et1=float(E_list[0]);Ep1=float(E_list[1]);Ep2=float(E_list[2])
-            E = 2*(Et1+Ep1+Ep2)
+            E = 2*(2*Et1+Ep1+Ep2)
             df_E.loc[idx, ['E_t1','E_p1','E_p2','E','status']] = [Et1,Ep1,Ep2,E,'Done']
             df_E.to_csv(auto_csv,index=False)
             break#2つ同時に計算終わったりしたらまずいので一個で切る
