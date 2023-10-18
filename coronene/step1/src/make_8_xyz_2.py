@@ -4,7 +4,7 @@ import pandas as pd
 import subprocess
 from utils import Rod, R2atom
 
-MONOMER_LIST = ["BTBT","BBBT","benzene","naphthalene","anthracene","tetracene","pentacene","hexacene","demo","PTA"]
+MONOMER_LIST = ["BTBT","BBBT","benzene","naphthalene","anthracene","tetracene","pentacene","hexacene","coronene","PTA"]
 ############################汎用関数###########################
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
     T_vec = np.array([Ta,Tb,Tc])
