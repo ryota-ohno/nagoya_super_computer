@@ -258,7 +258,8 @@ if __name__ == '__main__':
         print("----initial process----")
         init_process(args)
     
-    print("----main process----")
-    main_process(args)
-    print("----finish process----")
+    if not args.isTest:
+        print("----main process----")
+        main_process(args)
+        print("----finish process----")
     
