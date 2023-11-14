@@ -84,7 +84,7 @@ def get_one_exe(file_name):
 
 ##################gaussview##################
 def make_xyzfile(monomer_name,params_dict,isInterlayer=False):
-    a_ = params_dict['a']; b_ = params_dict['b']
+    a_ = 0; b_ = params_dict['b']
     A1 = params_dict.get('A1',0.0); A2 = params_dict.get('A2',0.0); A3 = params_dict['theta']
     phi1 = params_dict.get('phi1',0.0); phi2 = params_dict.get('phi2',0.0)
     print(phi1, phi2)
@@ -114,7 +114,7 @@ def make_xyz(monomer_name,params_dict):
     return xyzfile_name + '.xyz'
 
 def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
-    a_ = params_dict['a']; b_ = params_dict['b']; c = np.array([params_dict.get('cx',0.0),params_dict.get('cy',0.0),params_dict.get('cz',0.0)])
+    a_ = 0; b_ = params_dict['b']; c = np.array([params_dict.get('cx',0.0),params_dict.get('cy',0.0),params_dict.get('cz',0.0)])
     A1 = params_dict.get('A1',0.0); A2 = params_dict.get('A2',0.0); A3 = params_dict['theta']
     Rt = params_dict.get('Rt',0.0); Rp = params_dict.get('Rp',0.0)
     phi1 = params_dict.get('phi1',0.0); phi2 = params_dict.get('phi2',0.0)
