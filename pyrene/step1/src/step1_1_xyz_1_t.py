@@ -6,7 +6,7 @@ import time
 import sys
 from tqdm import tqdm
 sys.path.append(os.path.join(os.environ['HOME'],'Working/interaction/'))
-from make_8_xyz_1 import exec_gjf##計算した点のxyzfileを出す
+from make_1_xyz_1_t import exec_gjf##計算した点のxyzfileを出す
 from vdw_8_xyz_1 import vdw_R##同様
 from utils import get_E
 import argparse
@@ -80,7 +80,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step1.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['a','b','theta','E','E_p1','E_p2','E_t1','machine_type','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['a','b','theta','E','E_t1','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -106,13 +106,13 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
             continue
         E_list=get_E(log_filepath)
-        if len(E_list)!=3:
+        if len(E_list)!=1:
             continue
         else:
             len_queue-=1
-            Et1=float(E_list[0]);Ep1=float(E_list[1]);Ep2=float(E_list[2])
-            E = 2*(2*Et1+Ep1+Ep2)
-            df_E.loc[idx, ['E_t1','E_p1','E_p2','E','status']] = [Et1,Ep1,Ep2,E,'Done']
+            Et1=float(E_list[0])
+            E = Et1
+            df_E.loc[idx, ['E_t1','E','status']] = [Et1,E,'Done']
             df_E.to_csv(auto_csv,index=False)
             break#2つ同時に計算終わったりしたらまずいので一個で切る
     isAvailable = len_queue < num_nodes 
@@ -124,7 +124,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
                 if not(alreadyCalculated):
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isInterlayer=False,isTest=isTest)
-                    df_newline = pd.Series({**params_dict,'E':0.,'E_p1':0.,'E_p2':0.,'E_t1':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
+                    df_newline = pd.Series({**params_dict,'E':0.,'E_t1':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)
     
