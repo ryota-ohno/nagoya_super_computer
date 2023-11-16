@@ -58,7 +58,7 @@ def get_one_exe(file_name):
          '#PJM -L "rscunit=fx"\n',
          '#PJM -L "rscgrp=fx-small"\n',
          '#PJM -L "node=1"\n',
-         '#PJM -L "elapse=24:00:00"\n',
+         '#PJM -L "elapse=1:00:00"\n',
          '#PJM -j\n',
          '#PJM -S\n',
          '#PJM "--norestart"\n',
