@@ -50,9 +50,9 @@ def init_process(args):
                     a1 = np.round(a,1);b1 = np.round(b,1)
                     a_list.append(a1);b_list.append(b1);S_list.append(a*b)##Sを丸めずに出力
             local_minidx_list = signal.argrelmin(np.array(S_list), order=order)
-            if len(local_minidx_list[0])>0:
-                for local_minidx in local_minidx_list[0]:
-                    init_para_list.append([a_list[local_minidx],b_list[local_minidx],theta,'NotYet'])
+            #if len(local_minidx_list[0])>0:
+            #    for local_minidx in local_minidx_list[0]:
+            #        init_para_list.append([a_list[local_minidx],b_list[local_minidx],theta,'NotYet'])
             init_para_list.append([a_list[0],b_list[0],theta,'NotYet'])
             init_para_list.append([a_list[-1],b_list[-1],theta,'NotYet'])
             
