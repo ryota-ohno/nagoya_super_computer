@@ -105,6 +105,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             print('1')
             continue
         else:
+            print('2')
             len_queue-=1
             Et=float(E_list[0]);Ep=float(E_list[1])
             E = 4*Et+2*(Ep)
