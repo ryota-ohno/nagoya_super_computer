@@ -102,6 +102,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         E_list=get_E(log_filepath)
         if len(E_list)!=2:
+            print('1')
             continue
         else:
             len_queue-=1
