@@ -6,10 +6,19 @@ def get_E(path_file):
         lines=f.readlines()
     lines_E=[]
     for line in lines:
-        if line.find('E(R)')>-1 and len(line.split())>5:
+        if line.find('E(R')>-1 and len(line.split())>5:
             lines_E.append(float(line.split()[4])*627.510)
     E_list=[lines_E[5*i]-lines_E[5*i+1]-lines_E[5*i+2] for i in range(int(len(lines_E)/5))]
     return E_list
+
+def get_E_l(path_file):
+    with open(path_file,'r') as f:
+        lines=f.readlines()
+    lines_E=[]
+    for line in lines:
+        if line.find('E(R)')>-1 and len(line.split())>5:
+            lines_E.append(float(line.split()[4])*627.510)
+    return lines_E
 
 def get_E0(path_file):
     with open(path_file,'r') as f:
