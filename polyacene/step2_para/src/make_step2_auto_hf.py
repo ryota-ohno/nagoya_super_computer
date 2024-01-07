@@ -153,7 +153,7 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isTest):
     with open(sh_path1,'w') as f:
         f.writelines(cc_list1)
     if not(isTest):
-        subprocess.run(['qsub',sh_path1])
+        subprocess.run(['pjsub',sh_path1])
     log_file_name1 = file_basename1 + '.log'
 
     cc_list2 = get_one_exe(file_basename2,machine_type=2)
