@@ -166,7 +166,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
         isDone, opt_params_matrix = get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict)
         if isDone:
-            opt_params_dict={'theta':opt_params_matrix[0][0],'A1':opt_params_matrix[0][1],'a':opt_params_matrix[0][2],'b':opt_params_matrix[0][3]}
+            opt_params_dict={'a':opt_params_matrix[0][0],'b':opt_params_matrix[0][1]}
             # df_init_paramsのstatusをupdate
             df_init_params = update_value_in_df(df_init_params,index,'status','Done')
             if np.max(df_init_params.index) < index+1:##もうこれ以上は新しい計算は進まない
@@ -185,7 +185,7 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
 
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict={'theta':opt_params_matrix[i][0],'A1':opt_params_matrix[i][1],'a':opt_params_matrix[i][2],'b':opt_params_matrix[i][3]}
+                opt_params_dict={'a':opt_params_matrix[i][0],'b':opt_params_matrix[i][1]}
                 df_inprogress = filter_df(df_cur, {**fixed_params_dict,**opt_params_dict,'status':'InProgress'})
                 if len(df_inprogress)>=1:
                     continue
