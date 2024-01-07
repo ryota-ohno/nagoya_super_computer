@@ -69,7 +69,7 @@ def init_process(args):
     df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
 
 def main_process(args):
-    print('test 2')
+    #print('test 2')
     auto_dir = args.auto_dir
     os.makedirs(auto_dir, exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'gaussian'), exist_ok=True)
@@ -90,7 +90,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     num_init = args.num_init
     fixed_param_keys = ['theta','A1','A2']
     opt_param_keys = ['a','b']
-    print('test 3')
+    #print('test 3')
     auto_csv = os.path.join(auto_dir,'step2_twist.csv')
     df_E = pd.read_csv(auto_csv)
     df_queue = df_E.loc[df_E['status']=='InProgress',['file_name']]
@@ -253,7 +253,7 @@ if __name__ == '__main__':
     if args.init:
         print("----initial process----")
         init_process(args)
-    print('test 1')
+    #print('test 1')
     print("----main process----")
     main_process(args)
     print("----finish process----")
