@@ -15,7 +15,7 @@ MONOMER_LIST = ["BTBT","naphthalene","anthracene","tetracene","pentacene","hexac
 ############################汎用関数###########################
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
     T_vec = np.array([Ta,Tb,Tc])
-    df_mono=pd.read_csv('~/Working/nagoya_super_computer/perylene/monomer/{}.csv'.format(monomer_name))
+    df_mono=pd.read_csv('/data/group1/z40145w/Working/nagoya_super_computer/perylene/monomer/{}.csv'.format(monomer_name))
     atoms_array_xyzR=df_mono[['X','Y','Z','R']].values
     
     ex = np.array([1.,0.,0.]); ey = np.array([0.,1.,0.]); ez = np.array([0.,0.,1.])
@@ -132,7 +132,7 @@ def get_one_exe(file_basename):
 auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/1'
 monomer_name='perylene'
 params_dict={'a':7.9,'b':7.6,'theta':20}
-isTest = False
+isTest = True
 
 inp_dir = os.path.join(auto_dir,'gaussian')
 #print(params_dict)
@@ -147,7 +147,8 @@ for z in z_list1:
     sh_path1 = os.path.join(inp_dir,sh_filename1)
     with open(sh_path1,'w') as f:
         f.writelines(cc_list1)
-    subprocess.run(['pjsub',sh_path1])
+    if not(isTest):
+        subprocess.run(['pjsub',sh_path1])
     cc_list2 = get_one_exe(file_basename2)
     sh_filename2 = file_basename2 + '.r1'
     sh_path2 = os.path.join(inp_dir,sh_filename2)
@@ -163,6 +164,7 @@ for z in z_list2:
     sh_path3 = os.path.join(inp_dir,sh_filename3)
     with open(sh_path3,'w') as f:
         f.writelines(cc_list3)
-    subprocess.run(['pjsub',sh_path3])
+    if not(isTest):
+        subprocess.run(['pjsub',sh_path3])
     
 ############################################################################################
