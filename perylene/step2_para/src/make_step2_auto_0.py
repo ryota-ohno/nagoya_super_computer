@@ -11,7 +11,6 @@ import scipy.spatial.distance as distance
 from utils import Rod, R2atom
 import subprocess
 
-MONOMER_LIST = ["BTBT","naphthalene","anthracene","tetracene","pentacene","hexacene","demo"]
 ############################汎用関数###########################
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
     T_vec = np.array([Ta,Tb,Tc])
@@ -27,12 +26,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
     xyz_array = xyz_array + T_vec
     R_array = atoms_array_xyzR[:,3].reshape((-1,1))
     
-    if monomer_name in MONOMER_LIST:
-        return np.concatenate([xyz_array,R_array],axis=1)
-    
-    else:
-        raise RuntimeError('invalid monomer_name={}'.format(monomer_name))
-        
+    return np.concatenate([xyz_array,R_array],axis=1)        
 
 def get_xyzR_lines(xyzR_array,file_description):
     lines = [     
