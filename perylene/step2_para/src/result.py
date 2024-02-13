@@ -10,7 +10,8 @@ def get_E1(path_file):
     for line in lines:
         if line.find('E(R')>-1 and len(line.split())>5:
             lines_E.append(float(line.split()[4])*627.510)
-    return lines_E[0]
+    E_list=[lines_E[5*i]-lines_E[5*i+1]-lines_E[5*i+2] for i in range(int(len(lines_E)/5))]
+    return E_list[0]
 
 auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/1/gaussian'
 z_list1=[np.round(z,1) for z in np.linspace(np.round(0,1),np.round(4,1),int(np.round(np.round(4,1)/0.1))+1)]
