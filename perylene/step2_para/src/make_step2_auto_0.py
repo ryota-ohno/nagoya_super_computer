@@ -126,7 +126,7 @@ def get_one_exe(file_basename):
 auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/1'
 monomer_name='perylene'
 params_dict={'a':7.9,'b':7.6,'theta':20}
-isTest = True
+isTest = False
 
 inp_dir = os.path.join(auto_dir,'gaussian')
 subprocess.run(['cd',inp_dir])
