@@ -107,14 +107,14 @@ def make_xyzfile(monomer_name,params_dict,isInterlayer=False):
     monomer_array_b_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,0,b_,0,A2,A3)##1,2がb方向
     monomer_array_a_1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,-a_,0,0,A2,A3)##3,4がa方向
     monomer_array_a_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,a_,0,0,A2,A3)##3,4がa方向
-    monomer_array_t1_1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,a_/2,b_/2,0,A2,-A3)
-    monomer_array_t2_1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,a_/2,-b_/2,0,A2,-A3)
-    monomer_array_t3_1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,-a_/2,-b_/2,0,A2,-A3)
-    monomer_array_t4_1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,-a_/2,b_/2,0,A2,-A3)
-    monomer_array_t1_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,a_/2,b_/2,0,A2,-A3)
-    monomer_array_t2_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,a_/2,-b_/2,0,A2,-A3)
-    monomer_array_t3_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,-a_/2,-b_/2,0,A2,-A3)
-    monomer_array_t4_2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,-a_/2,b_/2,0,A2,-A3)
+    monomer_array_t1_1 = get_monomer_xyzR1(monomer_name,-Ga,Gb,Gc,a_/2,b_/2,0,A2,-A3)
+    monomer_array_t2_1 = get_monomer_xyzR1(monomer_name,-Ga,Gb,Gc,a_/2,-b_/2,0,A2,-A3)
+    monomer_array_t3_1 = get_monomer_xyzR1(monomer_name,-Ga,Gb,Gc,-a_/2,-b_/2,0,A2,-A3)
+    monomer_array_t4_1 = get_monomer_xyzR1(monomer_name,-Ga,Gb,Gc,-a_/2,b_/2,0,A2,-A3)
+    monomer_array_t1_2 = get_monomer_xyzR2(monomer_name,-Ga,Gb,Gc,a_/2,b_/2,0,A2,-A3)
+    monomer_array_t2_2 = get_monomer_xyzR2(monomer_name,-Ga,Gb,Gc,a_/2,-b_/2,0,A2,-A3)
+    monomer_array_t3_2 = get_monomer_xyzR2(monomer_name,-Ga,Gb,Gc,-a_/2,-b_/2,0,A2,-A3)
+    monomer_array_t4_2 = get_monomer_xyzR2(monomer_name,-Ga,Gb,Gc,-a_/2,b_/2,0,A2,-A3)
     xyz_list=['500 \n','polyacene9 \n']##4分子のxyzファイルを作成
     monomers_array_4 = np.concatenate([monomer_array_i1,monomer_array_i2,monomer_array_b_1,monomer_array_b_2,monomer_array_a_1,monomer_array_a_2,
                                        monomer_array_t1_1,monomer_array_t1_2,monomer_array_t2_1,monomer_array_t2_2,monomer_array_t3_1,monomer_array_t3_2,monomer_array_t4_1,monomer_array_t4_2],axis=0)
@@ -148,8 +148,8 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
         monomer_array_p1 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,0.0,b_,Rp,A2,A3)##p1がb方向
     else:
         monomer_array_p1 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,a_,0.0,2*Rt-Rp,A2,A3)
-    monomer_array_t1 = get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,a_/2,b_/2,Rt,A2,-A3)
-    monomer_array_t2 = get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,a_/2,b_/2,Rt,A2,-A3)
+    monomer_array_t1 = get_monomer_xyzR1(monomer_name,-Ga,Gb,Gc,a_/2,b_/2,Rt,A2,-A3)
+    monomer_array_t2 = get_monomer_xyzR2(monomer_name,-Ga,Gb,Gc,a_/2,b_/2,Rt,A2,-A3)
     
     dimer_array_t1 = np.concatenate([monomer_array_i1,monomer_array_t1])
     dimer_array_t2 = np.concatenate([monomer_array_i1,monomer_array_t2])
