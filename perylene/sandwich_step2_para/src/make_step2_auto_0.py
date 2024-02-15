@@ -30,7 +30,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A1,A2,A3,phi=0.0,isFF=False):
 
 def get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,Ta,Tb,Tc,A2,A3):
     T_vec = np.array([Ta,Tb,Tc]);G_vec = np.array([Ga,Gb,Gc])
-    df_mono=pd.read_csv('~/Working/nagoya_super_computer/perylene/monomer/{}1.csv'.format(monomer_name))
+    df_mono=pd.read_csv('/data/group1/z40145w/Working/nagoya_super_computer/perylene/monomer/{}1.csv'.format(monomer_name))
     
     ex = np.array([1.,0.,0.]); ey = np.array([0.,1.,0.]); ez = np.array([0.,0.,1.])
 
@@ -46,7 +46,7 @@ def get_monomer_xyzR1(monomer_name,Ga,Gb,Gc,Ta,Tb,Tc,A2,A3):
         
 def get_monomer_xyzR2(monomer_name,Ga,Gb,Gc,Ta,Tb,Tc,A2,A3):
     T_vec = np.array([Ta,Tb,Tc]);G_vec = np.array([Ga,Gb,Gc])
-    df_mono=pd.read_csv('~/Working/nagoya_super_computer/perylene/monomer/{}1.csv'.format(monomer_name))
+    df_mono=pd.read_csv('/data/group1/z40145w/Working/nagoya_super_computer/perylene/monomer/{}1.csv'.format(monomer_name))
     
     ex = np.array([1.,0.,0.]); ey = np.array([0.,1.,0.]); ez = np.array([0.,0.,1.])
 
