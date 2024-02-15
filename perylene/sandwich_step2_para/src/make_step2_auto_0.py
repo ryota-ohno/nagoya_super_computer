@@ -66,6 +66,8 @@ def get_xyzR_lines(xyzR_array,file_description):
         '%mem=24GB\n',
         '%nproc=45\n',
         '#P TEST b3lyp/6-311G** Empiricaldispersion=GD3 counterpoise=2\n',
+        '# symmetry = none\n',
+        '#integral=NoXCTest\n',
         '\n',
         file_description+'\n',
         '\n',
