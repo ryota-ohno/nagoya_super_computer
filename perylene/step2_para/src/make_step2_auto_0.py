@@ -33,6 +33,8 @@ def get_xyzR_lines(xyzR_array,file_description):
         '%mem=24GB\n',
         '%nproc=45\n',
         '#P TEST b3lyp/6-311G** Empiricaldispersion=GD3 counterpoise=2\n',
+        '# symmetry = none\n',
+        '#integral=NoXCTest\n',
         '\n',
         file_description+'\n',
         '\n',
@@ -123,7 +125,7 @@ def get_one_exe(file_basename):
 
     return cc_list
 
-auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/1'
+auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/2'
 monomer_name='perylene'
 params_dict={'a':7.9,'b':7.6,'theta':20}
 isTest = False
