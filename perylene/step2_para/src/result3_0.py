@@ -16,7 +16,7 @@ def get_E1(path_file):
 auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/3/gaussian'
 z_list1=[np.round(z,1) for z in np.linspace(np.round(0,1),np.round(4,1),int(np.round(np.round(4,1)/0.1))+1)]
 z_list2=[np.round(z,1) for z in np.linspace(np.round(0,1),np.round(8,1),int(np.round(np.round(8,1)/0.1))+1)]
-file_base_name='perylene_step2_a=7.9_b=7.6_theta=20_'
+file_base_name='perylene_step2_a=11.4_b=5.3_theta=40_'
 with open('/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/3/result1.txt','w')as f:
     for z in z_list1:
         file_basename1 = file_base_name;file_basename2 = file_base_name
