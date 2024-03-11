@@ -181,6 +181,7 @@ for params_dict in params_dict_list:
             f.writelines(cc_list2)
         if not(isTest):
             subprocess.run(['pjsub',sh_path2])
+    time.sleep(10)
 
     while True:
         done=0
@@ -189,6 +190,7 @@ for params_dict in params_dict_list:
             result_path2=file_base_name+'z={}_2.log'.format(z)
             done += check_done(result_path1)
             done += check_done(result_path2)
+            time.sleep(0.1)
         if done > 0:
             print('Calculation has finished')
             break
