@@ -82,18 +82,6 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##計算する際のジョ�
             f1.writelines(gij_xyz_lines1)##.inpファイルの作成完了
         with open(gij_xyz_path2,'w') as f2: ##.inpファイルを作成してそこに上で作った計算をまとめたものを書き込む
             f2.writelines(gij_xyz_lines2)##.inpファイルの作成完了
-    for z in z_list2:
-        gij_xyz_lines3 = ['$ RunGauss\n']
-        monomer_array_p2 = get_monomer_xyzR(monomer_name,a_,0,z,A1,A2,A3)
-        dimer_array_p2 = np.concatenate([monomer_array_i,monomer_array_p2])
-        file_description = '{}_A1={}_A2={}_A3={}'.format(monomer_name,int(A1),int(A2),round(A3,2))##ファイル名の角度部分　位置情報はそれぞれ後で加える
-        line_list_dimer_p2 = get_xyzR_lines(dimer_array_p2,file_description+'_p2')##2分子の計算ファイルの文章部分の作成　位置情報をファイル名に加えた
-        gij_xyz_lines3 = gij_xyz_lines3 + line_list_dimer_p2 + ['\n\n\n']
-        file_name3 = file_base_name
-        file_name3 +='z={}_3.inp'.format(z)
-        gij_xyz_path3 = os.path.join(auto_dir,'gaussian',file_name3)##ファイルへのパス
-        with open(gij_xyz_path3,'w') as f3: ##.inpファイルを作成してそこに上で作った計算をまとめたものを書き込む
-            f3.writelines(gij_xyz_lines3)##.inpファイルの作成完了
     return file_base_name
 
 def get_one_exe(file_basename):
