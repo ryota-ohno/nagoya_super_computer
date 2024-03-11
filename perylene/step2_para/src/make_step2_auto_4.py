@@ -179,7 +179,7 @@ for params_dict in params_dict_list:
             done += check_done(result_path1)
             done += check_done(result_path2)
             time.sleep(0.1)
-        if done > 0:
+        if done < 1:
             print('Calculation has finished')
             break
         time.sleep(1)
@@ -188,7 +188,7 @@ for params_dict in params_dict_list:
         for z in z_list1:
             file_basename1 = file_base_name;file_basename2 = file_base_name
             file_basename1 +='z={}_1.log'.format(z);file_basename2 +='z={}_2.log'.format(z)
-            result1=os.path.join(auto_dir,file_basename1);result2=os.path.join(auto_dir,file_basename2)
+            result1=os.path.join(inp_dir,file_basename1);result2=os.path.join(inp_dir,file_basename2)
             E1=get_E1(result1);E2=get_E1(result2)
             f.write('{} {} {}\n'.format(z,E1,E2))
 
