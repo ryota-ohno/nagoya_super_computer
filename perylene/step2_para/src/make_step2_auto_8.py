@@ -136,7 +136,7 @@ def check_done(path_file):
     else:
         return 1
 
-auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/7'
+auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/8'
 monomer_name='perylene'
 #params_dict={'a':11.4,'b':5.3,'theta':40}
 params_dict_list=[{'a':7.3,'b':8.1,'theta':15},{'a':7.4,'b':8.0,'theta':16},
@@ -183,7 +183,7 @@ for params_dict in params_dict_list:
             break
         time.sleep(1)
 
-    with open('/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/7/result{}.txt'.format(i),'w')as f:
+    with open('/data/group1/z40145w/Working/nagoya_super_computer/perylene/step2_para/8/result{}.txt'.format(i),'w')as f:
         for z in z_list1:
             file_basename1 = file_base_name;file_basename2 = file_base_name
             file_basename1 +='z={}_1.log'.format(z);file_basename2 +='z={}_2.log'.format(z)
