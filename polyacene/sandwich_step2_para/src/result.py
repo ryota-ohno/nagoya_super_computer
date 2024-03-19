@@ -13,10 +13,10 @@ def get_E1(path_file):
     E_list=[lines_E[5*i]-lines_E[5*i+1]-lines_E[5*i+2] for i in range(int(len(lines_E)/5))]
     return E_list[0]
 
-auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/perylene/sandwich_step2_para/1/gaussian'
+auto_dir='/data/group1/z40145w/Working/nagoya_super_computer/polyacene/sandwich_step2_para/anthracene1/gaussian'
 z_list1=[np.round(z,1) for z in np.linspace(np.round(-2.5,1),np.round(2.5,1),int(np.round(np.round(5,1)/0.1))+1)]
-file_base_name='perylene_step2_a=10.6_b=11.2_theta=55_'
-with open('/data/group1/z40145w/Working/nagoya_super_computer/perylene/sandwich_step2_para/1/result1.txt','w')as f:
+file_base_name='anthracene_step2_a=12.1_b=7.2_theta=60_'
+with open('/data/group1/z40145w/Working/nagoya_super_computer/polyacene/sandwich_step2_para/anthracene1/result1.txt','w')as f:
     for z in z_list1:
         file_basename1 = file_base_name;file_basename2 = file_base_name;file_basename3 = file_base_name
         file_basename1 +='z={}_1.log'.format(z);file_basename2 +='z={}_2.log'.format(z);file_basename3 +='z={}_3.log'.format(z)
