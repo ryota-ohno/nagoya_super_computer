@@ -99,7 +99,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     df_E = pd.read_csv(auto_csv)
     df_queue = df_E.loc[df_E['status']=='InProgress',['file_name']]
     len_queue = len(df_queue)
-    
+    print('debug1')
     for idx,row in zip(df_queue.index,df_queue.values):
         file_name = row[0]
         log_filepath = os.path.join(*[auto_dir,'gaussian',file_name])
@@ -117,6 +117,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             break#2つ同時に計算終わったりしたらまずいので一個で切る
     isAvailable = len_queue < num_nodes 
     if isAvailable:
+        print('debug2')
         dict_matrix = get_params_dict(auto_dir,num_init, fixed_param_keys, opt_param_keys)
         if len(dict_matrix)!=0:#終わりがまだ見えないなら
             for i in range(len(dict_matrix)):
