@@ -126,21 +126,18 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):##Rt:t-shaped Rt:slipped-par
     monomer_array_i02 = get_monomer_xyzR(monomer_name,c[0],c[1],c[2],A2,-A3)
     
     if a_ > b_:
-        monomer_array_p1 = get_monomer_xyzR(monomer_name,0,b_,2*Rt,A2,A3)##p1がb方向
         monomer_array_ip1 = get_monomer_xyzR(monomer_name,c[0],c[1]+b_,c[2]+2*Rt,A2,A3)
         monomer_array_ip2 = get_monomer_xyzR(monomer_name,c[0],c[1]-b_,c[2]-2*Rt,A2,A3)
         monomer_array_ip3 = get_monomer_xyzR(monomer_name,c[0],c[1]+b_,c[2]+2*Rt,A2,-A3)
         monomer_array_ip4 = get_monomer_xyzR(monomer_name,c[0],c[1]-b_,c[2]-2*Rt,A2,-A3)
         
     else:##a_<b_
-        monomer_array_p1 = get_monomer_xyzR(monomer_name,a_,0,2*Rt-2*Rt,0,0,A3)##p2がa方向
         monomer_array_ip1 = get_monomer_xyzR(monomer_name,c[0]+a_,c[1],c[2],A2,A3)
         monomer_array_ip2 = get_monomer_xyzR(monomer_name,c[0]-a_,c[1],c[2],A2,A3)
         monomer_array_ip3 = get_monomer_xyzR(monomer_name,c[0]+a_,c[1],c[2],A2,-A3)
         monomer_array_ip4 = get_monomer_xyzR(monomer_name,c[0]-a_,c[1],c[2],A2,-A3)
         
 
-    monomer_array_t1 = get_monomer_xyzR(monomer_name,a_/2,b_/2,Rt,A2,-A3)
     monomer_array_it1 = get_monomer_xyzR(monomer_name,c[0]+a_/2,c[1]+b_/2,c[2]+Rt,A2,-A3)
     monomer_array_it2 = get_monomer_xyzR(monomer_name,c[0]+a_/2,c[1]-b_/2,c[2]-Rt,A2,-A3)
     monomer_array_it3 = get_monomer_xyzR(monomer_name,c[0]-a_/2,c[1]-b_/2,c[2]-Rt,A2,-A3)
