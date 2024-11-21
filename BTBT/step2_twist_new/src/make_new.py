@@ -89,8 +89,8 @@ def get_one_exe(file_name):
 def make_gaussview_xyz(auto_dir,monomer_name,params_dict,isInterlayer=False):
     a_ = params_dict['a']; b_ = params_dict['b']
     Rt = params_dict['Rt']; A2 = params_dict['A2']; A3 = params_dict['theta']
-    phi1 = params_dict.get('phi1',0.0); phi2 = params_dict.get('phi2',0.0)
-    print(phi1, phi2)
+    phi1 = params_dict.get('phi',0.0); phi2 = -phi1
+    
     a =np.array([a_,0,0])
     b =np.array([0,b_,0])
     
@@ -127,8 +127,8 @@ def make_gaussview_xyz(auto_dir,monomer_name,params_dict,isInterlayer=False):
 def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     a_ = params_dict['a']; b_ = params_dict['b']
     Rt = params_dict['Rt']; A2 = params_dict['A2']; A3 = params_dict['theta']
-    phi1 = params_dict.get('phi1',0.0); phi2 = params_dict.get('phi2',0.0)
-    print(phi1, phi2)
+    phi1 = params_dict.get('phi',0.0); phi2 = -phi1
+    #print(phi1, phi2)
     
     monomer_array_i = get_monomer_xyzR(monomer_name,0,0,0,A2,A3, phi1)
     if b_ > a_:
