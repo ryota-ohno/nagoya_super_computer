@@ -4,7 +4,7 @@ import pandas as pd
 import subprocess
 from utils import Rod, R2atom
 
-MONOMER_LIST = ['C5']
+MONOMER_LIST = ['C5','C6','C9','C3','C7']
 ############################汎用関数###########################
 def get_monomer_xyza(monomer_name,Ta,Tb,Tc,A2,A3):
     T_vec = np.array([Ta,Tb,Tc])
@@ -178,7 +178,7 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isInterlayer,isTest=True):
     with open(sh_path,'w') as f:
         f.writelines(cc_list)
     if not(isTest):
-        subprocess.run(['qsub',sh_path])
+        subprocess.run(['pjsub',sh_path])
     log_file_name = os.path.splitext(file_name)[0]+'.log'
     return log_file_name
     
