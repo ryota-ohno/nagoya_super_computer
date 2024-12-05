@@ -37,7 +37,7 @@ def main_process(args):
     isOver = False
     while not(isOver):
         #check
-        isOver = listen(args.auto_dir,args.monomer_name,args.num_nodes,args.isTest)##argsの中身を取る
+        isOver = listen(args.auto_dir,args.monomer_name,args.num_nodes,args.num_init,args.isTest)##argsの中身を取る
         time.sleep(1)
 
 def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引数に取るか中身をばらして取るかの違い
