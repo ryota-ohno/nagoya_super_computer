@@ -221,7 +221,7 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
                         file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1}, machine_type, structure_type=1,isTest=isTest);len_queue +=1
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':machine_type,'status':'InProgress','file_name':file_name})
                         df_E_new_1=pd.concat([df_E_1,df_newline_1.to_frame().T],axis=0,ignore_index=True);df_E_new_1.to_csv(auto_csv_1,index=False)
-                        time.sllep(1)
+                        time.sleep(1)
                     else:
                         file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1}, machine_type, structure_type=1,isTest=True)
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':3,'status':'qw','file_name':file_name})
