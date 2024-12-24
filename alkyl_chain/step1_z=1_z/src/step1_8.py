@@ -154,7 +154,7 @@ def get_params_dict(auto_dir, num_nodes):
 
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict={'a1':np.round(opt_params_matrix[i][0],1),'b2':np.round(opt_params_matrix[i][1],1),'z2':np.round(opt_params_matrix[i][2],1)
+                opt_params_dict={'a':np.round(opt_params_matrix[i][0],1),'b':np.round(opt_params_matrix[i][1],1),'z':np.round(opt_params_matrix[i][2],1)
                             }
                 d={**fixed_params_dict,**opt_params_dict}
                 dict_matrix.append(d)
