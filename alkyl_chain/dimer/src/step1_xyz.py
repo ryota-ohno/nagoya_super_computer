@@ -64,7 +64,7 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
             if margin == 0:
                 break
             params_dict = row[fixed_param_keys + opt_param_keys].to_dict()# パラメータの辞書を作成
-            file_name = exec_gjf(auto_dir, monomer_name, {**params_dict}, machine_type,isTest=isTest)# ジョブの実行 structure type
+            file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isTest=isTest)# ジョブの実行 structure type
             len_queue += 1;margin -= 1
             df_E_1.at[index, 'machine_type'] = machine_type
             df_E_1.at[index, 'status'] = 'InProgress'
@@ -85,12 +85,12 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
                     print('debug1')
                     isAvailable = len_queue < max_nodes
                     if isAvailable:
-                        file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1}, machine_type,isTest=isTest);len_queue +=1
+                        file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=isTest);len_queue +=1
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':machine_type,'status':'InProgress','file_name':file_name})
                         df_E_new_1=pd.concat([df_E_1,df_newline_1.to_frame().T],axis=0,ignore_index=True);df_E_new_1.to_csv(auto_csv_1,index=False)
                         time.sleep(1)
                     else:
-                        file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1}, machine_type,isTest=True)
+                        file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=True)
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':3,'status':'qw','file_name':file_name})
                         df_E_new_1=pd.concat([df_E_1,df_newline_1.to_frame().T],axis=0,ignore_index=True);df_E_new_1.to_csv(auto_csv_1,index=False)
                         time.sleep(1)
