@@ -19,10 +19,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,x2,A3):
     xyz_array = xyz_array + T_vec
     R_array = atoms_array_xyzR[:,3].reshape((-1,1))
     
-    if monomer_name in MONOMER_LIST:
-        return np.concatenate([xyz_array,R_array],axis=1)
-    else:
-        raise RuntimeError('invalid monomer_name={}'.format(monomer_name))
+    return np.concatenate([xyz_array,R_array],axis=1)
         
 def get_xyzR_lines(xyzR_array,file_description,machine_type):
     lines = [     
