@@ -139,10 +139,10 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
             continue
         E_list3=get_E(log_filepath3)
         
-        if (len(E_list1)!=1) or (len(E_list2)!=1) or (len(E_list3)!=2):##get Eの長さは計算した分子の数
+        if (len(E_list1)!=1) or (len(E_list2)!=1) or (len(E_list3)!=1):##get Eの長さは計算した分子の数
             continue
         else:
-            E1=float(E_list1[0]);E2=float(E_list2[0]);E3=float(E_list3[0]);E4=float(E_list3[1])##8分子に向けてep1,ep2作成　ep1:b ep2:a
+            E1=float(E_list1[0]);E2=float(E_list2[0]);E3=float(E_list3[0]);E4=float(E_list3[0])##8分子に向けてep1,ep2作成　ep1:b ep2:a
             E=E1+E2+E3+E4
             df_E.loc[idx, ['E','E1','E2','E3','E4','status']] = [E,E1,E2,E3,E4,'Done']
             df_E.to_csv(auto_csv,index=False)
