@@ -3,7 +3,7 @@ import os
 os.environ['HOME'] ='/data/group1/z40145w'
 import pandas as pd
 import time
-from make_8 import exec_gjf##計算した点のxyzfileを出す
+from make_8_old import exec_gjf##計算した点のxyzfileを出す
 from utils import get_E
 import argparse
 import numpy as np
