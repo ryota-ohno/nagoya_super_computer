@@ -16,7 +16,7 @@ def main_process(args):
     
     auto_csv_path = os.path.join(auto_dir,'step1.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['theta','A2','a','b','z','E','E1','E2','E3','E4','status'])##いじる
+        df_E = pd.DataFrame(columns = ['theta','A2','a','b','z','E','E1','E2','E3','E4','status','machine_type','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
