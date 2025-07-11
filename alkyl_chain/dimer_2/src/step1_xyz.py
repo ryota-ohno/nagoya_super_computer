@@ -138,7 +138,7 @@ def get_params_dict(auto_dir, num_nodes):
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
         isDone, opt_params_matrix = get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict)
         if isDone:
-            opt_params_dict={'r':np.round(opt_params_matrix[0][0],1)}
+            opt_params_dict={'r':np.round(opt_params_matrix[0],1)}
             # df_init_paramsのstatusをupdate
             df_init_params = update_value_in_df(df_init_params,index,'status','Done')
             if np.max(df_init_params.index) < index+1:##もうこれ以上は新しい計算は進まない
@@ -157,7 +157,7 @@ def get_params_dict(auto_dir, num_nodes):
 
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict={'r':np.round(opt_params_matrix[i][0],1)}
+                opt_params_dict={'r':np.round(opt_params_matrix[i],1)}
                 d={**fixed_params_dict,**opt_params_dict}
                 dict_matrix.append(d)
                     #print(d)
@@ -173,14 +173,14 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
             r = np.round(r,1)
             df_val_xyz = df_val[(df_val['r']==r)&(df_val['status']=='Done')]
             if len(df_val_xyz)==0:
-                para_list.append([r])
+                para_list.append(r)
                 continue
-            r_list.append([r]);E_list.append(df_val_xyz['E'].values[0])
+            r_list.append(r);E_list.append(df_val_xyz['E'].values[0])
         if len(para_list) != 0:
             return False,para_list
         r_init = r_list[np.argmin(np.array(E_list))]
         if r_init==r_init_prev:
-            return True,[[r_init]]
+            return True,[r_init]
         else:
             r_init_prev=r_init
 
