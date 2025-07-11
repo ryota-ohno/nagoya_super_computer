@@ -27,7 +27,7 @@ def main_process(args):
     while not(isOver):
         #check
         isOver = listen(args.auto_dir,args.monomer_name,args.num_nodes,args.max_nodes,args.isTest)##argsの中身を取る
-        time.sleep(1)
+        
 
 def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
     fixed_param_keys = ['theta','phi','z'];opt_param_keys = ['r']
@@ -49,7 +49,6 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
             E1=float(E_list1[0])##8分子に向けてep1,ep2作成　ep1:b ep2:a
             df_E_1.loc[idx, ['E','status']] = [E1,'Done']
             df_E_1.to_csv(auto_csv_1,index=False)
-            time.sleep(1)
             break#2つ同時に計算終わったりしたらまずいので一個で切る
     
     
@@ -70,7 +69,7 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
             df_E_1.at[index, 'status'] = 'InProgress'
             df_E_1.at[index, 'file_name'] = file_name
         df_E_1.to_csv(auto_csv_1, index=False)
-        time.sleep(1)#
+        
     dict_matrix = get_params_dict(auto_dir,num_nodes)##更新分を流す a1~z2まで取得
     if len(dict_matrix)!=0:#終わりがまだ見えないなら
         for i in range(len(dict_matrix)):
@@ -88,13 +87,12 @@ def listen(auto_dir,monomer_name,num_nodes,max_nodes,isTest):##args自体を引�
                         file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=isTest);len_queue +=1
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':machine_type,'status':'InProgress','file_name':file_name})
                         df_E_new_1=pd.concat([df_E_1,df_newline_1.to_frame().T],axis=0,ignore_index=True);df_E_new_1.to_csv(auto_csv_1,index=False)
-                        time.sleep(1)
+                        
                     else:
                         file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=True)
                         df_newline_1 = pd.Series({**params_dict1,'E1':0.,'machine_type':3,'status':'qw','file_name':file_name})
                         df_E_new_1=pd.concat([df_E_1,df_newline_1.to_frame().T],axis=0,ignore_index=True);df_E_new_1.to_csv(auto_csv_1,index=False)
-                        time.sleep(1)
-
+                        
     init_params_csv=os.path.join(auto_dir, 'step1_init_params.csv')
     df_init_params = pd.read_csv(init_params_csv)
     df_init_params_done = filter_df(df_init_params,{'status':'Done'})
