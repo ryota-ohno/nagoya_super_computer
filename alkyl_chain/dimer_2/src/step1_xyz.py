@@ -165,7 +165,7 @@ def get_params_dict(auto_dir, num_nodes):
         
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     df_val = filter_df(df_cur, fixed_params_dict)
-    r_init_prev = init_params_dict['r'][0]
+    r_init_prev = init_params_dict['r']
     while True:
         E_list=[];r_list=[]
         para_list=[]
