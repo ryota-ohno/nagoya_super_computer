@@ -27,7 +27,7 @@ bond_lines=[' 1 1 2 ar\n', ' 2 1 3 ar\n', ' 3 1 7 ar\n', ' 4 2 4 ar\n', ' 5 2 9 
 line3='@<TRIPOS>SUBSTRUCTURE\n     1 RES1        1 GROUP             0 ****  ****    0  \n     2 RES2       25 GROUP             0 ****  ****    0 \n\n'
 
 para_list=[]
-with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/btbt/monomer/btbt_mono.mol2')as f:
+with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/monomer/btbt_mono.mol2')as f:
     for line in f:
         #print(line)
         s=line.split()
