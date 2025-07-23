@@ -11,7 +11,7 @@ import shutil
 import subprocess
 
 def main_process(args):
-    auto_dir = args.auto_dir
+    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/{args.auto_dir}'
     os.makedirs(auto_dir, exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'amber'), exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
