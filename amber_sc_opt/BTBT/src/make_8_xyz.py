@@ -58,15 +58,7 @@ def get_xyzR_lines(xyzr_array):
 def get_one_exe(auto_dir,file_name):
     file_basename = os.path.splitext(file_name)[0]
     lines_job=[
-'#!/bin/bash\n',
-'#PJM -L "rscunit=fx"\n',
-'#PJM -L "rscgrp=fx-small"\n',
-'#PJM -L "node=1"\n',
-'#PJM -L "elapse=0:10:00"\n',
-'#PJM -j\n',
-'#PJM -S\n',
-'#PJM "--norestart"\n',
-'\n',
+'#!/bin/bash\n','\n',
 'module load amber\n','\n',
 f'parmchk2 -i {file_basename}.mol2 -f mol2 -o {file_basename}.frcmod\n',
 f'tleap -f {file_basename}_tleap.in\n',
@@ -181,7 +173,8 @@ def exec_gjf(auto_dir, monomer_name, params_dict,structure_type,isTest=True):
     file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict,structure_type)
     file_job,log_file_name = get_one_exe(auto_dir,file_name)
     if not(isTest):
-        subprocess.run(['pjsub',file_job])
+        subprocess.run(['chmod','+x',file_name])
+        subprocess.run([file_name])
     return log_file_name
     
 ############################################################################################
