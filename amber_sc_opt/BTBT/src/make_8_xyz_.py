@@ -197,8 +197,8 @@ def exec_gjf(auto_dir, monomer_name, params_dict,structure_type,isTest=True):
     file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict,structure_type)
     file_job,log_file_name = get_one_exe(auto_dir,file_name)
     if not(isTest):
-        subprocess.run(['chmod','+x',file_name])
-        subprocess.run([file_name])
+        subprocess.run(['chmod','+x',file_job])
+        subprocess.run([file_job])
     return log_file_name
     
 ############################################################################################
