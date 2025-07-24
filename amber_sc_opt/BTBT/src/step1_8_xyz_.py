@@ -165,7 +165,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 dictlist_E_f=filter_dictlist(dictlist_E, params_dict)
                 if len(dictlist_E_f) == 0:
                     new_dict = {**params_dict, 'E': '0.0', 'E1': '0.0', 'E2': '0.0', 'E3': '0.0', 'status': 'InProgress'}
-                    dictlist_E.append(new_dict);write_dictlist_to_csv(dictlist_E, os.path.join(auto_dir,'step1.csv'), fieldnames)
+                    dictlist_E.append(new_dict);write_dictlist_to_csv(os.path.join(auto_dir,'step1.csv'), dictlist_E, fieldnames)
 
                 ## 1の実行　##
                 dictlist_E1,fieldnames1 = read_csv_to_dictlist(os.path.join(auto_dir,'step1_1.csv'))
@@ -173,7 +173,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 if len(dict_list_E1_f) == 0:
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1}, structure_type=1,isTest=isTest)
                     new_dict_1 = {**params_dict1, 'E1': '0.0', 'status': 'InProgress','file_name':file_name}
-                    dictlist_E1.append(new_dict_1);write_dictlist_to_csv(dictlist_E1, os.path.join(auto_dir,'step1_1.csv'), fieldnames1)
+                    dictlist_E1.append(new_dict_1);write_dictlist_to_csv(os.path.join(auto_dir,'step1_1.csv'), dictlist_E1, fieldnames1)
                     
                 ## 2の実行　##
                 dictlist_E2,fieldnames2 = read_csv_to_dictlist(os.path.join(auto_dir,'step1_2.csv'))
@@ -181,7 +181,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 if len(dict_list_E2_f) == 0:
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict2}, structure_type=2,isTest=isTest)
                     new_dict_2 = {**params_dict2, 'E2': '0.0', 'status': 'InProgress','file_name':file_name}
-                    dictlist_E2.append(new_dict_2);write_dictlist_to_csv(dictlist_E2, os.path.join(auto_dir,'step1_2.csv'), fieldnames2)
+                    dictlist_E2.append(new_dict_2);write_dictlist_to_csv(os.path.join(auto_dir,'step1_2.csv'), dictlist_E2, fieldnames2)
                     
                 ## 3の実行　##
                 dictlist_E3,fieldnames3 = read_csv_to_dictlist(os.path.join(auto_dir,'step1_3.csv'))
@@ -189,7 +189,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 if len(dict_list_E3_f) == 0:
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict3}, structure_type=3,isTest=isTest)
                     new_dict_3 = {**params_dict3, 'E3': '0.0', 'status': 'InProgress','file_name':file_name}
-                    dictlist_E3.append(new_dict_3);write_dictlist_to_csv(dictlist_E3, os.path.join(auto_dir,'step1_3.csv'), fieldnames3)
+                    dictlist_E3.append(new_dict_3);write_dictlist_to_csv(os.path.join(auto_dir,'step1_3.csv'), dictlist_E3, fieldnames3)
     
     dictlist_init_params,field_name_i=read_csv_to_dictlist(os.path.join(auto_dir, 'step1_init_params.csv'))
     dictlist_init_params_done = filter_dictlist(dictlist_init_params,{'status':'Done'})
@@ -243,11 +243,11 @@ def get_params_dict(auto_dir, num_nodes):
             else:
                 status = dictlist_init_params[index + 1]['status']
             fieldnames = list(dictlist_init_params[0].keys())
-            write_dictlist_to_csv(dictlist_init_params, init_params_csv, fieldnames)
+            write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
             if status == 'NotYet':
                 opt_params_dict = get_values_from_dictlist(dictlist_init_params, index + 1, opt_param_keys_1 + opt_param_keys_2)
                 dictlist_init_params = update_row_value(dictlist_init_params, index + 1, 'status', 'InProgress')
-                write_dictlist_to_csv(dictlist_init_params, init_params_csv, fieldnames)
+                write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
                 dict_matrix.append({**fixed_params_dict, **opt_params_dict})
             else:
                 continue
