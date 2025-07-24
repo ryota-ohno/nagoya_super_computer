@@ -16,6 +16,7 @@ def matmul(mat1, mat2):
         for j in range(3):    # mat2 の各列
             for k in range(3):
                 result[i][j] += mat1[i][k] * mat2[k][j]
+    return result
 
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3):
     T_vec = [Ta,Tb,Tc];
@@ -26,12 +27,16 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3):
             # 指定列の値をfloatに変換してリスト化
             values = [float(row[col]) for col in cols]
             atoms_array_xyzR.append(values)
-    xyz_array = atoms_array_xyzR[:,:3]
+    xyz_array = [];R_array=[]
+    for x,y,z,r in atoms_array_xyzR:
+        xyz_array.append([x,y,z]);R_array.append(r)
     xyz_array = matmul(xyz_array,Rod([-1,0,0],A2).T)
     xyz_array = matmul(xyz_array,Rod([0,0,1],A3).T)
     xyz_array = xyz_array + T_vec
-    R_array = atoms_array_xyzR[:,3].reshape((-1,1))
-    return concatenate([xyz_array,R_array])
+    xyzR_array=[]
+    for i in range(xyz_array):
+        xyzR_array.append([xyz_array[i][0],xyz_array[i][1],xyz_array[i][2],R_array[i]])
+    return xyzR_array
         
 line1='@<TRIPOS>MOLECULE\npentacene\n   48    54     2     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
 line2='@<TRIPOS>BOND\n'
