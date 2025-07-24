@@ -131,6 +131,7 @@ def make_xyz(monomer_name,params_dict,structure_type):
     xyzfile_name = ''
     xyzfile_name += monomer_name
     for key,val in params_dict.items():
+        val=float(val)
         if key in ['a','b','z']:
             val = round(val,2)
         elif key in ['A1','A2','theta']:
@@ -172,9 +173,10 @@ def get_file_name_from_dict(monomer_name,params_dict,structure_type):
     file_name = ''
     file_name += monomer_name
     for key,val in params_dict.items():
+        val=float(val)
         if key in ['a','b','z']:
-            val = val
-        elif key in ['A2','theta']:
+            val = round(val,2)
+        elif key in ['A1','A2','theta']:
             val = int(val)
         file_name += '_{}_{}'.format(key,val)
     return file_name + f'_{structure_type}.mol2'
