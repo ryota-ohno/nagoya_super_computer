@@ -216,17 +216,16 @@ def get_params_dict(auto_dir, num_nodes):
     fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
 
     #最初の立ち上がり時
-    if len(dictlist_init_params_inprogress) < num_nodes:
-        dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
-        if len(dictlist_init_params_notyet) == 0:
-            return []
-        notyet_row = dictlist_init_params_notyet[0]
-        notyet_index = dictlist_init_params.index(notyet_row)
-        dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgres')
-        write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-        selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
-        params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
-        return [params_dict]
+    dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
+    if len(dictlist_init_params_notyet) != 0:
+        if len(dictlist_init_params_inprogress) < num_nodes:
+            notyet_row = dictlist_init_params_notyet[0]
+            notyet_index = dictlist_init_params.index(notyet_row)
+            dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgres')
+            write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
+            selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
+            params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
+            return [params_dict]
     
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');cur_csv = os.path.join(auto_dir, 'step1.csv')
     dictlist_init_params = read_csv_to_dictlist(init_params_csv);dictlist_cur = read_csv_to_dictlist(cur_csv)
