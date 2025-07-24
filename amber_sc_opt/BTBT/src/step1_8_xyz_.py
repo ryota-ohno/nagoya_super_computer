@@ -234,6 +234,7 @@ def get_params_dict(auto_dir, num_nodes):
     for index, row in enumerate(dictlist_init_params):
         if row['status'] != 'InProgress':
             continue
+        print(index)
         dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
@@ -258,7 +259,7 @@ def get_params_dict(auto_dir, num_nodes):
             for i in range(len(opt_params_matrix)):
                 opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1)}
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
-
+    print(dict_matrix)
     return dict_matrix
         
 def get_opt_params_dict(dict_list, init_params_dict, fixed_params_dict):
