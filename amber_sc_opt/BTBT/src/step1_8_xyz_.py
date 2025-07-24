@@ -228,13 +228,13 @@ def get_params_dict(auto_dir, num_nodes):
             return [params_dict]
     
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');cur_csv = os.path.join(auto_dir, 'step1.csv')
-    dictlist_init_params = read_csv_to_dictlist(init_params_csv);dictlist_cur = read_csv_to_dictlist(cur_csv)
+    dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv);dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     
     dict_matrix = []
     for index, row in enumerate(dictlist_init_params):
         if row['status'] != 'InProgress':
             continue
-        dictlist_init_params = read_csv_to_dictlist(init_params_csv)
+        dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
         isDone, opt_params_matrix = get_opt_params_dict(dictlist_cur, init_params_dict, fixed_params_dict)
