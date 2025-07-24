@@ -34,7 +34,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3):
     xyz_array = matmul(xyz_array,Rod([0,0,1],A3))
     xyz_array = xyz_array + T_vec
     xyzR_array=[]
-    for i in range(xyz_array):
+    for i in range(len(xyz_array)):
         xyzR_array.append([xyz_array[i][0],xyz_array[i][1],xyz_array[i][2],R_array[i]])
     return xyzR_array
         
