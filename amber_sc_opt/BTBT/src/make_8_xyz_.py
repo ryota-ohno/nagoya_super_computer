@@ -19,7 +19,6 @@ def matmul(mat1, mat2):
     return result
 
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3):
-    T_vec = [Ta,Tb,Tc];
     csv_path=f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{monomer_name}/monomer/{monomer_name}.csv';cols=['X','Y','Z','R'];atoms_array_xyzR = []
     with open(csv_path, newline='') as f:
         reader = csv.DictReader(f)
@@ -32,10 +31,12 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3):
         xyz_array.append([x,y,z]);R_array.append(r)
     xyz_array = matmul(xyz_array,Rod([-1,0,0],A2))
     xyz_array = matmul(xyz_array,Rod([0,0,1],A3))
-    xyz_array = xyz_array + T_vec
+    xyz_array_ = []
+    for x,y,z in xyz_array:
+        xyz_array_.append([x+Ta,y+Tb,z+Tc])
     xyzR_array=[]
-    for i in range(len(xyz_array)):
-        xyzR_array.append([xyz_array[i][0],xyz_array[i][1],xyz_array[i][2],R_array[i]])
+    for i in range(len(xyz_array_)):
+        xyzR_array.append([xyz_array_[i][0],xyz_array_[i][1],xyz_array_[i][2],R_array[i]])
     return xyzR_array
         
 line1='@<TRIPOS>MOLECULE\npentacene\n   48    54     2     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
