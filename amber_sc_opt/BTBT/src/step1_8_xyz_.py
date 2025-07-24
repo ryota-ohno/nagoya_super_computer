@@ -218,6 +218,8 @@ def get_params_dict(auto_dir, num_nodes):
     #最初の立ち上がり時
     if len(dictlist_init_params_inprogress) < num_nodes:
         dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
+        if len(dictlist_init_params_notyet) == 0:
+            return []
         notyet_row = dictlist_init_params_notyet[0]
         notyet_index = dictlist_init_params.index(notyet_row)
         dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgres')
