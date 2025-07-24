@@ -7,4 +7,4 @@
 #PJM -S
 #PJM "--norestart"
 
-python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/src/step1_8_xyz.py --auto-dir BTBT_0_ --monomer-name BTBT --num-nodes 10
+nohup python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/src/step1_8_xyz_.py --auto-dir BTBT_0_ --monomer-name BTBT --num-nodes 10 &
