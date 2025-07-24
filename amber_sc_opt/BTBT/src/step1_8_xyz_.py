@@ -201,6 +201,8 @@ def check_calc_status(auto_dir,params_dict):
     if len(dict_list)==0:
         return False
     dict_list_f=filter_dictlist(dict_list, params_dict)
+    if len(dict_list_f)==0:
+        return False
     try:
         status = dict_list_f[0]['status']
         return status=='Done'
