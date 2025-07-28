@@ -226,8 +226,7 @@ def get_params_dict(auto_dir, num_nodes):
             selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
             params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
             return [params_dict]
-    init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');cur_csv = os.path.join(auto_dir, 'step1.csv')
-    dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv);dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
+    init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
     
     dict_matrix = []
     for index, row in enumerate(dictlist_init_params):
@@ -237,7 +236,7 @@ def get_params_dict(auto_dir, num_nodes):
         dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
-        isDone, opt_params_matrix = get_opt_params_dict(dictlist_cur, init_params_dict, fixed_params_dict)
+        isDone, opt_params_matrix = get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict)
         with open(os.path.join(auto_dir, 'debug4.txt'),'w') as f:
             f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
@@ -262,8 +261,9 @@ def get_params_dict(auto_dir, num_nodes):
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
     return dict_matrix
         
-def get_opt_params_dict(dict_list, init_params_dict, fixed_params_dict):
-    filtered = filter_dictlist(dict_list, fixed_params_dict)
+def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
+    cur_csv = os.path.join(auto_dir, 'step1.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
+    filtered = filter_dictlist(dictlist_cur, fixed_params_dict)
     a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1)
 
     while True:
