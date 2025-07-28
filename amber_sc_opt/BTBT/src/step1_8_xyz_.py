@@ -218,7 +218,6 @@ def get_params_dict(auto_dir, num_nodes):
     #最初の立ち上がり時
     dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
     if len(dictlist_init_params_notyet) != 0:
-        print('debug1')
         if len(dictlist_init_params_inprogress) < num_nodes:
             notyet_row = dictlist_init_params_notyet[0]
             notyet_index = dictlist_init_params.index(notyet_row)
@@ -227,7 +226,8 @@ def get_params_dict(auto_dir, num_nodes):
             selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
             params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
             return [params_dict]
-    
+    with open(os.path.join(auto_dir, 'debug1.txt'),'w')as f:
+        f.write('debug1')
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');cur_csv = os.path.join(auto_dir, 'step1.csv')
     dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv);dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     
@@ -260,7 +260,8 @@ def get_params_dict(auto_dir, num_nodes):
             for i in range(len(opt_params_matrix)):
                 opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1)}
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
-    print(dict_matrix)
+    with open(os.path.join(auto_dir, 'debug2.txt'),'w')as f:
+        f.write(f'debug2 {len(dict_matrix)}')
     return dict_matrix
         
 def get_opt_params_dict(dict_list, init_params_dict, fixed_params_dict):
