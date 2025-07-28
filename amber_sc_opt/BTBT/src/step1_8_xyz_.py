@@ -49,7 +49,7 @@ def main_process(args):
     while not(isOver):
         #check
         isOver = listen(auto_dir,args.monomer_name,args.num_nodes,args.isTest)##argsの中身を取る
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
 def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
     fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
@@ -238,6 +238,8 @@ def get_params_dict(auto_dir, num_nodes):
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
         isDone, opt_params_matrix = get_opt_params_dict(dictlist_cur, init_params_dict, fixed_params_dict)
+        with open(os.path.join(auto_dir, 'debug4.txt'),'w') as f:
+            f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
             opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1)}
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
