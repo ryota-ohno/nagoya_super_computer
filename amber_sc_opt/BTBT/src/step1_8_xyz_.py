@@ -221,7 +221,7 @@ def get_params_dict(auto_dir, num_nodes):
         if len(dictlist_init_params_inprogress) < num_nodes:
             notyet_row = dictlist_init_params_notyet[0]
             notyet_index = dictlist_init_params.index(notyet_row)
-            dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgres')
+            dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
             write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
             selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
             params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
@@ -238,9 +238,6 @@ def get_params_dict(auto_dir, num_nodes):
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
         isDone, opt_params_matrix = get_opt_params_dict(dictlist_cur, init_params_dict, fixed_params_dict)
-        with open(os.path.join(auto_dir, 'debug3.txt'),'a')as f:
-            f.write(f'debug3 {isDone}')
-            f.write(f'{len(opt_params_matrix)}')
         if isDone:
             opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1)}
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
