@@ -67,7 +67,7 @@ def main_process(args):
         #time.sleep(0.1)
 
 def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
-    fixed_param_keys = ['theta','A2','phi','z'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
+    fixed_param_keys = ['theta','A2','phi'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z']
     
     auto_csv_1 = os.path.join(auto_dir,'step1_1.csv');rows_1 = []
     with open(auto_csv_1, mode='r', newline='') as f:
@@ -301,7 +301,7 @@ def get_params_dict(auto_dir, num_nodes):
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv')
     dictlist_init_params,fieldnames = read_csv_to_dictlist(init_params_csv)
     dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
-    fixed_param_keys = ['theta','A2','phi','z'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
+    fixed_param_keys = ['theta','A2','phi'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z']
 
     #最初の立ち上がり時
     dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
@@ -328,7 +328,7 @@ def get_params_dict(auto_dir, num_nodes):
         with open(os.path.join(auto_dir, 'debug4.txt'),'w') as f:
             f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
-            opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1)}
+            opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1),'z': round(opt_params_matrix[0][2], 1)}
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
             if index + 1 >= len(dictlist_init_params):
                 status = 'Done'
@@ -345,31 +345,32 @@ def get_params_dict(auto_dir, num_nodes):
                 continue
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1)}
+                opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1),'z': round(opt_params_matrix[i][2], 1)}
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
     return dict_matrix
         
 def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
     cur_csv = os.path.join(auto_dir, 'step1.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     filtered = filter_dictlist(dictlist_cur, fixed_params_dict)
-    a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1)
-    theta = int(float(fixed_params_dict['theta','phi']))
+    a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1);z_init_prev = round(float(init_params_dict['z']), 1)
+    theta = int(float(fixed_params_dict['theta']));phi = int(float(fixed_params_dict['phi']))
     while True:
         E_list = [];xyz_list = [];para_list = []
         for da in [0.0]:
             for db in [0.0]:
-                a = round(a_init_prev + da, 1);b = round(b_init_prev + db, 1);E = find_entry(filtered, a, b)
-                if E is None:
-                    para_list.append([a, b])
-                else:
-                    xyz_list.append([a, b]);E_list.append(E)
+                for dz in [0.0]:
+                    a = round(a_init_prev + da, 1);b = round(b_init_prev + db, 1);z = round(z_init_prev + dz, 1);E = find_entry(filtered, a, b, z)
+                    if E is None:
+                        para_list.append([a, b, z])
+                    else:
+                        xyz_list.append([a, b, z]);E_list.append(E)
         if len(para_list) != 0:
             return False, para_list
-        min_idx = int(argmin(E_list));a_init, b_init = xyz_list[min_idx]
-        if a_init == a_init_prev and b_init == b_init_prev:
-            return True, [[a_init, b_init]]
+        min_idx = int(argmin(E_list));a_init, b_init, z_init = xyz_list[min_idx]
+        if a_init == a_init_prev and b_init == b_init_prev and z_init == z_init_prev:
+            return True, [[a_init, b_init, z_init]]
         else:
-            a_init_prev = a_init;b_init_prev = b_init
+            a_init_prev = a_init;b_init_prev = b_init;z_init_prev = z_init
 
 def filter_df(df, dict_filter):
     for k, v in dict_filter.items():
@@ -398,9 +399,9 @@ def filter_dictlist(dict_list, filter_dict):
             result.append(row)
     return result
 
-def find_entry(dict_list, a, b):
+def find_entry(dict_list, a, b, z):
     for row in dict_list:
-        if (float(row['a']) == a and float(row['b']) == b and row['status'] == 'Done'):
+        if (float(row['a']) == a and float(row['b']) == b and float(row['z']) == z and row['status'] == 'Done'):
             return float(row['E'])
     return None
 
