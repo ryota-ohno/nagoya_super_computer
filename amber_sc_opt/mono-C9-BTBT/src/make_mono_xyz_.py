@@ -34,21 +34,23 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     xyz_array = matmul(xyz_array,Rod([0,0,1],A3))
     
     C0_index = 5;C1_index = 23
-    C0=xyz_array[C0_index];C1=xyz_array[C1_index]    
+    C0=xyz_array[C0_index];C1=xyz_array[C1_index]
     nx=C1[0]-C0[0];ny=C1[1]-C0[1];nz=C1[2]-C0[2]
     n1_=math.sqrt(nx**2+ny**2+nz**2)
     n1=[nx/n1_,ny/n1_,nz/n1_]
-    
-    xyz_array_=[]
+    print(n1)
+    xyz_array_=[]; i=0
     for x,y,z in xyz_array:
-        xyz_array_.append([x-C0[0],y-C0[1],z-C0[2]])
-    xyz_array_=matmul(xyz_array_,Rod(n1,phi))
-    xyz_array_rot=[]
-    for x,y,z in xyz_array_:
-        xyz_array_rot.append([x+C0[0],y+C0[1],z+C0[2]])
+        if i < 23:
+            xyz_array_.append([x,y,z])
+        else:
+            xyz_array_1=[[x-C0[0],y-C0[1],z-C0[2]]]
+            xyz_array_2=matmul(xyz_array_1,Rod(n1,phi))
+            xyz_array_.append([xyz_array_2[0][0]+C0[0],xyz_array_2[0][1]+C0[1],xyz_array_2[0][2]+C0[2]])
+        i+=1
 
     xyz_array_f = []
-    for x,y,z in xyz_array_rot:
+    for x,y,z in xyz_array_:
         xyz_array_f.append([x+Ta,y+Tb,z+Tc])
     xyzR_array=[]
     for i in range(len(xyz_array_f)):
