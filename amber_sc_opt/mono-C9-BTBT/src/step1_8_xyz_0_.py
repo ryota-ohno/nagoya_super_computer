@@ -87,7 +87,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         phi=float(params_dict1_.get('phi',0.0))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
-            E_mono=get_E(mono_file)[0]
+            continue
+        E_mono=get_E(mono_file)[0]
         E1 = round(float(E_list1[0]) - 2 * E_mono, 4)
         rows_1[idx]['E1'] = E1;rows_1[idx]['status'] = 'Done'
         with open(auto_csv_1, mode='w', newline='') as f:
@@ -114,7 +115,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         phi=float(params_dict2_.get('phi',0.0))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
-            E_mono=get_E(mono_file)[0]
+            continue
+        E_mono=get_E(mono_file)[0]
         E2 = round(float(E_list2[0]) - 2 * E_mono, 4)
         rows_2[idx]['E2'] = E2;rows_2[idx]['status'] = 'Done'
         with open(auto_csv_2, mode='w', newline='') as f:
@@ -141,7 +143,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         phi=float(params_dict3_.get('phi',0.0))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
-            E_mono=get_E(mono_file)[0]
+            continue
+        E_mono=get_E(mono_file)[0]
         E3 = round(float(E_list3[0]) - 2 * E_mono, 4)
         rows_3[idx]['E3'] = E3;rows_3[idx]['status'] = 'Done'
         with open(auto_csv_3, mode='w', newline='') as f:
@@ -168,7 +171,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         phi=float(params_dict4_.get('phi',0.0))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
-            E_mono=get_E(mono_file)[0]
+            continue
+        E_mono=get_E(mono_file)[0]
         E4 = round(float(E_list4[0]) - 2 * E_mono, 4)
         rows_4[idx]['E4'] = E4;rows_4[idx]['status'] = 'Done'
         with open(auto_csv_4, mode='w', newline='') as f:
@@ -189,7 +193,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         phi=float(params_dict_mono_.get('phi',0.0))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
-            E_mono=get_E(mono_file)[0]
+            continue
+        E_mono=get_E(mono_file)[0]
         rows_mono[idx]['Emono'] = E_mono;rows_mono[idx]['status'] = 'Done'
         with open(auto_csv_mono, mode='w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=rows_mono[0].keys())
