@@ -84,7 +84,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         E_list1 = get_E(log_filepath1)
         if len(E_list1) != 1:
             continue
-        phi=int(params_dict1_.get('phi',0.0))
+        phi=int(float(params_dict1_.get('phi',0.0)))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             continue
@@ -112,7 +112,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         E_list2 = get_E(log_filepath2)
         if len(E_list2) != 1:
             continue
-        phi=int(params_dict2_.get('phi',0.0))
+        phi=int(float(params_dict2_.get('phi',0.0)))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             continue
@@ -140,7 +140,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         E_list3 = get_E(log_filepath3)
         if len(E_list3) != 1:
             continue
-        phi=int(params_dict3_.get('phi',0.0))
+        phi=int(float(params_dict3_.get('phi',0.0)))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             continue
@@ -168,7 +168,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         E_list4 = get_E(log_filepath4)
         if len(E_list4) != 1:
             continue
-        phi=int(params_dict4_.get('phi',0.0))
+        phi=int(float(params_dict4_.get('phi',0.0)))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             continue
@@ -190,7 +190,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if row['status'] != 'InProgress':
             continue
         params_dict_mono_ = {key: row[key] for key in ['phi'] + ['file_name']}
-        phi=int(params_dict_mono_.get('phi',0.0))
+        phi=int(float(params_dict_mono_.get('phi',0.0)))
         mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             continue
