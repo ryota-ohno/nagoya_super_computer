@@ -10,7 +10,7 @@ import shutil
 import csv
 
 def main_process(args):
-    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/{args.auto_dir}'
+    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/{args.auto_dir}'
     os.makedirs(auto_dir, exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'amber'), exist_ok=True)
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
@@ -112,7 +112,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if len(E_list2) != 1:
             continue
         phi=float(params_dict2_.get('phi',0.0))
-        mono_file=f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{monomer_name}/monomer/{monomer_name}_mono_{phi}.out'
+        mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             E_mono=get_E(mono_file)[0]
         E2 = round(float(E_list2[0]) - 2 * E_mono, 4)
@@ -139,7 +139,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if len(E_list3) != 1:
             continue
         phi=float(params_dict3_.get('phi',0.0))
-        mono_file=f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{monomer_name}/monomer/{monomer_name}_mono_{phi}.out'
+        mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             E_mono=get_E(mono_file)[0]
         E3 = round(float(E_list3[0]) - 2 * E_mono, 4)
@@ -166,7 +166,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if len(E_list4) != 1:
             continue
         phi=float(params_dict4_.get('phi',0.0))
-        mono_file=f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{monomer_name}/monomer/{monomer_name}_mono_{phi}.out'
+        mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             E_mono=get_E(mono_file)[0]
         E4 = round(float(E_list4[0]) - 2 * E_mono, 4)
@@ -187,7 +187,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         params_dict_mono_ = {key: row[key] for key in ['phi'] + ['file_name']}
         phi=float(params_dict_mono_.get('phi',0.0))
-        mono_file=f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{monomer_name}/monomer/{monomer_name}_mono_{phi}.out'
+        mono_file=os.path.join(auto_dir,f'amber/{monomer_name}_mono_{phi}.out')
         if len(get_E(mono_file)) != 1:
             E_mono=get_E(mono_file)[0]
         rows_mono[idx]['Emono'] = E_mono;rows_mono[idx]['status'] = 'Done'
