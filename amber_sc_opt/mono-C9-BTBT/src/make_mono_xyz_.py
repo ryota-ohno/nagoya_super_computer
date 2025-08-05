@@ -31,7 +31,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     for x,y,z,r in atoms_array_xyzR:
         xyz_array.append([x,y,z]);R_array.append(r)
     xyz_array = matmul(xyz_array,Rod([-1,0,0],A2))
-    xyz_array = matmul(xyz_array,Rod([0,0,1],A3,phi))
+    xyz_array = matmul(xyz_array,Rod([0,0,1],A3))
     
     C0_index = 5;C1_index = 23
     C0=xyz_array[C0_index];C1=xyz_array[C1_index]    
