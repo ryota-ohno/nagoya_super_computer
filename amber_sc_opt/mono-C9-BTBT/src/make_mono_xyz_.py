@@ -55,7 +55,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
         xyzR_array.append([xyz_array_f[i][0],xyz_array_f[i][1],xyz_array_f[i][2],R_array[i]])
     return xyzR_array
         
-line1='@<TRIPOS>MOLECULE\npentacene\n   51    54     1     0     0\nSMALL\nresp\n\n\n@<TRIPOS>ATOM\n'
+line1='@<TRIPOS>MOLECULE\npentacene\n   51    54     1     0     0\nSMALL\nrbcc\n\n\n@<TRIPOS>ATOM\n'
 line2='@<TRIPOS>BOND\n'
 bond_lines=[' 1 1 2 ar\n', ' 2 1 3 ar\n', ' 3 1 7 1\n', ' 4 2 4 ar\n', ' 5 2 9 1\n', ' 6 3 5 ar\n', ' 7 3 21 1\n', ' 8 4 6 ar\n', ' 9 4 23 1\n', 
             ' 10 5 6 ar\n', ' 11 5 22 1\n', ' 12 6 24 1\n', ' 13 7 8 2\n', ' 14 7 10 1\n', ' 15 8 9 1\n', ' 16 8 12 1\n', ' 17 10 11 1\n', ' 18 11 12 ar\n',
@@ -142,7 +142,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict):
 
     monomer_array = get_monomer_xyzR(monomer_name,0,0,0,0,0,phi)
     line_list_monomer = get_xyzR_lines(monomer_array)
-    gij_xyz_lines = line_list_monomer + ['\n\n\n']
+    gij_xyz_lines = line_list_monomer 
     
     file_name = get_file_name_from_dict(monomer_name,params_dict)
     os.makedirs(os.path.join(auto_dir,'amber'),exist_ok=True)
