@@ -36,7 +36,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     C0_index = 5;C1_index = 23
     C0=xyz_array[C0_index];C1=xyz_array[C1_index]    
     nx=C1[0]-C0[0];ny=C1[1]-C0[1];nz=C1[2]-C0[2]
-    n1_=math.sqrt(nx**2+ny[1]**2+nz[2]**2)
+    n1_=math.sqrt(nx**2+ny**2+nz**2)
     n1=[nx/n1_,ny/n1_,nz/n1_]
     
     xyz_array_=[]
