@@ -55,7 +55,7 @@ def main_process(args):
     auto_csv_path_mono = os.path.join(auto_dir,'step1_mono.csv')
     if not os.path.exists(auto_csv_path4):        
         header = ['phi','Emono','status','file_name']
-        with open(auto_csv_path4, mode='w', newline='') as file:
+        with open(auto_csv_path_mono, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=header)
             writer.writeheader()
 
