@@ -1,6 +1,9 @@
 import math
+import os
 
 def get_E(file):
+    if not os.path.exists(file):
+        return []
     i=0;E_list=[]
     with open(file)as f:
         for line in f:
