@@ -266,7 +266,6 @@ def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
     cur_csv = os.path.join(auto_dir, 'step1.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     filtered = filter_dictlist(dictlist_cur, fixed_params_dict)
     a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1);z_init_prev = round(float(init_params_dict['z']), 1)
-    theta = int(float(fixed_params_dict['theta','A2',]))
     while True:
         E_list = [];xyz_list = [];para_list = []
         for da in [-0.1, 0.0, 0.1]:
