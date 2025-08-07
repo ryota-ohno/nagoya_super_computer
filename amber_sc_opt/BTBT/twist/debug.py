@@ -9,17 +9,18 @@ def main_process(args):
     auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/{args.auto_dir}'
     os.chdir(os.path.join(auto_dir,'amber'))
     isOver = False
-    while not(isOver):
-        #check
-        isOver = listen(auto_dir)##argsの中身を取る
-        #time.sleep(0.1)
-
-def listen(auto_dir):##args自体を引数に取るか中身をばらして取るかの違い
-    fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
-    
     auto_csv_1 = os.path.join(auto_dir,'step1_1.csv');df_E_1 = pd.read_csv(auto_csv_1)
     auto_csv_2 = os.path.join(auto_dir,'step1_2.csv');df_E_2 = pd.read_csv(auto_csv_2)
     auto_csv_3 = os.path.join(auto_dir, 'step1_3.csv');df_E_3 = pd.read_csv(auto_csv_3)
+    
+    while not(isOver):
+        #check
+        isOver = listen(auto_dir,df_E_1,df_E_2,df_E_3)##argsの中身を取る
+        #time.sleep(0.1)
+
+def listen(auto_dir,df_E_1,df_E_2,df_E_3):##args自体を引数に取るか中身をばらして取るかの違い
+    fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
+    
     auto_csv = os.path.join(auto_dir,'step1.csv')
     df_E = pd.read_csv(auto_csv)
     df_prg = df_E.loc[df_E['status']=='InProgress',fixed_param_keys+opt_param_keys_1+opt_param_keys_2]
@@ -40,9 +41,8 @@ def listen(auto_dir):##args自体を引数に取るか中身をばらして取�
             
             E=2*E1+2*E2+4*E3
             df_E.loc[idx, ['E','E1','E2','E3','status']] = [round(E,4),round(E1,4),round(E2,4),round(E3,4),'Done']
-            df_E.to_csv(auto_csv,index=False)
-            break#2つ同時に計算終わったりしたらまずいので一個で切る
-    
+        df_E.to_csv(auto_csv,index=False)
+        
     dict_matrix = get_params_dict(auto_dir)##更新分を流す a1/HOME/HASEGAWALABz2まで取得
     if len(dict_matrix)!=0:#終わりがまだ見えないなら
         for i in range(len(dict_matrix)):
