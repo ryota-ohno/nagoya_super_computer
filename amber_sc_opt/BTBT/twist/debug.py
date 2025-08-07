@@ -89,6 +89,7 @@ def get_params_dict(auto_dir):
         df_init_params = pd.read_csv(init_params_csv)
         init_params_dict = df_init_params.loc[index,fixed_param_keys+opt_param_keys_1+opt_param_keys_2].to_dict()
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
+        print(init_params_dict)
         isDone, opt_params_matrix = get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict)
         if isDone:
             opt_params_dict={'a':np.round(opt_params_matrix[0][0],1),'b':np.round(opt_params_matrix[0][1],1)}
