@@ -81,7 +81,7 @@ def get_params_dict(auto_dir):
     init_params_csv=os.path.join(auto_dir, 'step1_init_params.csv')
     df_init_params = pd.read_csv(init_params_csv)
     df_cur = pd.read_csv(os.path.join(auto_dir, 'step1.csv'))
-    df_init_params_inprogress = df_init_params[(df_init_params['status']=='InProgress') or (df_init_params['status']=='Done')]
+    df_init_params_inprogress = df_init_params[df_init_params['status']!='NotYet']
     fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
     
     dict_matrix=[]
