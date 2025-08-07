@@ -109,7 +109,11 @@ def get_one_exe(auto_dir,file_name):
 'module load amber\n','\n',
 f'parmchk2 -i {file_basename}.mol2 -f mol2 -o {file_basename}.frcmod\n',
 f'tleap -f {file_basename}_tleap.in\n',
-f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n']
+f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n'
+f'rm {file_basename}.frcmod\n',
+f'rm {file_basename}.inpcrd\n',
+f'rm {file_basename}.prmtop\n',
+]
     
     lines_tleap=['source /home/center/opt/aarch64/apps/amber/19.0/dat/leap/cmd/leaprc.gaff\n',
 f'MOL = loadmol2 {file_basename}.mol2\n',
@@ -163,9 +167,9 @@ def make_xyz(monomer_name,params_dict,structure_type):
     xyzfile_name += monomer_name
     for key,val in params_dict.items():
         val=float(val)
-        if key in ['a','b','z']:
+        if key in ['theta','a','b','z']:
             val = round(val,2)
-        elif key in ['A1','A2','theta','phi']:
+        elif key in ['A1','A2','phi']:
             val = int(val)
         xyzfile_name += '_{}_{}'.format(key,val)
     return xyzfile_name + f'_{structure_type}.xyz'
@@ -208,9 +212,9 @@ def get_file_name_from_dict(monomer_name,params_dict,structure_type):
     file_name += monomer_name
     for key,val in params_dict.items():
         val=float(val)
-        if key in ['a','b','z']:
+        if key in ['theta','a','b','z']:
             val = round(val,2)
-        elif key in ['A1','A2','theta','phi']:
+        elif key in ['A1','A2','phi']:
             val = int(val)
         file_name += '_{}_{}'.format(key,val)
     return file_name + f'_{structure_type}.mol2'

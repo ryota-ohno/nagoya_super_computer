@@ -67,7 +67,7 @@ def main_process(args):
         #time.sleep(0.1)
 
 def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
-    fixed_param_keys = ['theta','A2','phi'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z']
+    fixed_param_keys = ['theta','A2'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z'];opt_param_keys_3 = ['phi']
     
     auto_csv_1 = os.path.join(auto_dir,'step1_1.csv');rows_1 = []
     with open(auto_csv_1, mode='r', newline='') as f:
@@ -77,7 +77,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     for idx, row in enumerate(rows_1):
         if row['status'] != 'InProgress':
             continue
-        params_dict1_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + ['file_name']}
+        params_dict1_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + opt_param_keys_3 + ['file_name']}
         file_name1 = params_dict1_['file_name'];log_filepath1 = os.path.join(auto_dir, 'amber', file_name1)
         if not os.path.exists(log_filepath1):
             continue
@@ -105,7 +105,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     for idx, row in enumerate(rows_2):
         if row['status'] != 'InProgress':
             continue
-        params_dict2_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_2 + ['file_name']}
+        params_dict2_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_2 + opt_param_keys_3 + ['file_name']}
         file_name2 = params_dict2_['file_name'];log_filepath2 = os.path.join(auto_dir, 'amber', file_name2)
         if not os.path.exists(log_filepath2):
             continue
@@ -133,7 +133,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     for idx, row in enumerate(rows_3):
         if row['status'] != 'InProgress':
             continue
-        params_dict3_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + ['file_name']}
+        params_dict3_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3 + ['file_name']}
         file_name3 = params_dict3_['file_name'];log_filepath3 = os.path.join(auto_dir, 'amber', file_name3)
         if not os.path.exists(log_filepath3):
             continue
@@ -161,7 +161,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     for idx, row in enumerate(rows_4):
         if row['status'] != 'InProgress':
             continue
-        params_dict4_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + ['file_name']}
+        params_dict4_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3 + ['file_name']}
         file_name4 = params_dict4_['file_name'];log_filepath4 = os.path.join(auto_dir, 'amber', file_name4)
         if not os.path.exists(log_filepath4):
             continue
@@ -211,10 +211,10 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     for row in df:
         if row['status'] != 'InProgress':
             continue
-        params_dict1_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1}
-        params_dict2_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_2}
-        params_dict3_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2}
-        params_dict4_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2}
+        params_dict1_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1 + opt_param_keys_3}
+        params_dict2_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_2 + opt_param_keys_3}
+        params_dict3_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3}
+        params_dict4_ = {k: row[k] for k in fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3}
         s1 = [r for r in filter_dictlist(df_1, params_dict1_) if r['status'] == 'Done']
         s2 = [r for r in filter_dictlist(df_2, params_dict2_) if r['status'] == 'Done']
         s3 = [r for r in filter_dictlist(df_3, params_dict3_) if r['status'] == 'Done']
@@ -234,8 +234,8 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
     if len(dict_matrix)!=0:#終わりがまだ見えないなら
         for i in range(len(dict_matrix)):
             params_dict=dict_matrix[i]#print(params_dict)
-            params_dict1 = {k: v for k, v in params_dict.items() if (k in fixed_param_keys) or (k in opt_param_keys_1)}
-            params_dict2 = {k: v for k, v in params_dict.items() if (k in fixed_param_keys) or (k in opt_param_keys_2)}
+            params_dict1 = {k: v for k, v in params_dict.items() if (k in fixed_param_keys) or (k in opt_param_keys_1) or (k in opt_param_keys_3)}
+            params_dict2 = {k: v for k, v in params_dict.items() if (k in fixed_param_keys) or (k in opt_param_keys_2) or (k in opt_param_keys_3)}
             params_dict3 = params_dict;params_dict4 = params_dict;params_dict_mono={k: v for k, v in params_dict.items() if (k in ['phi'])}
             alreadyCalculated = check_calc_status(auto_dir,params_dict)
             if not(alreadyCalculated):
@@ -306,7 +306,7 @@ def get_params_dict(auto_dir, num_nodes):
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv')
     dictlist_init_params,fieldnames = read_csv_to_dictlist(init_params_csv)
     dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
-    fixed_param_keys = ['theta','A2','phi'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z']
+    fixed_param_keys = ['theta','A2'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z'];opt_param_keys_3 = ['phi']
 
     #最初の立ち上がり時
     dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
@@ -316,7 +316,7 @@ def get_params_dict(auto_dir, num_nodes):
             notyet_index = dictlist_init_params.index(notyet_row)
             dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
             write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-            selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2
+            selected_keys = fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3
             params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
             return [params_dict]
     init_params_csv = os.path.join(auto_dir, 'step1_init_params.csv');dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
@@ -325,15 +325,15 @@ def get_params_dict(auto_dir, num_nodes):
     for index, row in enumerate(dictlist_init_params):
         if row['status'] != 'InProgress':
             continue
-        #print(index)
+        print(index)
         dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
-        init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2)
+        init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
         isDone, opt_params_matrix = get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict)
         with open(os.path.join(auto_dir, 'debug4.txt'),'w') as f:
             f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
-            opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1),'z': round(opt_params_matrix[0][2], 1)}
+            opt_params_dict = {'a': round(opt_params_matrix[0][0], 1),'b': round(opt_params_matrix[0][1], 1),'z': round(opt_params_matrix[0][2], 1),'phi': int(opt_params_matrix[0][3])}
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
             if index + 1 >= len(dictlist_init_params):
                 status = 'Done'
@@ -342,7 +342,7 @@ def get_params_dict(auto_dir, num_nodes):
             fieldnames = list(dictlist_init_params[0].keys())
             write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
             if status == 'NotYet':
-                opt_params_dict = get_values_from_dictlist(dictlist_init_params, index + 1, opt_param_keys_1 + opt_param_keys_2)
+                opt_params_dict = get_values_from_dictlist(dictlist_init_params, index + 1, opt_param_keys_1 + opt_param_keys_2 + opt_param_keys_3)
                 dictlist_init_params = update_row_value(dictlist_init_params, index + 1, 'status', 'InProgress')
                 write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
                 dict_matrix.append({**fixed_params_dict, **opt_params_dict})
@@ -350,31 +350,32 @@ def get_params_dict(auto_dir, num_nodes):
                 continue
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1),'z': round(opt_params_matrix[i][2], 1)}
+                opt_params_dict = {'a': round(opt_params_matrix[i][0], 1),'b': round(opt_params_matrix[i][1], 1),'z': round(opt_params_matrix[i][2], 1),'phi': int(opt_params_matrix[i][3])}
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
     return dict_matrix
         
 def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
     cur_csv = os.path.join(auto_dir, 'step1.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     filtered = filter_dictlist(dictlist_cur, fixed_params_dict)
-    a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1);z_init_prev = round(float(init_params_dict['z']), 1)
+    a_init_prev = round(float(init_params_dict['a']), 1);b_init_prev = round(float(init_params_dict['b']), 1);z_init_prev = round(float(init_params_dict['z']), 1);phi_init_prev = int(float(init_params_dict['phi']))
     while True:
         E_list = [];xyz_list = [];para_list = []
-        for da in [0.0]:
-            for db in [0.0]:
+        for da in [-0.1, 0.0, 0.1]:
+            for db in [-0.1, 0.0, 0.1]:
                 for dz in [0.0]:
-                    a = round(a_init_prev + da, 1);b = round(b_init_prev + db, 1);z = round(z_init_prev + dz, 1);E = find_entry(filtered, a, b, z)
-                    if E is None:
-                        para_list.append([a, b, z])
-                    else:
-                        xyz_list.append([a, b, z]);E_list.append(E)
+                    for dp in [-1,0,1]:
+                        a = round(a_init_prev + da, 1);b = round(b_init_prev + db, 1);z = round(z_init_prev + dz, 1);phi = int(phi_init_prev + dp);E = find_entry(filtered, a, b, z, phi)
+                        if E is None:
+                            para_list.append([a, b, z, phi])
+                        else:
+                            xyz_list.append([a, b, z, phi]);E_list.append(E)
         if len(para_list) != 0:
             return False, para_list
-        min_idx = int(argmin(E_list));a_init, b_init, z_init = xyz_list[min_idx]
-        if a_init == a_init_prev and b_init == b_init_prev and z_init == z_init_prev:
-            return True, [[a_init, b_init, z_init]]
+        min_idx = int(argmin(E_list));a_init, b_init, z_init ,phi_init= xyz_list[min_idx]
+        if a_init == a_init_prev and b_init == b_init_prev and z_init == z_init_prev and phi_init == phi_init_prev:
+            return True, [[a_init, b_init, z_init, phi_init]]
         else:
-            a_init_prev = a_init;b_init_prev = b_init;z_init_prev = z_init
+            a_init_prev = a_init;b_init_prev = b_init;z_init_prev = z_init;phi_init_prev = phi_init
 
 def filter_df(df, dict_filter):
     for k, v in dict_filter.items():
@@ -403,9 +404,9 @@ def filter_dictlist(dict_list, filter_dict):
             result.append(row)
     return result
 
-def find_entry(dict_list, a, b, z):
+def find_entry(dict_list, a, b, z,phi):
     for row in dict_list:
-        if (float(row['a']) == a and float(row['b']) == b and float(row['z']) == z and row['status'] == 'Done'):
+        if (float(row['a']) == a and float(row['b']) == b and float(row['z']) == z and int(float(row['phi'])) == phi and row['status'] == 'Done'):
             return float(row['E'])
     return None
 

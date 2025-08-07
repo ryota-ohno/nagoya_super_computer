@@ -100,8 +100,11 @@ def get_one_exe(auto_dir,file_name):
 f'antechamber -i {file_basename}.mol2 -fi mol2 -o {file_basename}_.mol2 -fo mol2 -s 2\n',
 f'parmchk2 -i {file_basename}_.mol2 -f mol2 -o {file_basename}.frcmod\n',
 f'tleap -f {file_basename}_tleap.in\n',
-f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n',]
-    
+f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n',
+f'rm {file_basename}.frcmod\n',
+f'rm {file_basename}.inpcrd\n',
+f'rm {file_basename}.prmtop\n',
+]    
     lines_tleap=['source /home/center/opt/aarch64/apps/amber/19.0/dat/leap/cmd/leaprc.gaff\n',
 f'MOL = loadmol2 {file_basename}_.mol2\n',
 f'loadamberparams {file_basename}.frcmod\n',
