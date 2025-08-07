@@ -82,17 +82,16 @@ def get_params_dict(auto_dir):
     df_init_params = pd.read_csv(init_params_csv)
     df_cur = pd.read_csv(os.path.join(auto_dir, 'step1.csv'))
     df_init_params_inprogress = df_init_params[df_init_params['status']=='Done']
-    fixed_param_keys = ['theta'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b']
-    
+    fixed_param_keys = ['theta','A2'];opt_param_keys_1 = ['a'];opt_param_keys_2 = ['b','z']
+    print(df_init_params_inprogress)
     dict_matrix=[]
     for index in df_init_params_inprogress.index:##こちら側はinit_params内のある業に関する探索が終わった際の新しい行での探索を開始するもの ###ここを改良すればよさそう
         df_init_params = pd.read_csv(init_params_csv)
         init_params_dict = df_init_params.loc[index,fixed_param_keys+opt_param_keys_1+opt_param_keys_2].to_dict()
         fixed_params_dict = df_init_params.loc[index,fixed_param_keys].to_dict()
-        print(init_params_dict)
         isDone, opt_params_matrix = get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict)
         if isDone:
-            opt_params_dict={'a':np.round(opt_params_matrix[0][0],1),'b':np.round(opt_params_matrix[0][1],1)}
+            opt_params_dict={'a':np.round(opt_params_matrix[0][0],1),'b':np.round(opt_params_matrix[0][1],1),'z':np.round(opt_params_matrix[0][2],1)}
             # df_init_paramsのstatusをupdate
             df_init_params = update_value_in_df(df_init_params,index,'status','Done')
             if np.max(df_init_params.index) < index+1:##もうこれ以上は新しい計算は進まない
@@ -111,7 +110,7 @@ def get_params_dict(auto_dir):
 
         else:
             for i in range(len(opt_params_matrix)):
-                opt_params_dict={'a':np.round(opt_params_matrix[i][0],1),'b':np.round(opt_params_matrix[i][1],1)}
+                opt_params_dict={'a':np.round(opt_params_matrix[i][0],1),'b':np.round(opt_params_matrix[i][1],1),'z':np.round(opt_params_matrix[i][2],1)}
                 d={**fixed_params_dict,**opt_params_dict}
                 dict_matrix.append(d)
                     #print(d)
@@ -119,25 +118,26 @@ def get_params_dict(auto_dir):
         
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     df_val = filter_df(df_cur, fixed_params_dict)
-    a_init_prev = init_params_dict['a'];b_init_prev = init_params_dict['b']
+    a_init_prev = init_params_dict['a'];b_init_prev = init_params_dict['b'];z_init_prev = init_params_dict['z']
     while True:
         E_list=[];xyz_list=[]
         para_list=[]
         for a in [a_init_prev-0.1,a_init_prev,a_init_prev+0.1]:
                     for b in [b_init_prev-0.1,b_init_prev,b_init_prev+0.1]:
-                            a = np.round(a,1);b = np.round(b,1)
-                            df_val_xyz = df_val[(df_val['a']==a)&(df_val['b']==b)&(df_val['status']=='Done')]
+                        for z in [z_init_prev]:
+                            a = np.round(a,1);b = np.round(b,1);z=np.round(z,1)
+                            df_val_xyz = df_val[(df_val['a']==a)&(df_val['b']==b)&(df_val['z']==z)&(df_val['status']=='Done')]
                             if len(df_val_xyz)==0:
-                                para_list.append([a,b])
+                                para_list.append([a,b,z])
                                 continue
-                            xyz_list.append([a,b]);E_list.append(df_val_xyz['E'].values[0])
+                            xyz_list.append([a,b,z]);E_list.append(df_val_xyz['E'].values[0])
         if len(para_list) != 0:
             return False,para_list
-        a_init,b_init = xyz_list[np.argmin(np.array(E_list))]
-        if a_init==a_init_prev and b_init==b_init_prev:
-            return True,[[a_init,b_init]]
+        a_init,b_init,z_init = xyz_list[np.argmin(np.array(E_list))]
+        if a_init==a_init_prev and b_init==b_init_prev and z_init==z_init_prev:
+            return True,[[a_init,b_init,z_init]]
         else:
-            a_init_prev=a_init;b_init_prev=b_init
+            a_init_prev=a_init;b_init_prev=b_init;z_init_prev=z_init
 
 def get_values_from_df(df,index,key):
     return df.loc[index,key]
