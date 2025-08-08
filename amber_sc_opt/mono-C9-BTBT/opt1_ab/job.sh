@@ -7,4 +7,4 @@
 #PJM -S
 #PJM "--norestart"
 
-python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/mono-C9-BTBT/src/step1_8_xyz_phi2.py --auto-dir opt1_phi --monomer-name mono-C9-BTBT --num-nodes 5 
+python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/mono-C9-BTBT/src/step1_8_xyz_phi2.py --auto-dir opt1_ab --monomer-name mono-C9-BTBT --num-nodes 5 
