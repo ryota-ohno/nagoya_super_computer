@@ -15,7 +15,7 @@ def init_process(args):
         dir_name = ''
         for key,val in params_dict_1.items():
             dir_name += '{}_'.format(val)
-        os.make_dirs(os.path.join(auto_dir,f'{dir_name}'), exist_ok=True)
+        os.makedirs(os.path.join(auto_dir,f'{dir_name}'), exist_ok=True)
         df_new_init = pd.Series({**params_dict_1,**params_dict_2,'status':'NotYet'})
         df_new_init.to_csv(os.path.join(auto_dir,f'{dir_name}/step1_init_params'),index=False)
         
