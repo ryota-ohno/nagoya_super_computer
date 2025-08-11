@@ -53,5 +53,6 @@ if __name__ == '__main__':
 
     print("----main process----")
     main_process(args)
+    result_process(args)
     print("----finish process----")
     
