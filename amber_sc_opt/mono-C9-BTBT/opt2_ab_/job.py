@@ -35,6 +35,7 @@ def init_process(args):
             ]
         with open(os.path.join(auto_dir,f'{dir_name}/job.sh'),'w')as f:
             f.writelines(job_lines)
+        subprocess.run(['cd',os.path.join(auto_dir,f'{dir_name}')])
         subprocess.run(['pjsub',os.path.join(auto_dir,f'{dir_name}/job.sh')])
 
 def main_process(args):
