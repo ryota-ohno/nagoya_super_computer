@@ -36,7 +36,8 @@ def result_process(args):
         path_dir=os.path.join(auto_dir,f'{dir_name}')
         df=pd.read_csv(os.path.join(path_dir,'step1.csv'))
         df_tot.append(df)
-    df_tot.to_csv(os.path.join(auto_dir,'step1.csv'))
+    df_=pd.concat(df_tot, ignore_index=True)
+    df_.to_csv(os.path.join(auto_dir,'step1.csv'))
 
 
 def update_value_in_df(df,index,key,value):
