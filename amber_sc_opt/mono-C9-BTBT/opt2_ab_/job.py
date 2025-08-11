@@ -29,7 +29,7 @@ def init_process(args):
         '#PJM -S\n',
         '#PJM "--norestart"\n',
         '\n',
-        'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/mono-C9-BTBT/src/step1_8_xyz_phi2.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name mono-C9-BTBT --num-nodes 1\n',
+        f'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/mono-C9-BTBT/src/step1_8_xyz_phi2.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name mono-C9-BTBT --num-nodes 1\n',
         '\n',
         '#sleep 5 \n'
             ]
