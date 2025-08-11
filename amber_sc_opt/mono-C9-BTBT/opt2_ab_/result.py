@@ -34,7 +34,7 @@ def result_process(args):
         for key,val in params_dict_1.items():
             dir_name += '{}_'.format(val)
         path_dir=os.path.join(auto_dir,f'{dir_name}')
-        df=pd.read_csv(path_dir,'step1.csv')
+        df=pd.read_csv(os.path.join(path_dir,'step1.csv'))
         df_tot.append(df)
     df_tot.to_csv(os.path.join(auto_dir,'step1.csv'))
 
