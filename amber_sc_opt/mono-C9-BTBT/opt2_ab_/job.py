@@ -17,7 +17,7 @@ def init_process(args):
             dir_name += '{}_'.format(val)
         os.makedirs(os.path.join(auto_dir,f'{dir_name}'), exist_ok=True)
         data={**params_dict_1,**params_dict_2,'status':'NotYet'}
-        df = pd.DataFrame(data)
+        df = pd.DataFrame(data, index=[0])
         df.to_csv(os.path.join(auto_dir,f'{dir_name}/step1_init_params.csv'),index=False)
         
         job_lines=[
