@@ -17,7 +17,7 @@ def init_process(args):
             dir_name += '{}_'.format(val)
         os.makedirs(os.path.join(auto_dir,f'{dir_name}'), exist_ok=True)
         df_new_init = pd.Series({**params_dict_1,**params_dict_2,'status':'NotYet'})
-        df_new_init.to_csv(os.path.join(auto_dir,f'{dir_name}/step1_init_params'),index=False)
+        df_new_init.to_csv(os.path.join(auto_dir,f'{dir_name}/step1_init_params.csv'),index=False)
         
         job_lines=[
         '#!/bin/bash \n',
@@ -35,7 +35,6 @@ def init_process(args):
             ]
         with open(os.path.join(auto_dir,f'{dir_name}/job.sh'),'w')as f:
             f.writelines(job_lines)
-        subprocess.run(['cd',os.path.join(auto_dir,f'{dir_name}')])
         subprocess.run(['pjsub',os.path.join(auto_dir,f'{dir_name}/job.sh')])
 
 def main_process(args):
