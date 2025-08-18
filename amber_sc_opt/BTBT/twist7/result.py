@@ -16,9 +16,8 @@ def main_process(args):
             for key,val in params_dict_1.items():
                 dir_name += '{}_'.format(val)
             path_dir=os.path.join(auto_dir,f'{dir_name}')
-            if os.path.exists(os.path.join(path_dir,'done.txt')):
-                df_init = update_value_in_df(df_init,idx,'status','Done')
-                df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
+            df_init = update_value_in_df(df_init,idx,'status','Done')
+            df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
         df_init_done=df_init[df_init['status']=='Done']
         if len(df_init)==len(df_init_done):
             inprogress = False
