@@ -347,6 +347,11 @@ def argmin(lst):
             min_value = value
     return min_index
 
+def final_process(args):
+    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/{args.auto_dir}'
+    with open(os.path.join(auto_dir,'done.txt'),'w')as f:
+        f.write('Done')
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     
@@ -358,5 +363,6 @@ if __name__ == '__main__':
 
     print("----main process----")
     main_process(args)
+    final_process(args)
     print("----finish process----")
     
