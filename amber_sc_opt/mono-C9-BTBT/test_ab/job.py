@@ -11,7 +11,7 @@ def init_process(args):
     
     for idx, row in df_init.iterrows():
         params_dict_1 = row[['theta','phi']].to_dict()
-        params_dict_2 = row[['a','b']].to_dict()
+        params_dict_2 = row[['a','b','A2','z']].to_dict()
         dir_name = ''
         for key,val in params_dict_1.items():
             dir_name += '{}_'.format(val)
