@@ -5,7 +5,7 @@ import pandas as pd
 import subprocess
 from utils import Rod, R2atom
 
-MONOMER_LIST = ["BTBT"];MONOMER_LIST2 = ["mono-C4-BTBT","mono-C9-BTBT"]
+MONOMER_LIST = ["BTBT"];MONOMER_LIST2 = ["mono-C4-BTBT","mono-C9-BTBT","mono-C11-BTBT"]
 ############################汎用関数###########################
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     T_vec = np.array([Ta,Tb,Tc])
