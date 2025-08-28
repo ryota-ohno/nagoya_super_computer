@@ -79,7 +79,7 @@ def get_xyzR_lines(xyzr_array):
 
 # 実行ファイル作成
 def get_one_exe(auto_dir,file_name):
-    file_basename = os.path.splitext(file_name)[0]
+    file_basename = file_name
     for i in range(1,10):
         file_basename_=file_basename+f'_{i}'
         lines_job=[
