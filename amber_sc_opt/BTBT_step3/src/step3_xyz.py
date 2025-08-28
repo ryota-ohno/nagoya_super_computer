@@ -153,7 +153,7 @@ def get_params_dict(auto_dir, num_nodes):
     return dict_matrix
         
 def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
-    cur_csv = os.path.join(auto_dir, 'step1.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
+    cur_csv = os.path.join(auto_dir, 'step3.csv');dictlist_cur,_ = read_csv_to_dictlist(cur_csv)
     filtered = filter_dictlist(dictlist_cur, fixed_params_dict)
     cx_init_prev = round(float(init_params_dict['cx']), 1);cy_init_prev = round(float(init_params_dict['cy']), 1);cz_init_prev = round(float(init_params_dict['cz']), 1)
     while True:
