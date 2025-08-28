@@ -144,8 +144,8 @@ def make_xyz(monomer_name,params_dict):
     xyzfile_name += monomer_name
     for key,val in params_dict.items():
         val=float(val)
-        if key in ['a','b','z']:
-            val = round(val,2)
+        if key in ['a','b','z','cx','cy','cz']:
+            val = round(val,1)
         elif key in ['A1','A2','theta']:
             val = int(val)
         xyzfile_name += '_{}_{}'.format(key,val)
