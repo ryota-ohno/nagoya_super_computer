@@ -23,7 +23,7 @@ def get_xyzR_lines(xyzR_array,file_description,machine_type):
     lines = [     
         '%mem=24GB\n',
         '%nproc=48\n',
-        '#P TEST PBEPBE/6-311G** EmpiricalDispersion=GD3BJ counterpoise=2\n',###汎関数や基底関数系は適宜変更する
+        '#P TEST b3lyp/6-311G** EmpiricalDispersion=GD3 counterpoise=2\n',###汎関数や基底関数系は適宜変更する
         '\n',
         file_description+'\n',
         '\n',
