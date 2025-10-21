@@ -6,7 +6,7 @@ import time
 import sys
 sys.path.append(os.path.join(os.environ['HOME'],'Working/interaction/'))
 from make_8_xyz import exec_gjf##計算した点のxyzfileを出す
-from utils import get_E
+from utils import get_E1
 import argparse
 import numpy as np
 
@@ -42,7 +42,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         log_filepath = os.path.join(*[auto_dir,'gaussian',file_name])
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
             continue
-        E_list=get_E(log_filepath)
+        E_list=get_E1(log_filepath)
         if len(E_list)!=3:
             continue
         else:
