@@ -46,7 +46,7 @@ def main_process(args):
             writer.writeheader()
 
     auto_csv_path4 = os.path.join(auto_dir,'step1_4.csv')
-    if not os.path.exists(auto_csv_path3):        
+    if not os.path.exists(auto_csv_path4):        
         header = ['theta','a','b','z1','z2','E4','status','file_name']
         with open(auto_csv_path4, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=header)
