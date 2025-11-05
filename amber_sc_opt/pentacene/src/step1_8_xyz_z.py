@@ -45,10 +45,10 @@ def main_process(args):
             writer = csv.DictWriter(file, fieldnames=header)
             writer.writeheader()
 
-    auto_csv_path4 = os.path.join(auto_dir,'step1_3.csv')
+    auto_csv_path4 = os.path.join(auto_dir,'step1_4.csv')
     if not os.path.exists(auto_csv_path3):        
         header = ['theta','a','b','z1','z2','E4','status','file_name']
-        with open(auto_csv_path3, mode='w', newline='') as file:
+        with open(auto_csv_path4, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=header)
             writer.writeheader()
 
