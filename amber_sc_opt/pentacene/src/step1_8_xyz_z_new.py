@@ -177,7 +177,6 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         row['E1'] = f"{E1:.4f}";row['E2'] = f"{E2:.4f}";row['E3'] = f"{E3:.4f}";row['E4'] = f"{E4:.4f}"
         row['E'] = f"{E:.4f}";row['status'] = 'Done'
         updated = True
-        break
     if updated:
         write_dictlist_to_csv(auto_csv, df, fieldnames)
 
