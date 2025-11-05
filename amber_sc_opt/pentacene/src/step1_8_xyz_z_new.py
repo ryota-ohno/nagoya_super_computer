@@ -81,10 +81,10 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         E1 = round(float(E_list1[0]) - 2 * E_mono, 4)
         rows_1[idx]['E1'] = E1;rows_1[idx]['status'] = 'Done'
-        with open(auto_csv_1, mode='w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=rows_1[0].keys())
-            writer.writeheader()
-            writer.writerows(rows_1)
+    with open(auto_csv_1, mode='w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['theta','a','za','E1','status','file_name'])
+        writer.writeheader()
+        writer.writerows(rows_1)
     
     auto_csv_2 = os.path.join(auto_dir,'step1_2.csv');rows_2 = []
     with open(auto_csv_2, mode='r', newline='') as f:
@@ -103,10 +103,10 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         E2 = round(float(E_list2[0]) - 2 * E_mono, 4)
         rows_2[idx]['E2'] = E2;rows_2[idx]['status'] = 'Done'
-        with open(auto_csv_2, mode='w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=rows_2[0].keys())
-            writer.writeheader()
-            writer.writerows(rows_2)
+    with open(auto_csv_2, mode='w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['theta','b','zb','E2','status','file_name'])
+        writer.writeheader()
+        writer.writerows(rows_2)
     
     auto_csv_3 = os.path.join(auto_dir,'step1_3.csv');rows_3 = []
     with open(auto_csv_3, mode='r', newline='') as f:
@@ -125,10 +125,10 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         E3 = round(float(E_list3[0]) - 2 * E_mono, 4)
         rows_3[idx]['E3'] = E3;rows_3[idx]['status'] = 'Done'
-        with open(auto_csv_3, mode='w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=rows_3[0].keys())
-            writer.writeheader()
-            writer.writerows(rows_3)
+    with open(auto_csv_3, mode='w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['theta','a','b','z1','E3','status','file_name'])
+        writer.writeheader()
+        writer.writerows(rows_3)
 
     auto_csv_4 = os.path.join(auto_dir,'step1_4.csv');rows_4 = []
     with open(auto_csv_4, mode='r', newline='') as f:
@@ -147,10 +147,10 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         E4 = round(float(E_list4[0]) - 2 * E_mono, 4)
         rows_4[idx]['E4'] = E4;rows_4[idx]['status'] = 'Done'
-        with open(auto_csv_4, mode='w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=rows_4[0].keys())
-            writer.writeheader()
-            writer.writerows(rows_4)
+    with open(auto_csv_4, mode='w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['theta','a','b','z2','E4','status','file_name'])
+        writer.writeheader()
+        writer.writerows(rows_4)
 
     auto_csv = os.path.join(auto_dir, 'step1.csv')
     df, fieldnames = read_csv_to_dictlist(auto_csv)
