@@ -6,18 +6,18 @@ import argparse
 import subprocess
 
 def main_process(args):
-    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/{args.auto_dir}'
+    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/pentacene/{args.auto_dir}'
     df_init=pd.read_csv(os.path.join(auto_dir,'step1_init_params.csv'))
     inprogress = True
-    theta_list=[20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70]
+    theta_list=[5,10,15,20,30,35,40,45]
     while inprogress:
-        i=0
         for theta in theta_list:
             dir_name = f'{theta}'
-            df_init = update_value_in_df(df_init,2*i,'status','Done')
-            df_init = update_value_in_df(df_init,2*i+1,'status','Done')
-            df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
-            i+=1
+            path_dir=os.path.join(auto_dir,f'{dir_name}')
+            df_init_=pd.read_csv(os.path.join(path_dir,'step1_init_params.csv'))
+            if len(df_init_)==len(df_init_[df_init_['status']=='Done']):
+                df_init.loc[df_init['theta'] == theta, 'status'] = 'Done'
+                df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
         df_init_done=df_init[df_init['status']=='Done']
         if len(df_init)==len(df_init_done):
             inprogress = False
@@ -25,9 +25,9 @@ def main_process(args):
 
 def result_process(args):
     subprocess.run(['rm','*.sh.*'])
-    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/{args.auto_dir}'
+    auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/pentacene/{args.auto_dir}'
     df_tot=[]
-    theta_list=[20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70]
+    theta_list=[5,10,15,20,30,35,40,45]
     for theta in theta_list:
         dir_name = f'{theta}'
         path_dir=os.path.join(auto_dir,f'{dir_name}')
