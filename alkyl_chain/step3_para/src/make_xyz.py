@@ -87,7 +87,7 @@ def make_xyzfile(monomer_name,params_dict):
     monomer_array_c = get_monomer_xyza(monomer_name,cx,cy,cz,0,A3)
     monomer_array_i = get_monomer_xyza(monomer_name,0,0,0,0,A3)
     monomer_array_p1 = get_monomer_xyza(monomer_name,0,b,2*z,A2,A3)##1,2がb方向
-    monomer_array_p2 = get_monomer_xyza(monomer_name,0,b,-2*z,A2,A3)##1,2がb方向
+    monomer_array_p2 = get_monomer_xyza(monomer_name,0,-b,-2*z,A2,A3)##1,2がb方向
     monomer_array_p3 = get_monomer_xyza(monomer_name,a,0,0,A2,A3)##3,4がa方向
     monomer_array_p4 = get_monomer_xyza(monomer_name,-a,0,0,A2,A3)##3,4がa方向
     monomer_array_t1 = get_monomer_xyza(monomer_name,a/2,b/2,z,A2,-A3)
@@ -123,7 +123,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     monomer_array_c = get_monomer_xyza(monomer_name,cx,cy,cz,0,A3)
     monomer_array_i = get_monomer_xyza(monomer_name,0,0,0,0,A3)
     monomer_array_p1 = get_monomer_xyza(monomer_name,0,b,2*z,A2,A3)##1,2がb方向
-    monomer_array_p2 = get_monomer_xyza(monomer_name,0,b,-2*z,A2,A3)##1,2がb方向
+    monomer_array_p2 = get_monomer_xyza(monomer_name,0,-b,-2*z,A2,A3)##1,2がb方向
     monomer_array_p3 = get_monomer_xyza(monomer_name,a,0,0,A2,A3)##3,4がa方向
     monomer_array_p4 = get_monomer_xyza(monomer_name,-a,0,0,A2,A3)##3,4がa方向
     
@@ -135,7 +135,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     monomer_array_c_ = get_monomer_xyza(monomer_name,cx,cy,cz,0,-A3)
     monomer_array_i_ = get_monomer_xyza(monomer_name,0,0,0,0,-A3)
     monomer_array_p1_ = get_monomer_xyza(monomer_name,0,b,2*z,A2,-A3)##1,2がb方向
-    monomer_array_p2_ = get_monomer_xyza(monomer_name,0,b,-2*z,A2,-A3)##1,2がb方向
+    monomer_array_p2_ = get_monomer_xyza(monomer_name,0,-b,-2*z,A2,-A3)##1,2がb方向
     monomer_array_p3_ = get_monomer_xyza(monomer_name,a,0,0,A2,-A3)##3,4がa方向
     monomer_array_p4_ = get_monomer_xyza(monomer_name,-a,0,0,A2,-A3)##3,4がa方向
     
