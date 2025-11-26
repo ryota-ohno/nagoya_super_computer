@@ -50,7 +50,7 @@ def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引�
             df_E.loc[idx, ['Ei0','Eip1','Eip2','Eip3','Eip4','Ei0_','Eip1_','Eip2_','Eip3_','Eip4_','Eit1','Eit2','Eit3','Eit4','E','status']] = [Ei0,Eip1,Eip2,Eip3,Eip4,Ei0_,Eip1_,Eip2_,Eip3_,Eip4_,Eit1,Eit2,Eit3,Eit4,E,'Done']
             df_E.to_csv(auto_csv,index=False)
             time.sleep(2)
-            break#2つ同時に計算終わったりしたらまずいので一個で切る
+            #break#2つ同時に計算終わったりしたらまずいので一個で切る
     isAvailable = len_queue < num_nodes 
     if isAvailable:
         dict_matrix = get_params_dict(auto_dir,num_init)
