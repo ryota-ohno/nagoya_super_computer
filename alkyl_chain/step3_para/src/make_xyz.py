@@ -174,9 +174,7 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     lld_it4 = get_xyzR_lines(dimer_array_it4,file_description+'_it4')
     
     if monomer_name in MONOMER_LIST and not(isInterlayer):##隣接8分子について対称性より3分子でエネルギー計算
-        gij_xyz_lines = ['$ RunGauss\n']  + lld_i0 + ['\n\n--Link1--\n'] + lld_ip1 + ['\n\n--Link1--\n'] + lld_ip2 + ['\n\n--Link1--\n'] + lld_ip3 + ['\n\n--Link1--\n'] + lld_ip4 + ['\n\n--Link1--\n']
-        + lld_i0_ + ['\n\n--Link1--\n'] + lld_ip1_ + ['\n\n--Link1--\n'] + lld_ip2_ + ['\n\n--Link1--\n'] + lld_ip3_ + ['\n\n--Link1--\n'] + lld_ip4_ + ['\n\n--Link1--\n'] 
-        + lld_it1 + ['\n\n--Link1--\n'] + lld_it2 + ['\n\n--Link1--\n'] + lld_it3 + ['\n\n--Link1--\n'] + lld_it4 + ['\n\n\n']
+        gij_xyz_lines = ['$ RunGauss\n']  + lld_i0 + ['\n\n--Link1--\n'] + lld_ip1 + ['\n\n--Link1--\n'] + lld_ip2 + ['\n\n--Link1--\n'] + lld_ip3 + ['\n\n--Link1--\n'] + lld_ip4 + ['\n\n--Link1--\n'] + lld_i0_ + ['\n\n--Link1--\n'] + lld_ip1_ + ['\n\n--Link1--\n'] + lld_ip2_ + ['\n\n--Link1--\n'] + lld_ip3_ + ['\n\n--Link1--\n'] + lld_ip4_ + ['\n\n--Link1--\n'] + lld_it1 + ['\n\n--Link1--\n'] + lld_it2 + ['\n\n--Link1--\n'] + lld_it3 + ['\n\n--Link1--\n'] + lld_it4 + ['\n\n\n']
     
     file_name = get_file_name_from_dict(monomer_name,params_dict)
     os.makedirs(os.path.join(auto_dir,'gaussian'),exist_ok=True)
