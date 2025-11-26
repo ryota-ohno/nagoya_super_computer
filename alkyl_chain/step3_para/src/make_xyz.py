@@ -139,6 +139,11 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     monomer_array_p3_ = get_monomer_xyza(monomer_name,a,0,0,A2,-A3)##3,4がa方向
     monomer_array_p4_ = get_monomer_xyza(monomer_name,-a,0,0,A2,-A3)##3,4がa方向
     
+    monomer_array_t1_ = get_monomer_xyza(monomer_name,a/2,b/2,z,A2,A3)
+    monomer_array_t2_ = get_monomer_xyza(monomer_name,a/2,-b/2,-z,A2,A3)
+    monomer_array_t3_ = get_monomer_xyza(monomer_name,-a/2,-b/2,-z,A2,A3)
+    monomer_array_t4_ = get_monomer_xyza(monomer_name,-a/2,b/2,z,A2,A3)
+
     dimer_array_i0 = np.concatenate([monomer_array_c,monomer_array_i])
     dimer_array_ip1 = np.concatenate([monomer_array_c,monomer_array_p1])
     dimer_array_ip2 = np.concatenate([monomer_array_c,monomer_array_p2])
@@ -156,7 +161,12 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     dimer_array_it3 = np.concatenate([monomer_array_c,monomer_array_t3])
     dimer_array_it4 = np.concatenate([monomer_array_c,monomer_array_t4])
     
-
+    dimer_array_it1_ = np.concatenate([monomer_array_c_,monomer_array_t1_])
+    dimer_array_it2_ = np.concatenate([monomer_array_c_,monomer_array_t2_])
+    dimer_array_it3_ = np.concatenate([monomer_array_c_,monomer_array_t3_])
+    dimer_array_it4_ = np.concatenate([monomer_array_c_,monomer_array_t4_])
+    
+    
     file_description = '{}_A2={}_A3={}'.format(monomer_name,int(A2),round(A3,2))
     lld_i0 = get_xyzR_lines(dimer_array_i0,file_description+'_i0')
     lld_ip1 = get_xyzR_lines(dimer_array_ip1,file_description+'_ip1')
@@ -172,9 +182,13 @@ def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     lld_it2 = get_xyzR_lines(dimer_array_it2,file_description+'_it1')
     lld_it3 = get_xyzR_lines(dimer_array_it3,file_description+'_it1')
     lld_it4 = get_xyzR_lines(dimer_array_it4,file_description+'_it4')
+    lld_it1_ = get_xyzR_lines(dimer_array_it1_,file_description+'_it1_')
+    lld_it2_ = get_xyzR_lines(dimer_array_it2_,file_description+'_it1_')
+    lld_it3_ = get_xyzR_lines(dimer_array_it3_,file_description+'_it1_')
+    lld_it4_ = get_xyzR_lines(dimer_array_it4_,file_description+'_it4_')
     
     if monomer_name in MONOMER_LIST and not(isInterlayer):##隣接8分子について対称性より3分子でエネルギー計算
-        gij_xyz_lines = ['$ RunGauss\n']  + lld_i0 + ['\n\n--Link1--\n'] + lld_ip1 + ['\n\n--Link1--\n'] + lld_ip2 + ['\n\n--Link1--\n'] + lld_ip3 + ['\n\n--Link1--\n'] + lld_ip4 + ['\n\n--Link1--\n'] + lld_i0_ + ['\n\n--Link1--\n'] + lld_ip1_ + ['\n\n--Link1--\n'] + lld_ip2_ + ['\n\n--Link1--\n'] + lld_ip3_ + ['\n\n--Link1--\n'] + lld_ip4_ + ['\n\n--Link1--\n'] + lld_it1 + ['\n\n--Link1--\n'] + lld_it2 + ['\n\n--Link1--\n'] + lld_it3 + ['\n\n--Link1--\n'] + lld_it4 + ['\n\n\n']
+        gij_xyz_lines = ['$ RunGauss\n']  + lld_i0 + ['\n\n--Link1--\n'] + lld_ip1 + ['\n\n--Link1--\n'] + lld_ip2 + ['\n\n--Link1--\n'] + lld_ip3 + ['\n\n--Link1--\n'] + lld_ip4 + ['\n\n--Link1--\n'] + lld_i0_ + ['\n\n--Link1--\n'] + lld_ip1_ + ['\n\n--Link1--\n'] + lld_ip2_ + ['\n\n--Link1--\n'] + lld_ip3_ + ['\n\n--Link1--\n'] + lld_ip4_ + ['\n\n--Link1--\n'] + lld_it1 + ['\n\n--Link1--\n'] + lld_it2 + ['\n\n--Link1--\n'] + lld_it3 + ['\n\n--Link1--\n'] + lld_it4 + ['\n\n--Link1--\n'] + lld_it1_ + ['\n\n--Link1--\n'] + lld_it2_ + ['\n\n--Link1--\n'] + lld_it3_ + ['\n\n--Link1--\n'] + lld_it4_ + ['\n\n\n']
     
     file_name = get_file_name_from_dict(monomer_name,params_dict)
     os.makedirs(os.path.join(auto_dir,'gaussian'),exist_ok=True)
