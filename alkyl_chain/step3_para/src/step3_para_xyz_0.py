@@ -17,7 +17,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step3.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['cx','cy','cz','a','b','theta','z','E','Ei0','Eip1','Eip2','Eip3','Eip4','Ei0_','Eip1_','Eip2_','Eip3_','Eip4_','Eit1','Eit2','Eit3','Eit4','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['cx','cy','cz','a','b','theta','z','E','Ei0','Eip1','Eip2','Eip3','Eip4','Eit1','Eit2','Eit3','Eit4','Ei0_','Eip1_','Eip2_','Eip3_','Eip4_','Eit1_','Eit2_','Eit3_','Eit4_','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -25,7 +25,7 @@ def main_process(args):
     while not(isOver):
         #check
         isOver = listen(args.auto_dir,args.monomer_name,args.num_nodes,args.num_init,args.isTest)##argsの中身を取る
-        time.sleep(1)
+        #time.sleep(1)
 
 def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引数に取るか中身をばらして取るかの違い
     auto_csv = os.path.join(auto_dir,'step3.csv')
@@ -39,17 +39,18 @@ def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引�
         if not(os.path.exists(log_filepath)):#logファイルが生成される直前だとまずいので
             continue
         E_list=get_E(log_filepath)
-        if len(E_list)!=14:##get Eの長さは計算した分子の数
+        if len(E_list)!=18:##get Eの長さは計算した分子の数
             continue
         else:
             len_queue-=1
             Ei0=float(E_list[0]);Eip1=float(E_list[1]);Eip2=float(E_list[2]);Eip3=float(E_list[3]);Eip4=float(E_list[4])
             Ei0_=float(E_list[5]);Eip1_=float(E_list[6]);Eip2_=float(E_list[7]);Eip3_=float(E_list[8]);Eip4_=float(E_list[9])
-            Eit1=float(E_list[10]);Eit2=float(E_list[11]);Eit3=float(E_list[12]);Eit4=float(E_list[13])##8分子に向けてep1,ep2作成　ep1:b ep2:a
-            E = ((Ei0 + Eip1 + Eip2 + Eip3 + Eip4) + (Ei0_ + Eip1_ + Eip2_ + Eip3_ + Eip4_))/2 + Eit1 + Eit2 + Eit3 + Eit4##エネルギーの値も変える
-            df_E.loc[idx, ['Ei0','Eip1','Eip2','Eip3','Eip4','Ei0_','Eip1_','Eip2_','Eip3_','Eip4_','Eit1','Eit2','Eit3','Eit4','E','status']] = [Ei0,Eip1,Eip2,Eip3,Eip4,Ei0_,Eip1_,Eip2_,Eip3_,Eip4_,Eit1,Eit2,Eit3,Eit4,E,'Done']
+            Eit1=float(E_list[10]);Eit2=float(E_list[11]);Eit3=float(E_list[12]);Eit4=float(E_list[13])
+            Eit1_=float(E_list[14]);Eit2_=float(E_list[15]);Eit3_=float(E_list[16]);Eit4_=float(E_list[17])
+            E = ((Ei0 + Eip1 + Eip2 + Eip3 + Eip4 + Eit1 + Eit2 + Eit3 + Eit4) + (Ei0_ + Eip1_ + Eip2_ + Eip3_ + Eip4_ + Eit1_ + Eit2_ + Eit3_ + Eit4_))/2##エネルギーの値も変える
+            df_E.loc[idx, ['Ei0','Eip1','Eip2','Eip3','Eip4','Ei0_','Eip1_','Eip2_','Eip3_','Eip4_','Eit1','Eit2','Eit3','Eit4','Eit1_','Eit2_','Eit3_','Eit4_','E','status']] = [Ei0,Eip1,Eip2,Eip3,Eip4,Ei0_,Eip1_,Eip2_,Eip3_,Eip4_,Eit1,Eit2,Eit3,Eit4,Eit1_,Eit2_,Eit3_,Eit4_,E,'Done']
             df_E.to_csv(auto_csv,index=False)
-            time.sleep(2)
+            #time.sleep(2)
             #break#2つ同時に計算終わったりしたらまずいので一個で切る
     isAvailable = len_queue < num_nodes 
     if isAvailable:
@@ -63,7 +64,7 @@ def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引�
                     df_newline = pd.Series({**params_dict,'E':0.,'Ei0':0.,'Eip1':0.,'Eip2':0.,'Eip3':0.,'Eip4':0.,'Ei0_':0.,'Eip1_':0.,'Eip2_':0.,'Eip3_':0.,'Eip4_':0.,'Eit1':0.,'Eit2':0.,'Eit3':0.,'Eit4':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)
-                    time.sleep(2)
+                    #time.sleep(2)
     
     init_params_csv=os.path.join(auto_dir, 'step3_init_params.csv')
     df_init_params = pd.read_csv(init_params_csv)
