@@ -59,7 +59,7 @@ def listen(auto_dir,monomer_name,num_nodes,num_init,isTest):##args自体を引�
                 params_dict=dict_matrix[i]
                 alreadyCalculated = check_calc_status(auto_dir,params_dict)
                 if not(alreadyCalculated):
-                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict,'cx':0,'cy':0,'cz':0},isInterlayer=False,isTest=isTest)
+                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isInterlayer=False,isTest=isTest)
                     df_newline = pd.Series({**params_dict,'E':0.,'Ei0':0.,'Eip1':0.,'Eip2':0.,'Eip3':0.,'Eip4':0.,'Ei0_':0.,'Eip1_':0.,'Eip2_':0.,'Eip3_':0.,'Eip4_':0.,'Eit1':0.,'Eit2':0.,'Eit3':0.,'Eit4':0.,'machine_type':'3','status':'InProgress','file_name':file_name})
                     df_E=df_E.append(df_newline,ignore_index=True)
                     df_E.to_csv(auto_csv,index=False)
