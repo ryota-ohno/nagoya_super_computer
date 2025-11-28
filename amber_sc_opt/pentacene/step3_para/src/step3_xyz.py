@@ -95,8 +95,7 @@ def check_calc_status(auto_dir,params_dict):
     if len(dict_list_f)==0:
         return False
     try:
-        status = dict_list_f[0]['status']
-        return status=='Done'
+        return dict_list_f[0].get('status') in ('Done', 'In Progress')
     except KeyError:
         return False
 

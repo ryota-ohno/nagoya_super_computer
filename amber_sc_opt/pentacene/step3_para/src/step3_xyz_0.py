@@ -95,8 +95,7 @@ def check_calc_status(auto_dir,params_dict):
     if len(dict_list_f)==0:
         return False
     try:
-        status = dict_list_f[0]['status']
-        return status=='Done'
+        return dict_list_f[0].get('status') in ('Done', 'In Progress')
     except KeyError:
         return False
 
@@ -123,7 +122,7 @@ def get_params_dict(auto_dir, num_nodes):
     for index, row in enumerate(dictlist_init_params):
         if row['status'] != 'InProgress':
             continue
-        print(index)
+        #print(index)
         dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
         init_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys + opt_param_keys_1)
         fixed_params_dict = get_values_from_dictlist(dictlist_init_params, index, fixed_param_keys)
