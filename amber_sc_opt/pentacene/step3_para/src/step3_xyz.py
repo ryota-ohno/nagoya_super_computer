@@ -18,7 +18,7 @@ def main_process(args):
     
     auto_csv_path = os.path.join(auto_dir,'step3.csv')
     if not os.path.exists(auto_csv_path): 
-        header = ['cx','cy','cz','theta','a','b','z','E','E1','E2','E3','E4','E5','E6','E7','E8','E9','E10','E11','E12','E13','E14','status','file_name']
+        header = ['cx','cy','cz','theta','a','b','z1','z2','E','E1','E2','E3','E4','E5','E6','E7','E8','E9','E10','E11','E12','E13','E14','status','file_name']
         with open(auto_csv_path, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=header)
             writer.writeheader()

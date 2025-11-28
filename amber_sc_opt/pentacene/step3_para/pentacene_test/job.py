@@ -14,7 +14,7 @@ def init_process(args):
         os.makedirs(os.path.join(auto_dir,f'{dir_name}'), exist_ok=True)
         df_init_=df_init[df_init['cx']==cx]
         df_init_.to_csv(os.path.join(auto_dir,f'{dir_name}/step3_init_params.csv'),index=False)
-        
+        os.chdir(os.path.join(auto_dir,f'{dir_name}'))
         job_lines=[
         '#!/bin/bash \n',
         '#PJM -L "rscunit=fx"\n',
