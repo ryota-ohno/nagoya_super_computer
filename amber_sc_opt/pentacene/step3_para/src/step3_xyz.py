@@ -46,7 +46,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             continue
         params_dict1_ = {key: row[key] for key in fixed_param_keys + opt_param_keys_1 + ['file_name']}
         file_name1 = params_dict1_['file_name'];E_list=[]
-        for i in range(1,10):
+        for i in range(1,15):
             log_filepath = os.path.join(auto_dir, 'amber', file_name1+f'_{i}.out')
             if not os.path.exists(log_filepath):
                 continue

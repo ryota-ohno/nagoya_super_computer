@@ -2,6 +2,7 @@ import os
 import subprocess
 from utils import Rod, R2atom
 import csv
+import time
 
 def concatenate(array_list):
     total_array=[]
@@ -223,11 +224,12 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isTest=True):
     
     file_name = make_gjf_xyz(auto_dir, monomer_name, params_dict)
     file_job_base,log_file_name = get_one_exe(auto_dir,file_name)
-    for i in range(1,10):
+    for i in range(1,15):
         file_job=file_job_base+f'_{i}.sh'
         if not(isTest):
             subprocess.run(['chmod','+x',file_job])
             subprocess.run([file_job])
+            time.sleep(0.1)
     return log_file_name
     
 ############################################################################################
