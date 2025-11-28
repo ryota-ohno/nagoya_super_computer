@@ -66,7 +66,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
             writer = csv.DictWriter(f, fieldnames=rows_1[0].keys())
             writer.writeheader()
             writer.writerows(rows_1)
-        break  # 1件で処理終了
+        #break  # 1件で処理終了
 
     dict_matrix = get_params_dict(auto_dir,num_nodes)##更新分を流す a1/HOME/HASEGAWALABz2まで取得
     if len(dict_matrix)!=0:#終わりがまだ見えないなら
