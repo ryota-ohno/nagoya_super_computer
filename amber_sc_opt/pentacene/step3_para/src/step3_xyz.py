@@ -55,12 +55,13 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 continue
             E = round(float(E_list_[0]) - 2 * E_mono, 4)
             E_list.append(E)
-        if len(E_list)!=9:
+        if len(E_list)!=14:
             continue
         E_columns=['E1','E2','E3','E4','E5','E6','E7','E8','E9','E10','E11','E12','E13','E14']
         for key, value in zip(E_columns, E_list):
             rows_1[idx][key] = f"{value:.4f}"
-        rows_1[idx]['E'] = f"{sum(E_list):.4f}";rows_1[idx]['status'] = 'Done'
+        E=(sum(E_list)+E_list[10]+E_list[11]+E_list[12]+E_list[13])/2
+        rows_1[idx]['E'] = f"{E:.4f}";rows_1[idx]['status'] = 'Done'
         with open(auto_csv_1, mode='w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=rows_1[0].keys())
             writer.writeheader()
