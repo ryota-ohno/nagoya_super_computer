@@ -106,14 +106,14 @@ def get_params_dict(auto_dir, num_nodes):
     #最初の立ち上がり時
     dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
     if len(dictlist_init_params_notyet) != 0:
-        if len(dictlist_init_params_inprogress) < num_nodes:
+        dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
+        while len(dictlist_init_params_inprogress) < num_nodes:
             notyet_row = dictlist_init_params_notyet[0]
             notyet_index = dictlist_init_params.index(notyet_row)
             dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
             write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-            selected_keys = fixed_param_keys + opt_param_keys_1
-            params_dict = {k: notyet_row[k] for k in selected_keys if k in notyet_row}
-            return [params_dict]
+            dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
+    
     init_params_csv = os.path.join(auto_dir, 'step3_init_params.csv');dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
     
     dict_matrix = []
