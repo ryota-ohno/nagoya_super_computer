@@ -94,10 +94,8 @@ def check_calc_status(auto_dir,params_dict):
     dict_list_f=filter_dictlist(dict_list, params_dict)
     if len(dict_list_f)==0:
         return False
-    try:
-        return dict_list_f[0].get('status') in ('Done', 'In Progress')
-    except KeyError:
-        return False
+    else:
+        return True
 
 def get_params_dict(auto_dir, num_nodes):
     init_params_csv = os.path.join(auto_dir, 'step3_init_params.csv')
