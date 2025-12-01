@@ -69,18 +69,19 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         #break  # 1件で処理終了
 
     dict_matrix = get_params_dict(auto_dir,num_nodes)##更新分を流す a1/HOME/HASEGAWALABz2まで取得
+    dictlist_E1,fieldnames1 = read_csv_to_dictlist(os.path.join(auto_dir,'step3.csv'))
     if len(dict_matrix)!=0:#終わりがまだ見えないなら
         for i in range(len(dict_matrix)):
             params_dict=dict_matrix[i]#print(params_dict)
             params_dict1 = {k: v for k, v in params_dict.items() if (k in fixed_param_keys) or (k in opt_param_keys_1)}
             alreadyCalculated = check_calc_status(auto_dir,params_dict)
             if not(alreadyCalculated):
-                dictlist_E1,fieldnames1 = read_csv_to_dictlist(os.path.join(auto_dir,'step3.csv'))
                 dict_list_E1_f=filter_dictlist(dictlist_E1, params_dict1)
                 if len(dict_list_E1_f) == 0:
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=isTest)
                     new_dict_1 = {**params_dict1,'E':'0.0','E1':'0.0','E2':'0.0','E3':'0.0','E4':'0.0','E5':'0.0','E6':'0.0','E7':'0.0','E8':'0.0','E9':'0.0','E10':'0.0','E11':'0.0','E12':'0.0','E13':'0.0','E14':'0.0', 'status': 'InProgress','file_name':file_name}
-                    dictlist_E1.append(new_dict_1);write_dictlist_to_csv(os.path.join(auto_dir,'step3.csv'), dictlist_E1, fieldnames1)
+                    dictlist_E1.append(new_dict_1)
+    write_dictlist_to_csv(os.path.join(auto_dir,'step3.csv'), dictlist_E1, fieldnames1)
     
     dictlist_init_params,field_name_i=read_csv_to_dictlist(os.path.join(auto_dir, 'step3_init_params.csv'))
     dictlist_init_params_done = filter_dictlist(dictlist_init_params,{'status':'Done'})
