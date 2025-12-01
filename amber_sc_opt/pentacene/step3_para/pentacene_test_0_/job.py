@@ -25,7 +25,7 @@ def init_process(args):
         '#PJM -S\n',
         '#PJM "--norestart"\n',
         '\n',
-        f'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/pentacene/step3_para/src/step3_xyz_0.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name pentacene --num-nodes 3\n',
+        f'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/pentacene/step3_para/src/step3_xyz_0.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name pentacene --num-nodes 5\n',
         '\n',
         '#sleep 12 \n'
             ]
