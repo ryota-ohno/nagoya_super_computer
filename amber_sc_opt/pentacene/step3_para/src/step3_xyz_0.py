@@ -127,21 +127,8 @@ def get_params_dict(auto_dir, num_nodes):
         with open(os.path.join(auto_dir, 'debug4.txt'),'w') as f:
             f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
-            opt_params_dict = {'cx': round(opt_params_matrix[0][0], 1),'cy': round(opt_params_matrix[0][1], 1),'cz': round(opt_params_matrix[0][2], 1)}
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
-            if index + 1 >= len(dictlist_init_params):
-                status = 'Done'
-            else:
-                status = dictlist_init_params[index + 1]['status']
-            fieldnames = list(dictlist_init_params[0].keys())
-            write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-            if status == 'NotYet':
-                opt_params_dict = get_values_from_dictlist(dictlist_init_params, index + 1, opt_param_keys_1)
-                dictlist_init_params = update_row_value(dictlist_init_params, index + 1, 'status', 'InProgress')
-                write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-                dict_matrix.append({**fixed_params_dict, **opt_params_dict})
-            else:
-                continue
+            return dict_matrix
         else:
             for i in range(len(opt_params_matrix)):
                 opt_params_dict = {'cx': round(opt_params_matrix[i][0], 1),'cy': round(opt_params_matrix[i][1], 1),'cz': round(opt_params_matrix[i][2], 1)}

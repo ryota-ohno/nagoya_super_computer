@@ -229,7 +229,7 @@ def exec_gjf(auto_dir, monomer_name, params_dict,isTest=True):
         if not(isTest):
             subprocess.run(['chmod','+x',file_job])
             subprocess.run([file_job])
-            time.sleep(0.1)
+    time.sleep(1.0)
     return log_file_name
     
 ############################################################################################
