@@ -103,16 +103,13 @@ def get_params_dict(auto_dir, num_nodes):
     fixed_param_keys = ['theta','a','b','z1','z2'];opt_param_keys_1 = ['cx','cy','cz']
 
     #最初の立ち上がり時
-    dictlist_init_params_notyet = filter_dictlist(dictlist_init_params, {'status':'NotYet'})
-    if len(dictlist_init_params_notyet) != 0:
-        dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
-        while len(dictlist_init_params_inprogress) < num_nodes:
-            notyet_row = dictlist_init_params_notyet[0]
-            notyet_index = dictlist_init_params.index(notyet_row)
-            dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
-            write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
-            dictlist_init_params_inprogress = filter_dictlist(dictlist_init_params, {'status':'InProgress'})
-    
+    while (len(filter_dictlist(dictlist_init_params, {'status':'NotYet'})) != 0) and (len(filter_dictlist(dictlist_init_params, {'status':'InProgress'})) < num_nodes):
+        notyet_row = filter_dictlist(dictlist_init_params, {'status':'NotYet'})[0]
+        notyet_index = dictlist_init_params.index(notyet_row)
+        dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
+
+    write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
+
     init_params_csv = os.path.join(auto_dir, 'step3_init_params.csv');dictlist_init_params,_ = read_csv_to_dictlist(init_params_csv)
     
     dict_matrix = []
