@@ -104,7 +104,7 @@ def get_one_exe(auto_dir,file_name):
         lines_tleap.append(f'MOL = loadmol2 {file_basename_}.mol2\n')
         lines_tleap.append(f'loadamberparams {file_basename_}.frcmod\n')
         lines_tleap.append(f'saveamberparm MOL {file_basename_}.prmtop {file_basename_}.inpcrd\n')
-        lines_tleap.append('quit\n\n')
+    lines_tleap.append('quit\n\n')
         
     file_tleap = os.path.join(auto_dir,f'amber/{file_basename}_tleap.in')
     with open(file_tleap,'w')as f:
