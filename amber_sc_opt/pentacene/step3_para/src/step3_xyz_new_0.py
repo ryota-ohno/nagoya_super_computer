@@ -81,7 +81,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                     file_name = exec_gjf(auto_dir, monomer_name, {**params_dict1},isTest=isTest)
                     new_dict_1 = {**params_dict1,'E':'0.0','E1':'0.0','E2':'0.0','E3':'0.0','E4':'0.0','E5':'0.0','E6':'0.0','E7':'0.0','E8':'0.0','E9':'0.0','E10':'0.0','E11':'0.0','E12':'0.0','E13':'0.0','E14':'0.0', 'status': 'InProgress','file_name':file_name}
                     dictlist_E1.append(new_dict_1)
-    write_dictlist_to_csv(os.path.join(auto_dir,'step3.csv'), dictlist_E1, fieldnames1)
+        write_dictlist_to_csv(os.path.join(auto_dir,'step3.csv'), dictlist_E1, fieldnames1)
     
     dictlist_init_params,field_name_i=read_csv_to_dictlist(os.path.join(auto_dir, 'step3_init_params.csv'))
     dictlist_init_params_done = filter_dictlist(dictlist_init_params,{'status':'Done'})
@@ -104,16 +104,18 @@ def get_params_dict(auto_dir, num_nodes):
     fixed_param_keys = ['theta','a','b','z1','z2'];opt_param_keys_1 = ['cx','cy','cz']
 
     #最初の立ち上がり時
-    while (len(filter_dictlist(dictlist_init_params, {'status':'NotYet'})) != 0) and (len(filter_dictlist(dictlist_init_params, {'status':'InProgress'})) < num_nodes):
-        notyet_row = filter_dictlist(dictlist_init_params, {'status':'NotYet'})[0]
-        notyet_index = dictlist_init_params.index(notyet_row)
-        dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
+    if (len(filter_dictlist(dictlist_init_params, {'status':'NotYet'})) != 0) and (len(filter_dictlist(dictlist_init_params, {'status':'InProgress'})) < num_nodes):
+        while (len(filter_dictlist(dictlist_init_params, {'status':'NotYet'})) != 0) and (len(filter_dictlist(dictlist_init_params, {'status':'InProgress'})) < num_nodes):
+            notyet_row = filter_dictlist(dictlist_init_params, {'status':'NotYet'})[0]
+            notyet_index = dictlist_init_params.index(notyet_row)
+            dictlist_init_params = update_row_value(dictlist_init_params, notyet_index, 'status', 'InProgress')
 
-    write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
+        write_dictlist_to_csv(init_params_csv, dictlist_init_params, fieldnames)
 
     init_params_csv = os.path.join(auto_dir, 'step3_init_params.csv');dictlist_init_params,field_name = read_csv_to_dictlist(init_params_csv)
     
     dict_matrix = []
+    i=0
     for index, row in enumerate(dictlist_init_params):
         if row['status'] != 'InProgress':
             continue
@@ -126,12 +128,14 @@ def get_params_dict(auto_dir, num_nodes):
             f.write(f'debug4 {isDone} {len(opt_params_matrix)}')
         if isDone:
             dictlist_init_params = update_row_value(dictlist_init_params, index, 'status', 'Done')
-            write_dictlist_to_csv(init_params_csv, dictlist_init_params, field_name)
+            i+=1
             #return dict_matrix
         else:
             for i in range(len(opt_params_matrix)):
                 opt_params_dict = {'cx': round(opt_params_matrix[i][0], 1),'cy': round(opt_params_matrix[i][1], 1),'cz': round(opt_params_matrix[i][2], 1)}
                 d = {**fixed_params_dict, **opt_params_dict};dict_matrix.append(d)
+    if i > 0:
+        write_dictlist_to_csv(init_params_csv, dictlist_init_params, field_name)
     return dict_matrix
         
 def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
