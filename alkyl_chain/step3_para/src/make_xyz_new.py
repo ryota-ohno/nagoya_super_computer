@@ -119,7 +119,7 @@ def make_xyz(monomer_name,params_dict):
 def make_gjf_xyz(auto_dir,monomer_name,params_dict,isInterlayer):
     a = params_dict.get('a',0.0); b = params_dict.get('b',0.0); z = params_dict.get('z',0.0)
     cx = params_dict.get('cx',0.0); cy = params_dict.get('cy',0.0); cz = params_dict.get('cz',0.0)
-    A3 = params_dict['theta']; A2 = 0; theta1 = params_dict['theta1']; theta2 = params_dict['theta2']  
+    A3 = params_dict.get('theta',0.0); A2 = 0; theta1 = params_dict.get('theta1',0.0); theta2 = params_dict.get('theta2',0.0)  
     
     monomer_array_c = get_monomer_xyza(monomer_name,cx,cy,cz,0,theta2)
     monomer_array_i = get_monomer_xyza(monomer_name,0,0,0,0,theta1)
