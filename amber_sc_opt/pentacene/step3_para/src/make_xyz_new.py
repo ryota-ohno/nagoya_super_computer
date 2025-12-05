@@ -87,9 +87,6 @@ def get_one_exe(auto_dir,file_name):
     file_basename = file_name
     lines_job=['#!/bin/bash\n','\n',
     'module load amber\n','\n',]
-    for i in range(1,15):
-        file_basename_=file_basename+f'_{i}'
-        lines_job.append(f'parmchk2 -i {file_basename_}.mol2 -f mol2 -o {file_basename_}.frcmod\n')
     lines_job.append(f'tleap -f {file_basename}_tleap.in\n')
     for i in range(1,15):
         file_basename_=file_basename+f'_{i}'
@@ -102,7 +99,7 @@ def get_one_exe(auto_dir,file_name):
     for i in range(1,15):
         file_basename_=file_basename+f'_{i}'
         lines_tleap.append(f'MOL = loadmol2 {file_basename_}.mol2\n')
-        lines_tleap.append(f'loadamberparams {file_basename_}.frcmod\n')
+        lines_tleap.append(f'loadamberparams pentacene.frcmod\n')
         lines_tleap.append(f'saveamberparm MOL {file_basename_}.prmtop {file_basename_}.inpcrd\n')
     lines_tleap.append('quit\n\n')
         
