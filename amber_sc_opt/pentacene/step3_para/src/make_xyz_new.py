@@ -94,7 +94,7 @@ def get_one_exe(auto_dir,file_name):
     for i in range(1,15):
         file_basename_=file_basename+f'_{i}'
         lines_job.append(f'sander -O -i FF_calc.in -o {file_basename_}.out -p {file_basename_}.prmtop -c {file_basename_}.inpcrd -r min.rst -ref {file_basename_}.inpcrd\n')
-        lines_job.append(f'rm {file_basename_}.frcmod\n')
+        #lines_job.append(f'rm {file_basename_}.frcmod\n')
         lines_job.append(f'rm {file_basename_}.inpcrd\n')
         lines_job.append(f'rm {file_basename_}.prmtop\n')
     
