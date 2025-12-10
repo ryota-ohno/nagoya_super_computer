@@ -240,7 +240,7 @@ def make_monomer(auto_dir,monomer_name,params_dict):
     layer_2=concatenate([monomer_array_t1,monomer_array_t2,monomer_array_t3,monomer_array_t4])
     layer_3=concatenate([monomer_array_i_,monomer_array_p1_,monomer_array_p2_,monomer_array_p3_,monomer_array_p4_])
 
-    mono_1=make_mono_mol2(layer_1);mono_2=make_dimer_mol2(layer_2);mono_3=make_dimer_mol2(layer_3)
+    mono_1=make_mono_mol2(layer_1);mono_2=make_mono_mol2(layer_2);mono_3=make_mono_mol2(layer_3)
     dimer_list=[mono_1,mono_2,mono_3]
     file_name = 'layer'
     os.makedirs(os.path.join(auto_dir,'amber'),exist_ok=True)
