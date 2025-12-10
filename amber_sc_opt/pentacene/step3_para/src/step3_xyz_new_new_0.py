@@ -16,7 +16,7 @@ def init_process(args):
     amber_path=os.path.join(auto_dir,'amber')
     shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/step3_para/src/FF_calc.in',amber_path)
     shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/step3_para/src/pentacene.frcmod',amber_path)
-    
+    os.chdir(os.path.join(auto_dir,'amber'))
     auto_csv_path = os.path.join(auto_dir,'step3.csv')
     if not os.path.exists(auto_csv_path): 
         header = ['cx','cy','cz','theta','a','b','z1','z2','E','E1','E2','E3','status','file_name']
