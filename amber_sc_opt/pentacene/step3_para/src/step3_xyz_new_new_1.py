@@ -176,7 +176,7 @@ def get_opt_params_dict(auto_dir, init_params_dict, fixed_params_dict):
         E_list = [];xyz_list = [];para_list = []
         for dcx in [0.0]:
             for dcy in [0.0]:
-                for dcz in [0.0]:
+                for dcz in [-0.1,0.0,0.1]:
                     cx = round(cx_init_prev + dcx, 1);cy = round(cy_init_prev + dcy, 1);cz = round(cz_init_prev + dcz, 1);E = find_entry(filtered, cx, cy, cz)
                     if E is None:
                         para_list.append([cx, cy, cz])
