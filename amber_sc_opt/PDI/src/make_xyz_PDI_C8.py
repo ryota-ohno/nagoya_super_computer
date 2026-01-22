@@ -94,7 +94,7 @@ def get_one_exe(auto_dir,file_name):
     
     lines_tleap=['source /home/center/opt/aarch64/apps/amber/19.0/dat/leap/cmd/leaprc.gaff\n']
     lines_tleap.append(f'MOL = loadmol2 {file_basename}.mol2\n')
-    lines_tleap.append(f'loadamberparams PDI_mono.frcmod\n')
+    lines_tleap.append(f'loadamberparams PDI-C8_mono.frcmod\n')
     lines_tleap.append(f'saveamberparm MOL {file_basename}.prmtop {file_basename}.inpcrd\n')
     lines_tleap.append('quit\n\n')
         
