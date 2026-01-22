@@ -15,11 +15,11 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc):
         reader = csv.DictReader(f)
         for row in reader:
             # 指定列の値をfloatに変換してリスト化
-            values = [float(row[col]) for col in cols]
+            values = [row[col] for col in cols]
             atoms_array_axyz.append(values)
     xyz_array = [];a_array=[]
     for atom,x,y,z, in atoms_array_axyz:
-        xyz_array.append([x,y,z]);a_array.append(atom)
+        xyz_array.append([float(x),float(y),float(z)]);a_array.append(atom)
     xyz_array_ = []
     for x,y,z in xyz_array:
         xyz_array_.append([x+Ta,y+Tb,z+Tc])
