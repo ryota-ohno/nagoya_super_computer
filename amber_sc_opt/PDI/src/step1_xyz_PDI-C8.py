@@ -46,7 +46,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
         if row['status'] != 'InProgress':
             continue
         params_dict_ = {key: row[key] for key in opt_param_keys + ['file_name']}
-        file_name = params_dict_['file_name'];log_filepath = os.path.join(auto_dir, 'amber', file_name)
+        file_name = params_dict_['file_name'];log_filepath = os.path.join(auto_dir, 'amber', file_name+'.out')
         if not os.path.exists(log_filepath):
             continue
         E_list = get_E(log_filepath)
