@@ -69,7 +69,7 @@ def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取�
                 dictlist,fieldnames = read_csv_to_dictlist(os.path.join(auto_dir,'step1.csv'))
                 dict_list_f=filter_dictlist(dictlist, params_dict)
                 if len(dict_list_f) == 0:
-                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict}, structure_type=1,isTest=isTest)
+                    file_name = exec_gjf(auto_dir, monomer_name, {**params_dict},isTest=isTest)
                     new_dict = {**params_dict, 'E': '0.0', 'status': 'InProgress','file_name':file_name}
                     dictlist.append(new_dict);write_dictlist_to_csv(os.path.join(auto_dir,'step1.csv'), dictlist, fieldnames)
                     
