@@ -19,7 +19,7 @@ def main_process(args):
     shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/monomer/PDI_mono.frcmod',amber_path)
     auto_csv_path = os.path.join(auto_dir,'step1.csv')
     if not os.path.exists(auto_csv_path): 
-        header = ['x','y','z','E','status']
+        header = ['x','y','z','E','status','file_name']
         with open(auto_csv_path, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=header)
             writer.writeheader()
