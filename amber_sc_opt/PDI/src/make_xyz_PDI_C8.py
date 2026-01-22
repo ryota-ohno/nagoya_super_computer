@@ -30,7 +30,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc):
 
 ## PDI-C8 num_atom 88 num_bond 94 
 
-line1='@<TRIPOS>MOLECULE\nPDI\n   176    188     2     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
+line1='@<TRIPOS>MOLECULE\nPDI-C8\n   176    188     2     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
 line2='@<TRIPOS>BOND\n'
 
 
@@ -51,7 +51,7 @@ bond_lines=[[1, 1, 2, 'ar'], [2, 1, 3, 'ar'], [3, 1, 7, 'ar'], [4, 2, 4, 'ar'], 
 line3='@<TRIPOS>SUBSTRUCTURE\n     1 RES1        1 GROUP             0 ****  ****    0  \n     2 RES2       89 GROUP             0 ****  ****    0 \n\n'
 
 para_list=[]
-with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/monomer/PDI_mono.mol2')as f:
+with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/monomer/PDI-C8_mono.mol2')as f:
     for line in f:
         #print(line)
         s=line.split()
@@ -62,7 +62,7 @@ with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/
 
 def make_dimer_mol2(xyzr_list_1,xyzr_list_2):
     num_mol1=int(len(xyzr_list_1)/88);num_mol2=int(len(xyzr_list_2)/88)
-    lines=[f'@<TRIPOS>MOLECULE\nPDI\n   {int(88*(num_mol1+num_mol2))}    {int(46*(num_mol1+num_mol2))}     1     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n']
+    lines=[f'@<TRIPOS>MOLECULE\nPDI-C8\n   {int(88*(num_mol1+num_mol2))}    {int(46*(num_mol1+num_mol2))}     1     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n']
     for i in range(num_mol1):
         for j in range(88):
             a,x,y,z=xyzr_list_1[88*i+j]
