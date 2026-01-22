@@ -9,7 +9,7 @@ import numpy as np
 def main_process(args):
     auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/{args.auto_dir}'
     df_init=pd.read_csv(os.path.join(auto_dir,'step1_init_params.csv'))
-    while inprogress:
+    while True:
         y_list=[np.round(y,1) for y in np.linspace(0,10,21)]
         for y in y_list:
             dir_name = f'{y}'
@@ -20,7 +20,7 @@ def main_process(args):
                 df_init.to_csv(os.path.join(auto_dir,'step1_init_params.csv'),index=False)
         df_init_done=df_init[df_init['status']=='Done']
         if len(df_init)==len(df_init_done):
-            inprogress = False
+            break
     print('Done')    
 
 def result_process(args):
