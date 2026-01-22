@@ -88,18 +88,15 @@ def get_one_exe(auto_dir,file_name):
     lines_job=['#!/bin/bash\n','\n',
     'module load amber\n','\n',]
     lines_job.append(f'tleap -f {file_basename}_tleap.in\n')
-    for i in range(1,4):
-        file_basename_=file_basename+f'_{i}'
-        lines_job.append(f'sander -O -i FF_calc.in -o {file_basename_}.out -p {file_basename_}.prmtop -c {file_basename_}.inpcrd -r min.rst -ref {file_basename_}.inpcrd\n')
-        lines_job.append(f'rm {file_basename_}.inpcrd\n')
-        lines_job.append(f'rm {file_basename_}.prmtop\n')
+    lines_job.append(f'tleap -f {file_basename}_tleap.in\n')
+    lines_job.append(f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n')
+    lines_job.append(f'rm {file_basename}.inpcrd\n')
+    lines_job.append(f'rm {file_basename}.prmtop\n')
     
     lines_tleap=['source /home/center/opt/aarch64/apps/amber/19.0/dat/leap/cmd/leaprc.gaff\n']
-    for i in range(1,4):
-        file_basename_=file_basename+f'_{i}'
-        lines_tleap.append(f'MOL = loadmol2 {file_basename_}.mol2\n')
-        lines_tleap.append(f'loadamberparams PDI-C8_mono.frcmod\n')
-        lines_tleap.append(f'saveamberparm MOL {file_basename_}.prmtop {file_basename_}.inpcrd\n')
+    lines_tleap.append(f'MOL = loadmol2 {file_basename}.mol2\n')
+    lines_tleap.append(f'loadamberparams PDI_mono.frcmod\n')
+    lines_tleap.append(f'saveamberparm MOL {file_basename}.prmtop {file_basename}.inpcrd\n')
     lines_tleap.append('quit\n\n')
         
     file_tleap = os.path.join(auto_dir,f'amber/{file_basename}_tleap.in')
