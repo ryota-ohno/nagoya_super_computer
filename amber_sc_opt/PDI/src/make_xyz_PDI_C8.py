@@ -62,7 +62,7 @@ with open(r'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/PDI/
 
 def make_dimer_mol2(xyzr_list_1,xyzr_list_2):
     num_mol1=int(len(xyzr_list_1)/88);num_mol2=int(len(xyzr_list_2)/88)
-    lines=[f'@<TRIPOS>MOLECULE\nPDI-C8\n   {int(88*(num_mol1+num_mol2))}    {int(46*(num_mol1+num_mol2))}     1     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n']
+    lines=[f'@<TRIPOS>MOLECULE\nPDI-C8\n   {int(88*(num_mol1+num_mol2))}    {int(94*(num_mol1+num_mol2))}     1     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n']
     for i in range(num_mol1):
         for j in range(88):
             a,x,y,z=xyzr_list_1[88*i+j]
@@ -87,7 +87,6 @@ def get_one_exe(auto_dir,file_name):
     file_basename = file_name
     lines_job=['#!/bin/bash\n','\n',
     'module load amber\n','\n',]
-    lines_job.append(f'tleap -f {file_basename}_tleap.in\n')
     lines_job.append(f'tleap -f {file_basename}_tleap.in\n')
     lines_job.append(f'sander -O -i FF_calc.in -o {file_basename}.out -p {file_basename}.prmtop -c {file_basename}.inpcrd -r min.rst -ref {file_basename}.inpcrd\n')
     lines_job.append(f'rm {file_basename}.inpcrd\n')
