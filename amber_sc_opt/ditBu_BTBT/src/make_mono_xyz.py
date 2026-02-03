@@ -96,7 +96,8 @@ def get_xyzR_lines(xyzr_array):
         atom_type,charge=para_list[i]
         lines.append(f'  {i+1} {R2atom(r)} {x} {y} {z} {atom_type} 1 RES1 {charge}\n')
     lines.append(line2)
-    for line in bond_lines:
+    for bond,atom1,atom2,type in bond_lines:
+        line=f'{bond} {atom1} {atom2} {type}\n'
         lines.append(line)
     lines.append(line3)
     return lines
