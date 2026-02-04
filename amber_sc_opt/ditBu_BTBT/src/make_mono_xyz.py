@@ -54,7 +54,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
             xyz_array_.append([xyz_array_2[0][0]+C2[0],xyz_array_2[0][1]+C2[1],xyz_array_2[0][2]+C2[2]])
         elif i > 34 : #35~47 tBu 2
             xyz_array_1=[[x-C0[0],y-C0[1],z-C0[2]]]
-            xyz_array_2=matmul(xyz_array_1,Rod(n1,phi))
+            xyz_array_2=matmul(xyz_array_1,Rod(n1,-phi))
             xyz_array_.append([xyz_array_2[0][0]+C0[0],xyz_array_2[0][1]+C0[1],xyz_array_2[0][2]+C0[2]])
         i+=1
 
