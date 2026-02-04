@@ -66,7 +66,7 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
         xyzR_array.append([xyz_array_f[i][0],xyz_array_f[i][1],xyz_array_f[i][2],R_array[i]])
     return xyzR_array
         
-line1='@<TRIPOS>MOLECULE\nmono-C9-BTBT\n   48    51     2     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
+line1='@<TRIPOS>MOLECULE\nmono-C9-BTBT\n   48    51     1     0     0\nSMALL\nbcc\n\n\n@<TRIPOS>ATOM\n'
 line2='@<TRIPOS>BOND\n'
 bond_lines=[[1, 1, 2, 'ar'], [2, 1, 3, 'ar'], [3, 1, 7, '1'], [4, 2, 4, 'ar'], [5, 2, 9, '1'], [6, 3, 5, 'ar'], [7, 3, 20, '1'], [8, 4, 6, 'ar'], 
             [9, 4, 22, '1'], [10, 5, 6, 'ar'], [11, 5, 21, '1'], [12, 6, 36, '1'], [13, 7, 8, '2'], [14, 7, 10, '1'], [15, 8, 9, '1'], [16, 8, 12, '1'], 
