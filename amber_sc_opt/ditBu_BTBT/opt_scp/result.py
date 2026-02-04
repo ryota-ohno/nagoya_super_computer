@@ -10,7 +10,7 @@ def main_process(args):
     auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/ditBu_BTBT/{args.auto_dir}'
     df_init=pd.read_csv(os.path.join(auto_dir,'step1_init_params.csv'))
     while True:
-        z_list=[np.round(z,1) for z in np.linspace(-4.0,40,41)]
+        z_list=[np.round(z,1) for z in np.linspace(-4.0,4.0,41)]
         for z in z_list:
             dir_name = f'{z}'
             path_dir=os.path.join(auto_dir,f'{dir_name}')
@@ -28,7 +28,7 @@ def result_process(args):
     auto_dir = f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/ditBu_BTBT/{args.auto_dir}'
     df_init=pd.read_csv(os.path.join(auto_dir,'step1_init_params.csv'))
     df_tot=[]
-    z_list=[np.round(z,1) for z in np.linspace(-4.0,40,41)]
+    z_list=[np.round(z,1) for z in np.linspace(-4.0,4.0,41)]
     for z in z_list:
         dir_name = f'{z}'
         path_dir=os.path.join(auto_dir,f'{dir_name}')
