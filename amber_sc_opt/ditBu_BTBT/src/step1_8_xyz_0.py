@@ -16,7 +16,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     amber_path=os.path.join(auto_dir,'amber')
     shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/src/FF_calc.in',amber_path)
-    shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/monomer/{args.monomer_name}.frcmod',amber_path)
+    shutil.copy(f'/data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/{args.monomer_name}/monomer/{args.monomer_name}_dimer.frcmod',amber_path)
     
     auto_csv_path = os.path.join(auto_dir,'step1.csv')
     if not os.path.exists(auto_csv_path): 

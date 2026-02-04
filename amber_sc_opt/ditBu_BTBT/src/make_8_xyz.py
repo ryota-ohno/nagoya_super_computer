@@ -124,7 +124,7 @@ f'rm {file_basename}.prmtop\n',
     
     lines_tleap=['source /home/center/opt/aarch64/apps/amber/19.0/dat/leap/cmd/leaprc.gaff\n',
 f'MOL = loadmol2 {file_basename}.mol2\n',
-f'loadamberparams ditBu_BTBT.frcmod\n',
+f'loadamberparams ditBu_BTBT_dimer.frcmod\n',
 f'saveamberparm MOL {file_basename}.prmtop {file_basename}.inpcrd\n',
 'quit\n']
     file_job = os.path.join(auto_dir,f'amber/job_{file_basename}.sh')
