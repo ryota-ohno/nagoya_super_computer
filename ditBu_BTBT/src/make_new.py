@@ -5,7 +5,6 @@ import pandas as pd
 import subprocess
 from utils import Rod, R2atom
 
-MONOMER_LIST = ["BTBT"];MONOMER_LIST2 = ["mono-C4-BTBT","mono-C9-BTBT","mono-C11-BTBT"]
 ############################汎用関数###########################
 def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     T_vec = np.array([Ta,Tb,Tc])
@@ -20,7 +19,6 @@ def get_monomer_xyzR(monomer_name,Ta,Tb,Tc,A2,A3,phi):
     xyz_array = xyz_array + T_vec
     R_array = atoms_array_xyzR[:,3].reshape((-1,1))
     
-    C0_index = 5;C1_index = 23 #アルキルの根本
     C0_index = 5;C1_index = 35;C2_index = 13;C3_index = 22
     C0=xyz_array[C0_index];C1=xyz_array[C1_index];C2=xyz_array[C2_index];C3=xyz_array[C3_index]
     n1=C1-C0;n1/=np.linalg.norm(n1)
