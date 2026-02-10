@@ -17,7 +17,7 @@ def main_process(args):
     os.makedirs(os.path.join(auto_dir,'gaussview'), exist_ok=True)
     auto_csv_path = os.path.join(auto_dir,'step2_twist.csv')
     if not os.path.exists(auto_csv_path):        
-        df_E = pd.DataFrame(columns = ['a','b','theta','z','A2','E','E_p1','E_p2','E_t','machine_type','status','file_name'])##いじる
+        df_E = pd.DataFrame(columns = ['a','b','theta','z','A2','phi','E','E_p1','E_p2','E_t','machine_type','status','file_name'])##いじる
         df_E.to_csv(auto_csv_path,index=False)##step3を二段階でやる場合二段階目ではinitをやらないので念のためmainにも組み込んでおく
 
     os.chdir(os.path.join(args.auto_dir,'gaussian'))
@@ -29,7 +29,7 @@ def main_process(args):
 
 def listen(auto_dir,monomer_name,num_nodes,isTest):##args自体を引数に取るか中身をばらして取るかの違い
     num_init = args.num_init
-    fixed_param_keys = ['theta','z','A2']
+    fixed_param_keys = ['theta','z','A2','phi']
     opt_param_keys = ['a','b']
     
     auto_csv = os.path.join(auto_dir,'step2_twist.csv')
@@ -138,8 +138,8 @@ def get_params_dict(auto_dir, num_init,fixed_param_keys,opt_param_keys):
         
 def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
     df_val = filter_df(df_cur, fixed_params_dict)
-    a_init_prev = init_params_dict['a']; b_init_prev = init_params_dict['b']
-    z = init_params_dict['z']; A2 = init_params_dict['A2']; theta = init_params_dict['theta']
+    a_init_prev = init_params_dict['a']; b_init_prev = init_params_dict['b']; theta = init_params_dict['theta']
+    z = init_params_dict['z']; A2 = init_params_dict['A2']; phi = init_params_dict['phi']
     
     while True:
         E_list=[];heri_list=[]
@@ -149,7 +149,7 @@ def get_opt_params_dict(df_cur, init_params_dict,fixed_params_dict):
                 a = np.round(a,1);b = np.round(b,1)
                 df_val_ab = df_val[
                     (df_val['a']==a)&(df_val['b']==b)&(df_val['theta']==theta)&
-                    (df_val['z']==z)&(df_val['A2']==A2)&
+                    (df_val['z']==z)&(df_val['A2']==A2)&(df_val['phi']==phi)&
                     (df_val['status']=='Done')]
                 if len(df_val_ab)==0:
                     para_list.append([a,b])
