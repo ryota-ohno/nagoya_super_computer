@@ -2,7 +2,7 @@
 import os
 os.environ['HOME'] ='/home/HasegawaLab'
 import time
-from make_8_xyz__ import exec_gjf##計算した点のxyzfileを出す
+from make_8_xyz_new import exec_gjf##計算した点のxyzfileを出す
 from utils import get_E
 import argparse
 import shutil
