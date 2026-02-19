@@ -26,7 +26,7 @@ def init_process(args):
         '#PJM -S\n',
         '#PJM "--norestart"\n',
         '\n',
-        f'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/src/step1_8_xyz_new.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name BTBT --num-nodes 5\n',
+        f'python /data/group1/z40145w/Working/nagoya_super_computer/amber_sc_opt/BTBT/src/step1_8_xyz_new_.py --auto-dir {args.auto_dir}/{dir_name} --monomer-name BTBT --num-nodes 5\n',
         '\n',
         '#sleep 5 \n'
             ]
